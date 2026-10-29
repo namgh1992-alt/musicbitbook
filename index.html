@@ -88,6 +88,8 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--neon2);outline-
 .card:hover{border-color:var(--neon);transform:translateY(-2px)}
 .card .no{position:absolute;top:12px;right:14px;font-family:var(--f-num);font-size:12px;color:var(--faint)}
 .chip{align-self:flex-start;font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:99px;letter-spacing:.04em}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip.draft{background:rgba(255,210,92,.12);color:#ffd25c;border:1px dashed rgba(255,210,92,.55)}
 .chip.dy{background:rgba(255,225,77,.16);color:#ffe98a}
 .chip.gu{background:rgba(93,255,180,.14);color:#9dffd0}
 .card h3{margin:0;font-family:var(--f-display);font-weight:400;font-size:21px;line-height:1.15;text-wrap:balance;padding-right:26px}
@@ -131,6 +133,60 @@ input[type=range]{width:100%;accent-color:var(--neon)}
 .skin .sw{background:radial-gradient(circle at 50% 35%,rgba(255,95,200,.6),transparent 60%),linear-gradient(180deg,#1c1438,#122833 60%,#05040a)}
 .skin[aria-pressed="true"]{border-color:var(--neon2);box-shadow:0 0 0 2px var(--neon2),0 0 18px rgba(255,95,200,.35)}
 #hud{text-shadow:0 1px 4px rgba(0,0,0,.7)}
+/* 시작 화면 — 곡 선택 화면과 같은 어두운 반투명 패널·네온 테두리 */
+#title{background:radial-gradient(ellipse at 50% 28%,rgba(7,5,15,.15) 0%,rgba(7,5,15,.55) 75%)}
+.twrap{max-width:640px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:clamp(20px,6vh,56px) 32px;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center}
+.twrap,.twrap *{box-sizing:border-box}
+.tlabel{font-family:var(--f-num);font-size:13px;letter-spacing:.42em;color:var(--dim);margin:0 0 -10px}
+.logo{margin:0;font-family:var(--f-display);font-weight:400;font-size:clamp(80px,21vw,150px);line-height:1.02;display:flex;gap:.02em;
+  filter:drop-shadow(0 0 26px rgba(212,107,255,.5))}
+.logo span{background:linear-gradient(180deg,#fff 0%,#f3c7ff 45%,var(--neon2) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  display:inline-block;animation:glow 3.2s ease-in-out infinite}
+.logo span:nth-child(2){animation-delay:.4s}.logo span:nth-child(3){animation-delay:.8s}
+@keyframes glow{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.tsub{margin:0;font-size:clamp(15px,3.6vw,18px);font-weight:500;color:#e6d8ff;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:8px 16px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.startbtn{margin-top:6px;border:0;border-radius:16px;padding:16px 0;width:min(300px,82%);font-family:var(--f-display);font-size:28px;letter-spacing:.04em;color:#fff;
+  background:linear-gradient(135deg,#9b3dff,var(--neon2));box-shadow:0 0 0 1px rgba(255,255,255,.12) inset,0 0 30px rgba(212,107,255,.45),0 10px 24px rgba(0,0,0,.4);transition:transform .1s,box-shadow .2s}
+.startbtn:hover{box-shadow:0 0 0 1px rgba(255,255,255,.2) inset,0 0 44px rgba(255,95,200,.6),0 10px 24px rgba(0,0,0,.4)}
+.startbtn:active{transform:translateY(2px) scale(.99)}
+.recline{margin:0;font-size:13.5px;color:#d9cff2;background:var(--panel);border:1px solid var(--line);padding:7px 16px;border-radius:99px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-variant-numeric:tabular-nums}
+.badge{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);padding:5px 22px 5px 5px;border-radius:99px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.bmark{width:44px;height:44px;border-radius:50%;background:#fff;box-shadow:0 0 0 2px rgba(255,255,255,.85),0 0 16px rgba(93,255,180,.35);display:block}
+.btxt{font-family:var(--f-display);font-weight:400;font-size:16px;letter-spacing:.12em;color:#9dffcf;text-shadow:0 0 12px rgba(93,255,180,.35)}
+.notice{width:100%;text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.ntoggle{border:0;background:none;font-family:var(--f-display);font-weight:400;font-size:18px;color:var(--ink);padding:0;display:flex;align-items:center;gap:8px}
+.ntoggle::before{content:"";width:8px;height:8px;border-right:2px solid var(--neon);border-bottom:2px solid var(--neon);transform:rotate(45deg) translateY(-2px);transition:transform .2s}
+.ntoggle[aria-expanded="false"]::before{transform:rotate(-45deg)}
+.nbox{margin:10px 0 0;padding:4px 8px 4px 22px;max-height:min(220px,32vh);overflow-y:auto;font-size:13.5px;line-height:1.7;color:#cfc4e8;display:flex;flex-direction:column;gap:6px;scrollbar-color:var(--neon) transparent}
+.nbox li::marker{color:var(--neon);font-family:var(--f-num);font-weight:700}
+.nbox b{color:var(--ink)}
+.nbox li.warn b,.nbox li.warn em{color:#ff8fb0}.nbox li.warn em{font-style:normal;font-weight:700}
+.tcards{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tcard{display:flex;align-items:center;gap:12px;text-align:left;border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--panel);color:var(--ink);min-width:0;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:border-color .15s,transform .15s}
+.tcard:hover{border-color:var(--neon);transform:translateY(-2px)}
+.ticon{flex:none;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:19px;font-weight:700;color:#fff}
+.ticon.src{background:linear-gradient(135deg,#9b3dff,#5b44e0);box-shadow:0 0 16px rgba(155,61,255,.45)}
+.ticon.del{background:linear-gradient(135deg,#ff5c7a,#c2203f);box-shadow:0 0 16px rgba(255,92,122,.4)}
+.tt{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}
+.tt b{font-family:var(--f-display);font-weight:400;font-size:17px}.tt small{font-size:12px;color:var(--dim);line-height:1.4}
+.tcard.danger{border-color:rgba(255,92,122,.4)}
+.arr{font-size:22px;color:var(--faint)}
+@media (max-width:520px){.tcards{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.logo span{animation:none}}
+.sheet.wide{width:min(760px,100%)}
+.srcwrap{overflow:auto;max-height:52vh;border:1px solid var(--line);border-radius:10px}
+table.src{width:100%;border-collapse:collapse;font-size:13px}
+table.src th{position:sticky;top:0;background:#24183e;text-align:left;padding:8px;font-weight:700;color:var(--dim)}
+table.src td{padding:7px 8px;border-top:1px solid var(--line);vertical-align:top}
+table.src td small{display:block;color:var(--faint);font-size:11.5px}
+#menu{background:linear-gradient(180deg,rgba(7,5,15,.4),rgba(7,5,15,.15))}
+#menu .brand,#menu .howto,#menu .summary,#menu .diffnote,#menu .sec h2{background:rgba(12,7,28,.62);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:12px;padding:8px 12px}
+#menu .brand{align-self:flex-start}
+#menu .diffnote{margin:-10px 0 0;color:#d9cff2}
+#menu .summary{align-self:flex-start;color:#d9cff2}
+#menu .sec h2{align-self:flex-start}
+#menu .tip{color:#d9cff2}
+#hud{background:linear-gradient(180deg,rgba(7,5,15,.45),rgba(7,5,15,0));padding-bottom:10px}
 .grade{font-family:var(--f-display);font-size:88px;line-height:.9;text-align:center;background:linear-gradient(180deg,#fff,var(--neon2));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px rgba(255,95,200,.5))}
 .rscore{text-align:center;font-family:var(--f-num);font-weight:700;font-size:34px;font-variant-numeric:tabular-nums}
 .newrec{align-self:center;font-size:12px;font-weight:700;letter-spacing:.12em;color:#1a0b24;background:var(--warn);padding:3px 10px;border-radius:99px}
@@ -148,11 +204,39 @@ input[type=range]{width:100%;accent-color:var(--neon)}
 
 <canvas id="cv" aria-label="리듬 게임 화면"></canvas>
 
-<div id="menu" class="screen">
+<div id="title" class="screen">
+  <div class="twrap">
+    <p class="tlabel">BEATBOOK</p>
+    <h1 class="logo" aria-label="비트북"><span style="--c:#ff6fa8;--d:#c23a74">비</span><span style="--c:#ffd84a;--d:#c9971a">트</span><span style="--c:#8f7bff;--d:#5a45d6">북</span></h1>
+    <p class="tsub">교과서 명곡으로 배우는 리듬 교실</p>
+    <button class="startbtn" id="startBtn" type="button">시작하기</button>
+    <p class="recline" id="recLine"></p>
+    <div class="badge"><img class="bmark" src="data:image/webp;base64,UklGRkARAABXRUJQVlA4WAoAAAAQAAAAvwAAvwAAQUxQSIkBAAABDzD/ERGCbm07gWRLLAxMQiAUQoPQCIUQMDFYyEBIl+5+7/3vRfR/AuiLK7PHMDM7xDwyoLLobUNKti2xqfE1WMYtWfaNDZWVXtc1UTc1Wbc0Rcdqp2m6oOm6qJm6rFm6otk6VlQ2+luzhFu3xNu05NuylNu28I3NTqo2LzVbkLotSsOWpGnL0rIVadtYYqB7UxH+aIhwdER8MxDpmIh8LER5sxF8MNS9qBj/omECUcfEFwOTXkxMfrEw5Rs2hl8w2H1eRfnPa6jweR0Vf8dApd83UfnvY6HK/y8Tlf8+Bir9vo6Kv6OhwudVlP88Qrkv2CB6sDDlGyYmvxiY9KJj4ouGCUQV418Qxj3ZECKihShvJiIfA5GOjohvGiIcFeEPQrhHG0DishVp2rI0bEnqtig1W5CqzUtkc5dtouuylNu05Fu3xFuzhFu1+BttAymXrmimLmu6LmqaLmhI51RLU0g9NVnXNVFXNV5HW0HGcUuWdgsW2hcyDynZquRtNI9MyMNBKrOnDwQAVlA4IJAPAADwUwCdASrAAMAAPjkYiUMiIaEYrDXwIAOEoIcAXwB+gH8ARgqw8HnqvNjsL+R/tv2z+4Ds17E8wPyv9m8ofq7/PnsE/rF0x/M95s/qM8zz/nddF0JH/o9oP9u/3S9kbVQuw/4AfoBwR+M32/+4ehblXtI/mn43x5c0nkjqOv2yIbVV5ZOj7///RJPtvPaRDfokSYgv+uzubukNmePIE+IdUUjjDbPxEamZkfOy8bYAGDWRosT2Hdt7D/z+AipgrRmjavKLSwePXkC5DvBfivRscNCVsP/6RrV9UMg96Ark6bFGvW6KYhMuA/IozPgQLXWVn2Q4QmEgwGakE/R4rQHKG4XkSUlb8xv58nsjTZev46Zs5TfL55IS9VONBOAouZfLgXmyLwfn16H3W+KLYgdhJHVe9g9io/jh1MayEnLqAAqseQKNiIuLrk1LxaK+tWsZ+MmRpazpIzn4TNTlIcXjQEauwhZc//Om+LAoTd4PGr3qTaD26//jTnhdir0LDASCnXVt62DcXNguD9jpWAkjuDRHoPKCbdoNMdSJSwBPfWAWjCcheuR8dFniGAZVTvOB8eJd3Oc5hT7sF3Lii8X9zn7M+Rm5NfsR4YfwEXEIM31/uK/uz7FttpiB94KsZk1PWjMDyRheW2yURfgVMQjsww62wv/C7eF+JebWI6gB/JOLr6mPpzU5dlcJfLEHCcWkMMHZdnELtoDMe2ajX3vKKgey2Jt2TkRYFG2L78+q+YbUY7AMPvtakAjumMYphiHa4QTI1/409f+lFKZytwEI6EZ89xBJEetorj0RO4b+SGeC5lBXytaeQvsr/ohIbdVujVjcJ9apHUEudOIgr042zQOI8yQopiYj7E0Ci+PuFhVHGouJzz387obQ5jr76L4xTNk0UICcAAD+8BOFh/tlOw7+yRc7V0ULSTbDSCfUA6a9ZJRokZp41GPNLwiyvVSkzdxpOdxvHO3Pw+PbC///9F7AGx/tlPA2L/tlOwpKL0bLify+QvpeQm/r2DXz8SKRsS41/9DTO3QK7sR9ktG7O7vuLAN/W3PaACHdLE13oS+Q1NnC+5vI9b3iRqzXTGPdeXzLQUmP8pgMRDYyUcS7S4dbaOgAXDA6rWBBTcI8tA0EF7FkXY/HfZkX0V8UY9o0j8nDAFkjh84gIb+C5Mi85A+i7TP+jlVzPn/eAf8Y/PpkW1OyxewlHK2MZ81U3g+WVu1eX7j5wq7zVH7rrCFA+JkpMwJlmu/2yglCePp28PhT82jP+uMi7cRy6HQ9g3sLACR2+wjcmw3tI2piWyYoWZHU8chw6LJ7Lq/o3cXprkCHYFqslpX6p3YFrvb3teZ60Cpfkw/Rp/eveIX1f2o0eKqUEj1I126NeqL6B4BzI7aDB/Ne4Ij6oDcFKkPfW/onzIeUpEQTbP+i0EY5Z0X51dk8vAq4isrnjPL+LCyzfiYW+TMLzMcF8z72y7e4vAw8dFjPDeKkmJIZLMCzmALGDDR8m86+CYvGA/l7UXkr+gLTtE/qJT4G1m6fjPQbH5JF+Jxi3eEDK7/aPq32br/pWXmN+UEVqOZPAF2m2VytOswZBsb/nE9UWM6zC6t3XxDwBJnp0RsH+InqCcLB2aMVjax5KQCRgGyljP9YAqZTrijuDNnMxM7p1mF++KpyqisT3vcneNQ8NmID8h2CtDcd9Git/dkDwp7KpLP/MFwv1TjCFdA9GtMvULFoZj9uYYZxkZNzt/30m5sKVBzSo4Xyes/SoOgNzLGdJQdlfxkw04ZS+J8H8rplbQKEi0SJ9bxdKJuvZ6yhW7aSGnAe5SIxtjOfcu7SP2EBQHeHDshDtzkCYDjbp2DRGs6L7vZ3aqoEK1arFJ9iM24WlNd42RqWg0XxtLxfW8IRKllv+hNVgzFiCjMtLGFhzq6//vaeNHhIQBPuWjqeqIKJmTfzjT+1K3Rnrk9f1wCjoJHnED3hCJN2/zBXUofu2BWx1Wl2vzBgDkaFnJwr7+Vz61/s/+EbIJjBSe4gby+vNlr97uQCRiKgTt5I/dre2NzkLzdffGJOHTGjTetlyv/uPEyCuxTAVnjc2FJz4bQIPMYJhul7KpQ8S8QGD3WFPJm160Me9S93XFf9LaDhn1J4vF6BaRr7Wn5ka5FJirKeedybdpTZkVzlCKtmVu/ONSrlYUpArwGabVLL/4UqJfV9bfuNUmLz6rG4Zr3UKVf4n0X9AOWCfGdBooKP+JdaHn9D6vA91Bayr5a55PMMON4HZqUPM3aYPmmp5Lqt5FLWvKa7fdahciUw++xhz9GLxHsq9vRzKLeWjqmLki8ioP03babNOUjoMi7C6oDA2apNRuzRMErQpLcClJrXWfKb4caYBK65RQ2Afccuewhnajj6ohnibKB4j7jKvdWy7mGbh8KjCsSN5xcJSvn+VNMh4Re7IooUcgxb39aSDzvll1p+4Yiu5wrd4JuVUzzE5Hnfr1mXTPzFwoJoqi186dbIu2ztkWfFoJqhRMWbeaurfHlsypG7S81TnulyDx7T3BzrR7swVwp5MAJwvRxRiq5DO5WINEbnwIO75dEHbuwasuwHOqLWBDJPmiNFueLJTKtxV0WrRge042aAjTYaSgvUsFImbykPgBpgIYLTbf1/hLzUkyPHHNVv9Cq4tBIiUvfTGknAj+M0WxhYEzbjg6Hj9mQHd7L3izPPUzF5pbzErnKgD72WchvmBCNlzMOMAmxrFT3Co3zOswEK3nmtp5FvuqGqD9Xva3hZDij1gsg+f9SC1fWwZfc1hXWs5e3GiTfGSzb/AAoeDx7HdcVjNoerMMT+TbP1HYOFgE49mt3kEnAMJj07neIxymplscW959tkqqKNzxXK2q63P4qIV+zBZie3Ag3CFnkw5IdgI54D2moLUSUJPHRvhaHrJkOyJzziMJNLiQN7xlELV/eODAUUG37exoNotjM982qaI6oYJC16kpxC5/ViP7FuaoVzGuCVb1hn6e8OCC3squQaUO8uXoFarwOvbbRZZu0ZMcdK25DBqO/gtPFyMKdKxfDesdkq1iCx353pcrZbODlWc/auoO0khhMzyM8ZsdYuIVuULFfcr6s+uojFupUbazH3M9t2EbJj7rKhLgP+CXW68UWzSrKE8RHBYlPLQgcWRtAUSgzq27SlIJbz8e1fJUt4l+nMd+B4wGKVACtTglhDXJWV1oT7GWdZzDi0SnQhmbNMYP2XwU9tD0uwmx5UFAnDgIkklqFlhzpcduMB9vAAFJSgZFZR37H9JavpoyA8N4QXebECgndaSfsluD9kG65VGwdYiKw/jn8vqaExHfExuUMZCzm3yPBBpZF3p4Tjg60Gzfw61RD/du2Z6lgIFaq8EwMDFy8TeI7QZTDiocJGw+uAnLUBkcVflNiD8xk22wNZbDoWDxNa5S6u7WbTQqXdhHqr+edecD+kWSRVMaOcxDvwhAjmjrDyo63XyhpJGOytrLRqMXRAJ+UwE/BleCfSFEFzFvowcscaX+NaRE3A+eXC3PDVMRxsexSZIeMheBlHZ6jmkdYDPDitwY5XsGvszhx8UVU/n6ymJkHltK8MttqufN6QU/uMgO9+ptPUr/aZgEn2xSSLO64W3DeurhhIZCnJHo6KgWhekhen3tkXbskyA/YvsMpqbOKpkUY8XzmnWXKDWrDGtpxnfaGenaNatkX5HBTSbRqZ7LAMt651MD7gJ8qABTyJO+Orz/z7AserKCeT8ATc8bWGtSMwiCL0TisTLxO2lPI6g/bqwPUHEMkX4mZ1CF/JrPIA9TA9KsEpI+K3VD44sIQ0l/l2/VF+1kwpcZdvpfFQc/jLNTtJr6i+Quf5u7UDGOIlXHh5HM+M3Z/DFq9I42czCCEfYLcoyD7Q8RNUbYXTCCThgoBnrA5Lr5TrqmMkVUiaEQAWH4V5kxRLv7kcX69VIl0c9nvbs5v4LGmeNEbCsyeCdPD2GBtRBavgQc7sQW+xtLRcNxkpcjMP02YHPbKiLvmbR9VDNw8rVy4J6Vyt5sVpKoCnN0g6xUvLfhOMBxFC93uIbe4fToBI1zAAiMwf0U+CjeY2xG3N+xFm5/88LsIdnCQoMQZCi/J7rOP7ESUdoKxN6WTxEWxsmOLamRMCyNRtYhe9m0yGndFiD0Qsv9KdsOv0NzL/rthrkFOyiJsntjJFg8opuzGa6SYN/QHoeoCjnNttNlhFL3LZpFNTfLuIuaBVm/uzrSPUoXlSAGdxij1pY3soOiZ/0o4DN8UcOhm9hgcksW76uOZ2xMoIyH/5EF5T1f70DxRCHVm4UpoL9ziazFmXT3+EFUMFTHj29+9GSlxi8HrRWbnDGJHkjvLPz4/ox/BcCXyJvPmpa9uUhPEQhaH1184ud6svPNOhe1SO/RpNI/lwGh3iqOZsHNn5OkobiskkRv6ywA8DDdQ/GCanXkCMB+/7bhwMAT7uf30gKzz1CYfMpX8Cdzoi7askckswNqWM9IHOH3lWg8bAFas7Z2VyiU6gyF2atfJHzM/zd8lvNo8ZuFoLBDHBm3g+mU4RCfN/LsgYzHVOBMr8ihF2OVcJ/KVFII7vrmim0SMKsAPr6+JgjMKwYqs8N4HHK2Qu1l/4TYXkRsg2P4lmGfvr+ta4++TuIAtCXEL9m8niiuoXlXB7ol7j6OotErFZuFaHP69NwNn/DO6tlTaAX0j0hD8YlbEzTtTTaqVOImAGjUo/BNLsiQdoYABqf7bhsJAMeYhSVYYr7piECXXWj82uVE7yRfHDbHeEAq3xhAUF7RcN6UvirJj7A6xxkJaJQV1v46COZWDf2dS/p9mGMqu/NFPZxARJZHoxhfteOSIm06Ji5V15oBFr4otGE165JZ3kQrE+DY947BAoEHTTLMsf6kO6Rvz/COM5t/LHK7ZGmZ9mVsjJ38FqwrbLF+DJFvbqVEWGmlmLnxNs3d6QNgS6EU028uK6NdDTATwOk+QfW5RQT8ZilDFKTBoKdZECoHKvyIB6YiFWth2TSADQ+Q69dwRwnDgaF/VBPv2v//msD//+acAAvIK640hbAUbnQ0AiYrWi0iaojF0NT1goI0Y/99Ngqq7XLs8QnuMmtu6Mj5AEl6xvNMzr284AehUK9XU5rUbkZsNQqcRj5B0q5+BU3adDNUYXMXYy5bvXYxOKt3zEYUOnhjJloxo7MKbXi+5B2UAHmwS8fpprBwH/pBWjZgHH+dswcREPZ9iW3J63hL4t3TcdnNe/KBqqkIUwRPogy2AXr6+jTNRkuDC/bhSc/bc1gekzhlCuHWsDzeIZllUZuo/NFNEufWRAFJ/tuHAwWMrWH+24cDAAAAA=" alt="온투 로고" width="48" height="48"><span class="btxt">COPYRIGHT BY 온투</span></div>
+    <section class="notice">
+      <button class="ntoggle" id="noteToggle" type="button" aria-expanded="true" aria-controls="noteBox">이용 시 주의사항</button>
+      <ol class="nbox" id="noteBox">
+        <li><b>교육용 게임이에요.</b> 이 게임은 초등학생의 음악 감상과 리듬 교육을 위해 비영리로 만들었어요. 수업과 개인 학습에서만 이용해 주세요.</li>
+        <li><b>음악 출처:</b> 작곡가가 세상을 떠난 지 오래되어 저작권 보호기간이 끝난 곡(퍼블릭 도메인)과 작자 미상의 민요·전래동요만 담았어요. 녹음 파일은 쓰지 않고, 원곡 악보를 바탕으로 새로 편곡해 브라우저가 직접 소리를 만들어요. 곡마다 자세한 내용은 「음악 출처」에서 볼 수 있어요.</li>
+        <li><b>저작권 보호 작품은 넣지 않았어요.</b> 교과서에 실렸더라도 작곡가·작사가의 보호기간이 남은 창작곡은 뺐어요. 노랫말과 교과서의 편곡·음원도 쓰지 않았고, 동요와 민요는 가락만 사용해요.</li>
+        <li><b>게임용 편곡은 원곡과 달라요.</b> 2~4분 길이에 맞추려고 주제를 되풀이하고 악기 편성을 바꿨어요. 별 다섯 개 곡 일부는 원곡의 대표 음형을 바탕으로 새로 편곡한 부분이 있어요. 감상 수업에는 실제 연주 음원을 함께 들려주세요.</li>
+        <li class="warn"><b>교육 외 목적으로 쓰면 문제가 생길 수 있어요.</b> 상업적 이용, 유료 배포, 편곡·채보 데이터의 추출과 재사용 등에 쓰면 권리 문제가 생길 수 있어요. <em>이런 이용으로 생기는 문제의 책임은 이용자에게 있으며, 제작자는 책임지지 않아요.</em></li>
+        <li><b>귀와 눈을 쉬어 가며 즐겨요.</b> 이어폰은 알맞은 음량으로 쓰고, 20~30분마다 쉬어 주세요. 빛이 번쩍이는 효과가 있으니 어지러우면 바로 멈춰요.</li>
+        <li><b>기록은 이 기기에만 저장돼요.</b> 로그인 없이 브라우저에 저장되기 때문에, 브라우저 기록을 지우거나 다른 기기에서 열면 이어지지 않아요.</li>
+      </ol>
+    </section>
+    <div class="tcards">
+      <button class="tcard" id="srcBtn" type="button"><span class="ticon src" aria-hidden="true">♪</span><span class="tt"><b>음악 출처</b><small>수록곡의 작곡가와 저작권 상태를 확인해요</small></span><span class="arr" aria-hidden="true">›</span></button>
+      <button class="tcard danger" id="tClearBtn" type="button"><span class="ticon del" aria-hidden="true">✕</span><span class="tt"><b>기록 지우기</b><small>이 기기에 저장된 점수 기록을 지워요</small></span><span class="arr" aria-hidden="true">›</span></button>
+    </div>
+  </div>
+</div>
+
+<div id="menu" class="screen" hidden>
   <div class="wrap">
     <div class="top">
       <div class="brand"><span class="en">BEATBOOK</span><h1>비트북</h1><span class="tagline">교과서 명곡으로 배우는 리듬 교실</span></div>
       <div class="tbtns">
+        <button class="btn" id="homeBtn" type="button">처음 화면</button>
         <button class="btn" id="setBtn" type="button">설정</button>
         <button class="btn danger" id="clearBtn" type="button">기록 지우기</button>
       </div>
@@ -234,10 +318,21 @@ input[type=range]{width:100%;accent-color:var(--neon)}
     <div class="row"><button class="btn danger" id="clearYes" type="button">모두 지우기</button><button class="btn" id="clearNo" type="button">취소</button></div>
   </div>
 </div>
+<div id="sources" class="modal" hidden>
+  <div class="sheet wide">
+    <h2>음악 출처</h2>
+    <p>모든 곡은 저작권 보호기간이 끝났거나 작자 미상인 곡이에요. 국내 기준으로 1962년 이전에 세상을 떠난 작곡가의 작품은 보호기간이 끝났어요. 녹음 음원은 쓰지 않고 가락을 새로 편곡해 합성했어요.</p>
+    <div class="srcwrap"><table class="src"><thead><tr><th>곡</th><th>작곡가</th><th>근거</th><th>편곡</th></tr></thead><tbody id="srcBody"></tbody></table></div>
+    <div class="row"><button class="btn primary" id="srcClose" type="button">닫기</button></div>
+  </div>
+</div>
 <div class="toast" id="toast" hidden></div>
 
 <script>
-// ===== 음악 데이터 파서 · 반주 생성 · 채보 생성 (순수 함수) =====
+// ===== 음악 데이터 · 편곡 엔진 · 채보 생성 =====
+// 곡은 "주제(선율+화음)"와 "구간 설계도(form)"로 정의한다.
+// 구간마다 단계(lvl 0~5)가 있고, 단계가 오를수록 악기가 차례로 더해진다.
+//   0 도입(여백)  1 주제 제시  2 전개  3 상승  4 절정(선율 중심, 단순하고 두꺼운 합주)  5 종결
 const NB = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 };
 function pm(s) {
   const m = /^([A-G])([#b]*)(-?\d)$/.exec(s);
@@ -249,7 +344,7 @@ function pm(s) {
 function parseSeq(str, tr) {
   tr = tr || 0;
   const out = []; let b = 0, vel = 1;
-  for (const tok of str.trim().split(/\s+/)) {
+  for (const tok of String(str).trim().split(/\s+/)) {
     if (!tok || tok === '|') continue;
     if (/^v[\d.]+$/.test(tok)) { vel = parseFloat(tok.slice(1)); continue; }
     const parts = tok.split('/');
@@ -259,135 +354,356 @@ function parseSeq(str, tr) {
   }
   return { events: out, len: b };
 }
-const QUAL = { '': [0, 4, 7], m: [0, 3, 7], '7': [0, 4, 7, 10], m7: [0, 3, 7, 10], dim: [0, 3, 6], maj7: [0, 4, 7, 11] };
+const QUAL = { '': [0, 4, 7], m: [0, 3, 7], '7': [0, 4, 7, 10], m7: [0, 3, 7, 10], dim: [0, 3, 6], dim7: [0, 3, 6, 9], maj7: [0, 4, 7, 11], sus4: [0, 5, 7], aug: [0, 4, 8], m6: [0, 3, 7, 9], '6': [0, 4, 7, 9] };
 function parseChord(name) {
   if (name === 'N') return null;
-  const m = /^([A-G])([#b]?)(maj7|m7|dim|m|7)?$/.exec(name);
+  const m = /^([A-G])([#b]?)(maj7|m7|m6|dim7|dim|sus4|aug|m|7|6)?(?:\/([A-G])([#b]?))?$/.exec(name);
   if (!m) throw new Error('bad chord ' + name);
   const pc = NB[m[1]] + (m[2] === '#' ? 1 : m[2] === 'b' ? -1 : 0);
-  return { pc: ((pc % 12) + 12) % 12, iv: QUAL[m[3] || ''] };
+  let bass = null;
+  if (m[4]) bass = (((NB[m[4]] + (m[5] === '#' ? 1 : m[5] === 'b' ? -1 : 0)) % 12) + 12) % 12;
+  return { pc: ((pc % 12) + 12) % 12, iv: QUAL[m[3] || ''], bass };
 }
-// 반주 양식 → 오케스트라 악기 (베이스 악기, 화음 악기, 현악 패드 여부)
-const STYLE_INST = {
-  block: ['cello', 'strings', false], bass: ['cello', null, false], pulse: ['cello', 'strings', false],
-  trem: ['cello', 'strings', false], oompah: ['pizz', 'pizz', true], arp: ['harp', 'harp', true],
-  alberti: ['cello', 'harp', true], pizz: ['pizz', null, true], waltz: ['pizz', 'strings', false]
-};
-function chordEvents(prog, style, u, tr, opt) {
-  u = u || 0.5; tr = tr || 0; opt = opt || {};
-  const [bInst, cInst, pad] = STYLE_INST[style] || ['cello', 'strings', false];
+function parseChords(str) {
   const out = []; let b = 0;
-  for (const tok of prog.trim().split(/\s+/)) {
+  for (const tok of String(str).trim().split(/\s+/)) {
     if (!tok || tok === '|') continue;
     const [name, ds] = tok.split(':');
     const d = parseFloat(ds);
-    const c = parseChord(name);
-    if (c) {
-      const pc = (c.pc + tr + 120) % 12;
-      let bass = 36 + pc; if (bass > 45) bass -= 12;
-      let root = 48 + pc; if (root < 53) root += 12;
-      const tri = c.iv.map(i => root + i);
-      const fifth = bass + 7;
-      const push = (bb, dd, midi, v, inst) => out.push({ b: bb, d: dd, midi, v, acc: true, inst });
-      if (pad && opt.pad !== false) push(b, d, tri, 0.16, 'strings');
-      if (opt.timp) push(b, Math.min(d, 1.5), [bass > 40 ? bass - 12 : bass], 0.9, 'timp');
-      if (style === 'block') { push(b, d, [bass], 0.75, bInst); push(b, d, tri, 0.42, cInst); }
-      else if (style === 'bass') { push(b, d, [bass, bass + 12], 0.8, bInst); }
-      else if (style === 'pulse') {
-        push(b, d, [bass], 0.75, bInst);
-        for (let x = 0; x < d - 1e-6; x += 1) push(b + x, Math.min(0.9, d - x), tri, 0.33, cInst);
-      } else if (style === 'trem') {
-        push(b, d, [bass], 0.7, bInst);
-        for (let x = 0; x < d - 1e-6; x += 0.5) push(b + x, 0.45, tri, x % 1 === 0 ? 0.3 : 0.22, cInst);
-      } else if (style === 'oompah') {
-        let i = 0;
-        for (let x = 0; x < d - 1e-6; x += u, i++) {
-          if (i % 2 === 0) push(b + x, u * 0.9, [(i / 2) % 2 === 0 ? bass : fifth], 0.85, bInst);
-          else push(b + x, u * 0.8, tri, 0.4, cInst);
-        }
-      } else if (style === 'arp') {
-        const vo = [bass, bass + c.iv[2], bass + 12, bass + 12 + c.iv[1], bass + 12 + c.iv[2], bass + 24];
-        const pat = [0, 1, 2, 3, 4, 3, 2, 1];
-        let i = 0;
-        for (let x = 0; x < d - 1e-6; x += u, i++) push(b + x, u * 1.8, [vo[pat[i % 8]]], i % 8 === 0 ? 0.62 : 0.45, cInst);
-      } else if (style === 'alberti') {
-        push(b, d, [bass], 0.6, bInst);
-        const pat = [0, 2, 1, 2]; let i = 0;
-        for (let x = 0; x < d - 1e-6; x += u, i++) push(b + x, u * 0.95, [tri[pat[i % 4]]], 0.4, cInst);
-      } else if (style === 'waltz') {
-        for (let x = 0; x < d - 1e-6; x += 1) {
-          if (Math.round(x) % 3 === 0) push(b + x, 0.9, [bass], 0.8, bInst); else push(b + x, 0.8, tri, 0.3, cInst);
-        }
-      } else if (style === 'pizz') {
-        let i = 0;
-        for (let x = 0; x < d - 1e-6; x += 1, i++) push(b + x, 0.3, [i % 2 ? fifth : bass], 0.85, bInst);
-      } else throw new Error('bad style ' + style);
-    }
+    out.push({ b, d, c: parseChord(name) });
     b += d;
   }
-  return { events: out, len: b };
+  return { list: out, len: b };
 }
-// ----- 국악 반주: 장구 장단 + 가야금 -----
-const JANGDAN = {
-  semachi: { len: 9, hits: [[0, 'dung'], [3, 'dung'], [5, 'deok'], [6, 'kung'], [8, 'deok']], gaya: [[0, 0], [3, 7], [6, 12]] },
-  gutgeori: { len: 12, hits: [[0, 'dung'], [2, 'gideok'], [3, 'kung'], [4, 'roll'], [6, 'kung'], [8, 'gideok'], [9, 'kung'], [10, 'roll']], gaya: [[0, 0], [3, 7], [6, 12], [9, 7]] },
-  jajin: { len: 12, hits: [[0, 'dung'], [3, 'dung'], [6, 'kung'], [8, 'deok'], [9, 'kung']], gaya: [[0, 0], [3, 7], [6, 12], [9, 7]] }
-};
-function gugakEvents(jd, bars, root, opt) {
-  opt = opt || {};
-  const J = JANGDAN[jd], out = [];
-  for (let k = 0; k < bars; k++) {
-    const b0 = k * J.len;
-    for (const [p, kind] of J.hits) out.push({ b: b0 + p, d: 0.5, midi: [0], v: (opt.v || 1) * (p === 0 ? 1 : 0.85), acc: true, inst: 'janggu', drum: kind });
-    if (opt.gaya !== false) for (const [p, iv] of J.gaya) out.push({ b: b0 + p, d: 2.5, midi: [root + iv], v: (opt.v || 1) * (p === 0 ? 0.7 : 0.5), acc: true, inst: 'gayageum' });
-  }
-  return { events: out, len: bars * J.len };
+const SCALE = { major: [0, 2, 4, 5, 7, 9, 11], minor: [0, 2, 3, 5, 7, 8, 10] };
+const rep = (s, n) => Array(n).fill(s).join(' ');
+
+// ---------- 화음 배치 ----------
+function voicing(c, tr) {
+  const pc = (c.pc + tr + 120) % 12;
+  const bpc = c.bass === null ? pc : (c.bass + tr + 120) % 12;
+  let bass = 36 + bpc; if (bass > 43) bass -= 12;            // C2~G2
+  let root = 55 + ((pc - 7 + 12) % 12);                       // G3~F#4
+  const mid = c.iv.slice(0, 4).map(i => root + i);
+  let hroot = 67 + ((pc - 7 + 12) % 12);                      // G4~F#5
+  const high = c.iv.slice(0, 3).map(i => hroot + i);
+  return { bass, mid, high, pc, iv: c.iv };
 }
-function buildSong(def) {
-  const mel = []; let mb = 0;
-  for (const seg of def.mel) {
-    const [s, tr, inst] = Array.isArray(seg) ? seg : [seg, 0];
-    const r = parseSeq(s, tr);
-    r.events.forEach(e => { e.b += mb; e.inst = inst || def.lead || 'piano'; mel.push(e); });
-    mb += r.len;
+
+// ---------- 반주 층 (오케스트라·동요) ----------
+// feel: lyric(노래하듯) march(행진) galop(빠른 2박) waltz(3박 왈츠) baroque(바로크 걷는 베이스)
+//       pulse8(8분음표 맥박) storm(트레몰로 폭풍) still(지속음만)
+function orchLayers(push, ch, lvl, feel, M, opt) {
+  const { b, d } = ch, V = voicing(ch.c, opt.tr), B = M.beat, bar = M.bar;
+  const beatsIn = [];
+  for (let x = 0; x < d - 1e-6; x += B) beatsIn.push(x);
+  const posInBar = x => ((((b + x) % bar) + bar) % bar);
+  const strong = x => Math.abs(posInBar(x)) < 1e-6;
+  const half = x => bar >= 4 * B && Math.abs(posInBar(x) - bar / 2) < 1e-6;
+  const cres = opt.cres || 1;
+  const sub = B === 3 ? 1 : B / 2;                 // 박을 둘로 (6/8·9/8은 8분음표)
+  const fifthLow = V.bass + 7 > 47 ? V.bass - 5 : V.bass + 7;
+  if (lvl <= 0) {
+    push(b, d, [V.bass], 0.45, 'cello', 'bass');
+    push(b, d, V.mid, 0.1, 'strings', 'pad');
+    if (feel !== 'storm') push(b, d, V.mid.slice(0, 3), 0.12, 'horn', 'pad');
+    return;
   }
-  const acc = []; let ab = 0;
-  for (const seg of def.acc) {
-    let r;
-    if (seg.n !== undefined) { r = parseSeq(seg.n, seg.tr); r.events.forEach(e => { e.v *= 0.8; e.inst = seg.inst || 'cello'; }); }
-    else if (seg.g) r = gugakEvents(seg.g, seg.bars, seg.root, seg);
-    else r = chordEvents(seg.p, seg.s, seg.u, seg.tr, seg);
-    r.events.forEach(e => { e.b += ab; e.acc = true; if (seg.v) e.v *= seg.v; acc.push(e); });
-    ab += r.len;
+  if (lvl === 5) {
+    push(b, d, [V.bass, V.bass + 12], 0.85, 'cello', 'bass');
+    push(b, d, V.mid, 0.22, 'horn', 'pad');
+    push(b, d, V.high, 0.26, 'strings', 'pad');
+    push(b, Math.min(d, 1.5), [V.bass + 12 > 52 ? V.bass : V.bass + 12], 0.7, 'timp', 'perc');
+    return;
   }
-  if (def.acc2) {
-    let b2 = 0;
-    for (const seg of def.acc2) {
-      const r = seg.n !== undefined ? parseSeq(seg.n, seg.tr) : chordEvents(seg.p, seg.s, seg.u, seg.tr, seg);
-      r.events.forEach(e => { e.b += b2; e.acc = true; if (seg.n !== undefined) e.inst = seg.inst || 'cello'; if (seg.v) e.v *= seg.v; acc.push(e); });
-      b2 += r.len;
+  if (lvl === 4) {
+    // 절정: 화음은 길게 두껍게, 베이스는 센박에만. 잔장식 없이 선율이 잘 들리게
+    push(b, d, V.high, 0.24, 'strings', 'pad');
+    push(b, d, V.mid.slice(0, 3), 0.24, 'horn', 'pad');
+    for (const x of beatsIn) {
+      if (strong(x) || half(x) || feel === 'march' || feel === 'galop') {
+        const dd = Math.min(B * (feel === 'waltz' ? 1 : 2), d - x);
+        push(b + x, dd * 0.9, [V.bass, V.bass + 12], strong(x) ? 0.9 : 0.75, 'cello', 'bass');
+      }
+      if ((feel === 'march' || feel === 'galop' || feel === 'waltz') && !strong(x) && !half(x))
+        push(b + x, B * 0.5, V.mid.slice(0, 3), 0.3, 'pizz', 'chord');
+      if (strong(x)) push(b + x, B, [V.bass > 40 ? V.bass : V.bass + 12], 0.6, 'timp', 'perc');
     }
-    ab = Math.max(ab, b2);
+    return;
   }
-  const tm = (def.tempo || [[0, def.bpm]]).slice().sort((a, b) => a[0] - b[0]);
+  // 1~3단계
+  const bassInst = feel === 'march' || feel === 'galop' || feel === 'waltz' ? 'pizz' : 'cello';
+  for (const x of beatsIn) {
+    const bx = b + x, s1 = strong(x), sh = half(x);
+    switch (feel) {
+      case 'march': case 'galop':
+        if (s1 || sh) push(bx, B * 0.8, [s1 ? V.bass : fifthLow], 0.75, bassInst, 'bass');
+        else if (feel === 'galop') push(bx, B * 0.8, [fifthLow], 0.7, bassInst, 'bass');
+        else push(bx, B * 0.5, V.mid.slice(0, 3), 0.24 * cres, 'pizz', 'chord');
+        if (feel === 'galop' || lvl >= 2) push(bx + sub, sub * 0.8, V.mid.slice(0, 3), 0.24 * cres, 'pizz', 'chord');
+        break;
+      case 'waltz':
+        if (s1) push(bx, B * 0.9, [V.bass], 0.8, bassInst, 'bass');
+        else push(bx, B * 0.7, V.mid.slice(0, 3), 0.22 * cres, lvl >= 2 ? 'strings' : 'pizz', 'chord');
+        break;
+      case 'baroque':
+        push(bx, B * 0.9, [x / B % 2 ? V.bass + 7 > 47 ? V.bass - 5 : V.bass + 7 : V.bass], 0.6, 'cello', 'bass');
+        break;
+      case 'pulse8':
+        if (s1 || sh) push(bx, B, [V.bass], 0.7, 'cello', 'bass');
+        for (let k = 0; k < B / sub - 1e-6; k++) push(bx + k * sub, sub * 0.9, V.mid.slice(1, 3), 0.17 * cres, 'strings', 'chord');
+        break;
+      case 'storm':
+        if (s1 || sh) push(bx, B, [V.bass], 0.75, 'cello', 'bass');
+        for (let k = 0; k < 2 * B / sub - 1e-6; k++) push(bx + k * sub / 2, sub * 0.48, [V.mid[k % 2 ? 1 : 0]], 0.17 * cres, 'strings', 'chord');
+        break;
+      case 'still':
+        if (s1) push(bx, Math.min(bar, d - x), [V.bass], 0.55, 'cello', 'bass');
+        break;
+      default: // lyric
+        if (s1 || (sh && lvl >= 2)) push(bx, Math.min(sh || bar < 4 * B ? bar / 2 : bar, d - x), [V.bass], 0.62, 'cello', 'bass');
+    }
+  }
+  // 화음 받침
+  if (feel === 'lyric' || feel === 'still' || feel === 'baroque') {
+    const step = lvl >= 2 ? sub : B;
+    if (feel !== 'still') {
+      const arp = [V.bass + 12, V.mid[0], V.mid[1], V.mid[2], V.mid[1], V.mid[0]];
+      let i = 0;
+      for (let x = 0; x < d - 1e-6; x += step, i++) push(b + x, step * 1.8, [arp[i % arp.length]], 0.34 * cres, opt.arpInst || 'harp', 'chord');
+    }
+  }
+  push(b, d, V.mid.slice(0, 3), (lvl >= 2 ? 0.12 : 0.08) * cres, 'strings', 'pad');
+  if (lvl >= 2) push(b, d, V.mid.slice(0, 3), 0.13 * cres, 'horn', 'pad');
+  if (lvl >= 3) {
+    if (feel !== 'storm' && feel !== 'pulse8') for (const x of beatsIn) for (let k = 0; k < B / sub - 1e-6; k++) push(b + x + k * sub, sub * 0.9, V.high.slice(0, 2), 0.13 * cres, 'strings', 'chord');
+    for (const x of beatsIn) if (strong(x)) push(b + x, B, [V.bass > 40 ? V.bass : V.bass + 12], 0.42 * cres, 'timp', 'perc');
+  }
+}
+// ---------- 피아노·하프시코드·오르간 (독주 악기 원곡) ----------
+function keysLayers(push, ch, lvl, feel, M, opt, inst) {
+  const { b, d } = ch, V = voicing(ch.c, opt.tr), B = M.beat;
+  const lo = V.bass + 12 < 43 ? V.bass + 12 : V.bass, tri = V.mid.slice(0, 3);
+  const vv = (lvl <= 1 ? 0.5 : lvl === 2 ? 0.6 : lvl === 3 ? 0.7 : 0.8) * (opt.cres || 1);
+  const oct = lvl >= 3 ? [lo, lo + 12] : [lo + 12];
+  if (lvl === 5) { push(b, d, [lo, lo + 12], 0.85, inst, 'bass'); push(b, d, tri, 0.6, inst, 'chord'); return; }
+  if (inst === 'organ') { push(b, d, [lo], 0.8, 'organ', 'bass'); if (lvl >= 2) push(b, d, tri, 0.45 + 0.1 * lvl, 'organ', 'pad'); return; }
+  let i = 0;
+  switch (feel) {
+    case 'alberti': {
+      const pat = [tri[0], tri[2], tri[1], tri[2]];
+      push(b, Math.min(d, B), oct, vv, inst, 'bass');
+      for (let x = 0; x < d - 1e-6; x += B / 2, i++) push(b + x, B / 2, [pat[i % 4] - (lvl >= 3 ? 0 : 0)], vv * 0.6, inst, 'chord');
+      break;
+    }
+    case 'oompah': case 'march': {
+      for (let x = 0; x < d - 1e-6; x += B, i++) {
+        if (i % 2 === 0) push(b + x, B * 0.9, i % 4 === 0 ? oct : oct.map(n => n + 7 > 59 ? n - 5 : n + 7), vv, inst, 'bass');
+        else push(b + x, B * 0.8, tri, vv * 0.65, inst, 'chord');
+      }
+      break;
+    }
+    case 'waltz': {
+      for (let x = 0; x < d - 1e-6; x += B, i++) {
+        if (i % 3 === 0) push(b + x, B * 0.9, oct, vv, inst, 'bass');
+        else push(b + x, B * 0.8, tri, vv * 0.6, inst, 'chord');
+      }
+      break;
+    }
+    case 'arp': {
+      const vo = [lo, lo + 7, lo + 12, tri[1] + 12 > 72 ? tri[1] : tri[1] + 12, tri[2] + 12 > 76 ? tri[2] : tri[2] + 12];
+      const pat = [0, 1, 2, 3, 4, 3, 2, 1];
+      const st = opt.u || B / 2;
+      for (let x = 0; x < d - 1e-6; x += st, i++) push(b + x, st * 1.6, [vo[pat[i % 8]]], vv * (i % 8 ? 0.6 : 0.85), inst, i % 8 ? 'chord' : 'bass');
+      break;
+    }
+    case 'broken': { // 엘리제풍: 베이스-5도-옥타브 후 쉼
+      push(b, B / 2, [lo], vv, inst, 'bass'); push(b + B / 2, B / 2, [lo + 7], vv * 0.6, inst, 'chord'); push(b + B, B / 2, [lo + 12], vv * 0.6, inst, 'chord');
+      if (lvl >= 3 && d >= 3 * B) push(b + 2 * B, B / 2, [tri[1] + 12 > 72 ? tri[1] : tri[1]], vv * 0.5, inst, 'chord');
+      break;
+    }
+    case 'bass': { // 바로크 2성부: 왼손 한 줄
+      for (let x = 0; x < d - 1e-6; x += B, i++) push(b + x, B * 0.95, [i % 2 ? (lo + 7 > 55 ? lo - 5 : lo + 7) : lo + 12], vv * 0.8, inst, 'bass');
+      break;
+    }
+    default: { // block
+      push(b, d, oct, vv, inst, 'bass');
+      push(b, d, tri, vv * 0.6, inst, 'chord');
+    }
+  }
+}
+// ---------- 국악: 장구 장단 + 가야금 + (대금·해금·피리) ----------
+const JANGDAN = {
+  semachi: { len: 9, hits: [[0, 'dung'], [3, 'dung'], [5, 'deok'], [6, 'kung'], [8, 'deok']], beat: 3 },
+  gutgeori: { len: 12, hits: [[0, 'dung'], [2, 'gideok'], [3, 'kung'], [4, 'roll'], [6, 'kung'], [8, 'gideok'], [9, 'kung'], [10, 'roll']], beat: 3 },
+  jajin: { len: 12, hits: [[0, 'dung'], [3, 'dung'], [6, 'kung'], [8, 'deok'], [9, 'kung']], beat: 3 },
+  jungjung: { len: 12, hits: [[0, 'dung'], [3, 'deok'], [5, 'deok'], [6, 'kung'], [8, 'deok'], [9, 'kung'], [11, 'deok']], beat: 3 }
+};
+function gugakLayers(push, b0, len, lvl, J, root) {
+  for (let b = b0; b < b0 + len - 1e-6; b += J.len) {
+    const hits = lvl <= 1 ? J.hits.filter(h => h[1] === 'dung' || h[1] === 'kung' || h[0] === 0) : J.hits;
+    for (const [p, kind] of hits) if (b + p < b0 + len - 1e-6) push(b + p, 0.5, [0], (p === 0 ? 1 : 0.85) * (lvl >= 4 ? 1.1 : lvl <= 1 ? 0.85 : 1), 'janggu', 'perc', kind);
+    if (lvl >= 4) push(b, 0.5, [0], 0.9, 'buk', 'perc');
+    if (lvl >= 2) {
+      const pts = lvl >= 3 ? [[0, 0], [J.beat, 7], [2 * J.beat, 12], [3 * J.beat, 7]] : [[0, 0], [2 * J.beat, 7]];
+      for (const [p, iv] of pts) if (p < J.len && b + p < b0 + len - 1e-6) push(b + p, J.beat * 1.6, [root + iv], p === 0 ? 0.7 : 0.5, 'gayageum', 'bass');
+    }
+  }
+}
+// ---------- 선율 변형 ----------
+function scaleStep(song, midi, dir) {
+  const sc = SCALE[song.mode] || SCALE.major;
+  for (let k = 1; k <= 3; k++) { const n = midi + dir * k; if (sc.includes((((n - song.tonic) % 12) + 12) % 12)) return n; }
+  return midi + dir;
+}
+function figure16(song, evs, B) {
+  const out = [];
+  for (const e of evs) {
+    if (e.d < B - 1e-6 || e.midi.length > 1) { out.push(e); continue; }
+    const top = e.midi[0], up = scaleStep(song, top, 1), dn = scaleStep(song, top, -1);
+    const pat = [top, up, top, dn];
+    let i = 0;
+    for (let x = 0; x < e.d - 1e-6; x += B / 4, i++) out.push({ b: e.b + x, d: B / 4, midi: [pat[i % 4]], v: e.v * (i % 4 ? 0.85 : 1) });
+  }
+  return out;
+}
+function toMinor(song, evs) {
+  return evs.map(e => ({ ...e, midi: e.midi.map(m => { const r = (((m - song.tonic) % 12) + 12) % 12; return r === 4 || r === 9 ? m - 1 : m; }) }));
+}
+
+// ---------- 곡 만들기 ----------
+const LV_MEL = [0.75, 0.82, 0.9, 0.96, 1.05, 1];
+function buildSong(def) {
+  const song = Object.assign({}, def);
+  const unit = def.unit || 1, bar = def.bar || 4;
+  const M = { bar, beat: unit };
+  const melEv = [], accEv = [], cueEv = [], secs = [], tempo = [];
+  let pos = 0;
+  const T = def.T || {};
+  const style = def.style || 'orch';
+  // 편성: strings(현악 합주) · kids(동요: 가벼운 편성)
+  const mapInst = inst => {
+    if (def.ens === 'strings') { if (inst === 'timp' || inst === 'cym') return null; if (inst === 'horn' || inst === 'brass') return 'strings'; if (inst === 'harp') return 'pizz'; }
+    if (def.ens === 'kids') { if (inst === 'horn') return 'strings'; }
+    return inst;
+  };
+  const accPush = ev => { const i = mapInst(ev.inst); if (!i) return; ev.inst = i; accEv.push(ev); };
+  for (const sec of def.form) {
+    const th = sec.t ? T[sec.t] : null;
+    if (sec.t && !th) throw new Error(def.id + ': no theme ' + sec.t);
+    const tr = (sec.tr || 0);
+    const lvl = sec.lvl === undefined ? 1 : sec.lvl;
+    const lead = sec.lead || (th && th.lead) || def.lead || (style === 'piano' ? 'piano' : 'violin');
+    if (sec.bpm) tempo.push([pos, sec.bpm]);
+    const mStr = sec.m !== undefined ? sec.m : th ? th.m : null;
+    const chStr = sec.ch !== undefined ? sec.ch : th ? th.ch : null;
+    let len = 0;
+    // 선율
+    if (mStr) {
+      const r = parseSeq(mStr, tr + (sec.oct || 0) * 12);
+      let evs = r.events;
+      if (sec.minor) evs = toMinor({ tonic: def.tonic + tr, mode: def.mode }, evs);
+      if (sec.fig) evs = figure16({ tonic: def.tonic + tr, mode: def.mode }, evs, unit);
+      const vm = (sec.v || 1) * LV_MEL[lvl];
+      for (const e of evs) {
+        const ev = { b: pos + e.b, d: e.d, midi: e.midi, v: e.v * vm, inst: lead, lm: e.midi.map(m => m - tr) };
+        melEv.push(ev);
+        // 절정: 선율을 한 옥타브 아래 금관/현이 함께 (단순하고 힘 있게)
+        if ((lvl >= 4 && sec.dbl !== false) || sec.dbl) {
+          const di = typeof sec.dbl === 'string' ? sec.dbl : style === 'piano' || style === 'harpsi' || style === 'organ' ? lead : style === 'gugak' ? 'haegeum' : 'brass';
+          const sh = style === 'piano' || style === 'harpsi' ? -12 : style === 'gugak' ? 0 : -12;
+          accPush({ b: ev.b, d: ev.d, midi: ev.midi.map(m => m + sh), v: e.v * 0.5, inst: di, role: 'dbl', lm: ev.lm });
+        }
+        if (style === 'gugak' && lvl >= 3 && sec.dbl !== false) accPush({ b: ev.b, d: ev.d, midi: ev.midi, v: e.v * 0.4, inst: 'haegeum', role: 'dbl' });
+        if (style === 'gugak' && lvl >= 4 && sec.dbl !== false) accPush({ b: ev.b, d: ev.d, midi: ev.midi, v: e.v * 0.45, inst: 'piri', role: 'dbl' });
+      }
+      // 돌림노래·카논: 같은 선율이 늦게 따라 들어옴
+      for (const cn of sec.canon || []) for (const e of evs) accPush({ b: pos + e.b + cn.at, d: e.d, midi: e.midi.map(m => m + (cn.oct || 0) * 12), v: e.v * (cn.v || 0.55) * LV_MEL[lvl], inst: cn.inst || lead, role: 'counter', lm: e.midi.map(m => m - tr) });
+      len = r.len;
+    }
+    // 반주
+    const push0 = (b, d, midi, v, inst, role, drum) => accPush({ b, d, midi, v, inst, role, drum, lm: midi.map(m => m - tr) });
+    if (th && th.an && !sec.ch) {
+      const r = parseSeq(th.an, tr);
+      const va = [0.6, 0.7, 0.8, 0.9, 1, 1][lvl];
+      for (const e of r.events) {
+        push0(pos + e.b, e.d, e.midi, e.v * va, th.anInst || lead, 'bass');
+        if (lvl >= 4) push0(pos + e.b, e.d, e.midi.map(m => m - 12).filter(m => m >= 28), e.v * va * 0.6, th.anInst || lead, 'bass');
+      }
+      len = Math.max(len, r.len);
+    }
+    if (chStr && sec.pad) {
+      const C = parseChords(chStr), n = C.list.length;
+      C.list.forEach((ch, i) => { if (!ch.c) return; const V = voicing(ch.c, tr); const cr = sec.cres ? 0.6 + 0.6 * i / Math.max(1, n - 1) : 1;
+        push0(pos + ch.b, ch.d, V.mid.slice(0, 3), 0.11 * cr, 'strings', 'pad'); push0(pos + ch.b, ch.d, [V.bass], 0.4 * cr, 'cello', 'bass'); });
+      len = Math.max(len, C.len);
+    }
+    if (th && th.an && !sec.ch) {
+      // (위에서 처리)
+    } else if (chStr && !sec.solo) {
+      const C = parseChords(chStr);
+      const n = C.list.length;
+      C.list.forEach((ch, i) => {
+        if (!ch.c) return;
+        const cres = sec.cres ? 0.75 + 0.35 * (i / Math.max(1, n - 1)) : 1;
+        const opt = { tr, cres, u: sec.u || def.u, arpInst: sec.arpInst || def.arpInst };
+        const cc = { b: pos + ch.b, d: ch.d, c: ch.c };
+        const feel = sec.feel || (th && th.feel) || def.feel || 'lyric';
+        if (style === 'piano' || style === 'harpsi' || style === 'organ') keysLayers(push0, cc, lvl, feel, M, opt, style === 'harpsi' ? 'harpsi' : style === 'organ' ? 'organ' : 'piano');
+        else orchLayers(push0, cc, lvl, feel, M, opt);
+      });
+      len = Math.max(len, C.len);
+    }
+    if (sec.len) len = sec.len;
+    if (style === 'gugak') {
+      const J = JANGDAN[sec.jd || def.jd];
+      if (!len) len = J.len * (sec.cycles || 1);
+      gugakLayers(push0, pos, len, lvl, J, def.tonic - 24 + tr);
+    }
+    // 강조 화음(꽝!)
+    for (const [ob, name, vv] of sec.stab || []) {
+      const V = voicing(parseChord(name), tr);
+      push0(pos + ob, 1.2, V.high.concat(V.mid), 0.5 * (vv || 1), 'brass', 'pad');
+      push0(pos + ob, 1.2, [V.bass, V.bass + 12], 1, 'cello', 'bass');
+      push0(pos + ob, 1.5, [V.bass > 40 ? V.bass : V.bass + 12], 1, 'timp', 'perc');
+      push0(pos + ob, 2, [0], 0.8, 'cym', 'perc');
+    }
+    if (lvl >= 4 && sec.cym !== false && style !== 'gugak' && style !== 'piano' && style !== 'harpsi' && style !== 'organ') push0(pos, 2.5, [0], 0.5, 'cym', 'perc');
+    if (sec.roll && style !== 'gugak') for (let x = 0; x < Math.min(len, 4 * unit) - 1e-6; x += unit / 4) push0(pos + len - Math.min(len, 4 * unit) + x, unit / 4, [def.tonic - 36 + tr + 7 > 47 ? def.tonic - 36 + tr - 5 : def.tonic - 36 + tr + 7], 0.25 + 0.5 * x / (4 * unit), 'timp', 'perc');
+    // 선율이 없는 구간은 베이스 리듬을 노트로 (게임이 비지 않게)
+    if (!mStr && sec.cue !== false) {
+      const bs = accEv.filter(e => e.b >= pos - 1e-6 && e.b < pos + len - 1e-6 && (e.role === 'bass' || (style === 'gugak' && e.inst === 'janggu')));
+      const seen = new Set();
+      for (const e of bs) { const k = Math.round(e.b * 100); if (seen.has(k)) continue; seen.add(k); cueEv.push({ fixLane: style === 'gugak' ? ({ dung: 3, kung: 1, deok: 5, gideok: 5, roll: 4 }[e.drum] ?? 3) : undefined, b: e.b, d: e.d, midi: style === 'gugak' ? [def.tonic + ({ dung: 0, kung: -5, deok: 7, gideok: 7, roll: 4 }[e.drum] || 0)] : [Math.max(...e.midi)], lm: style === 'gugak' ? [def.tonic + ({ dung: 0, kung: -5, deok: 7, gideok: 7, roll: 4 }[e.drum] || 0)] : e.lm.slice(-1), v: 1 }); }
+    }
+    secs.push({ b: pos, len, lvl, label: sec.label || (sec.t ? sec.t : sec.s || '') });
+    pos += len;
+    if (sec.rit) tempo.push([pos - Math.min(len, 2 * bar), (sec.bpm || (tempo.length ? tempo[tempo.length - 1][1] : def.bpm)) * 0.82]);
+  }
+  // 끝 화음은 길게 늘림(페르마타)
+  const total = pos;
+  for (const e of melEv.concat(accEv)) if (e.b + e.d > total) e.d = Math.max(0.1, total - e.b);
+  const lastB = Math.max(...melEv.concat(accEv).map(e => e.b));
+  for (const e of melEv.concat(accEv)) if (Math.abs(e.b - lastB) < 1e-6 && e.inst !== 'timp' && e.inst !== 'cym' && e.inst !== 'janggu' && e.inst !== 'buk') e.d += 2 * unit;
+  // 템포 지도
+  const tm = (tempo.length && tempo[0][0] === 0 ? tempo : [[0, def.bpm]].concat(tempo)).sort((a, b) => a[0] - b[0]);
   const segs = []; let sec = 0;
   for (let i = 0; i < tm.length; i++) {
     segs.push({ b0: tm[i][0], s0: sec, spb: 60 / tm[i][1] });
     if (i + 1 < tm.length) sec += (tm[i + 1][0] - tm[i][0]) * 60 / tm[i][1];
   }
   const secOf = b => { let s = segs[0]; for (const x of segs) if (b >= x.b0) s = x; return s.s0 + (b - s.b0) * s.spb; };
-  const len = Math.max(mb, ab);
-  const song = Object.assign({}, def, { melEv: mel, accEv: acc, melLen: mb, accLen: ab, len, secOf, duration: secOf(len) });
+  melEv.sort((a, b) => a.b - b.b); accEv.sort((a, b) => a.b - b.b); cueEv.sort((a, b) => a.b - b.b);
+  Object.assign(song, { melEv, accEv, cueEv, secs, len: total + 2 * unit, secOf, duration: secOf(total + 2 * unit), bpm0: tm[0][1] });
   if (def.laneMode === 'rank') {
-    const ps = [...new Set(mel.map(e => Math.max(...e.midi)))].sort((a, b) => a - b);
+    const ps = [...new Set(melEv.concat(cueEv.filter(e => e.fixLane === undefined)).map(e => Math.max(...e.lm)))].sort((a, b) => a - b);
     song.rankIdx = new Map(ps.map((p, i) => [p, i]));
   }
   planLanes(song);
   return song;
 }
-// ----- 레인 배정 -----
-const SCALE = { major: [0, 2, 4, 5, 7, 9, 11], minor: [0, 2, 3, 5, 7, 8, 10] };
-// 음계에서 몇 번째 음인지(옥타브 포함). 국악 곡은 쓰인 음들의 높이 순서
+
+// ---------- 레인 배치 ----------
 function diaIndex(song, midi) {
   if (song.rankIdx) {
     if (song.rankIdx.has(midi)) return song.rankIdx.get(midi);
@@ -400,15 +716,12 @@ function diaIndex(song, midi) {
 }
 // 손가락 힘: 약지 < 중지 < 검지 < 엄지 (S D F Space J K L)
 const FINGER = [0.45, 0.8, 0.95, 1, 0.95, 0.8, 0.45];
-// 곡마다 레인 배치 계획: 낮은 음은 왼쪽·높은 음은 오른쪽 순서를 지키면서,
-// 자주 나오는 음이 엄지·검지에 가도록 배치함
 function planLanes(song) {
   const freq = new Map();
-  for (const e of song.melEv) { const d = diaIndex(song, Math.max(...e.midi)); freq.set(d, (freq.get(d) || 0) + 1); }
+  for (const e of song.melEv.concat((song.cueEv || []).filter(e => e.fixLane === undefined))) { const d = diaIndex(song, Math.max(...e.lm)); freq.set(d, (freq.get(d) || 0) + 1); }
   const P = [...freq.keys()].sort((a, b) => a - b), n = P.length;
   song.posLane = null; song.offset = 0;
   if (n && n <= 7) {
-    // 순서를 지키는 배치 중 손가락 점수가 가장 높은 것(동적 계획법)
     const dp = Array.from({ length: n }, () => new Array(7).fill(-1)), from = Array.from({ length: n }, () => new Array(7).fill(-1));
     for (let j = 0; j < 7; j++) dp[0][j] = freq.get(P[0]) * FINGER[j];
     for (let i = 1; i < n; i++) for (let j = i; j < 7; j++) for (let k = i - 1; k < j; k++) {
@@ -420,7 +733,6 @@ function planLanes(song) {
     song.posLane = new Map();
     for (let i = n - 1, j = bj; i >= 0; i--) { song.posLane.set(P[i], j); j = from[i][j]; }
   } else if (n) {
-    // 음역이 넓은 곡: 7칸을 돌아가며 쓰되, 시작 위치를 손가락 점수가 가장 높게 맞춤
     let best = -1;
     for (let o = 0; o < 7; o++) {
       let sc = 0; for (const [d, f] of freq) sc += f * FINGER[(((d + o) % 7) + 7) % 7];
@@ -432,12 +744,14 @@ function laneOf(song, midi) {
   const d = diaIndex(song, midi);
   if (song.posLane) {
     if (song.posLane.has(d)) return song.posLane.get(d);
-    let near = null, nd = 1e9;
+    let near = 3, nd = 1e9;
     for (const [p, l] of song.posLane) { const sameDeg = (((p - d) % 7) + 7) % 7 === 0; const dist = sameDeg ? -1 : Math.abs(p - d); if (dist < nd) { nd = dist; near = l; } }
     return near;
   }
   return (((d + (song.offset || 0)) % 7) + 7) % 7;
 }
+
+// ---------- 채보 ----------
 const DRUM_LANE = { dung: 3, kung: 1, deok: 5, gideok: 5 };
 const DIFF_RULES = {
   easy: { minGap: 0.42, holdMin: 1.2, offbeatGap: 0.8, chordEvery: 0 },
@@ -456,21 +770,21 @@ function makeChart(song, diff) {
     return true;
   };
   const beatsBar = song.bar || 4;
-  const unit = song.unit || 1; // 박 단위(국악은 8분음표 3개 = 1박)
+  const unit = song.unit || 1;
   let last = -9;
   const melTimes = [];
-  // 같은 음 빠른 연타는 쉬움·보통에서 양손이 번갈아 치도록 반대편 레인으로 나눔
   const jackThr = diff === 'easy' ? 0.65 : diff === 'normal' ? 0.4 : 0;
   let prevPitch = null, prevLane = -1, prevT = -9;
-  for (const e of song.melEv) {
+  const src = song.melEv.concat(song.cueEv || []).sort((a, b) => a.b - b.b);
+  for (const e of src) {
     const t = song.secOf(e.b);
-    const top = Math.max(...e.midi);
+    const top = Math.max(...e.lm);
     const onBeat = Math.abs(e.b / unit - Math.round(e.b / unit)) < 1e-3;
     const gap = t - last;
     if (gap < R.minGap - 1e-6) continue;
     if (diff === 'easy' && !onBeat && e.d < unit && gap < R.offbeatGap) continue;
     const durSec = song.secOf(e.b + e.d) - t;
-    const base = laneOf(song, top);
+    const base = e.fixLane !== undefined ? e.fixLane : laneOf(song, top);
     let lane = base;
     if (jackThr && top === prevPitch && t - prevT < jackThr && prevLane === base) lane = base === 3 ? 4 : 6 - base;
     const end = (durSec >= R.holdMin && e.d >= (diff === 'easy' ? 2 : 1.5) * unit) ? t + durSec * 0.82 : 0;
@@ -478,22 +792,21 @@ function makeChart(song, diff) {
     if (!okAdd && lane !== base) { lane = base; okAdd = add(t, lane, end); }
     if (okAdd) { last = t; melTimes.push({ t, lane, b: e.b }); prevPitch = top; prevLane = lane; prevT = t; }
   }
-  if (song.gugak) {
-    // 장구: 보통은 덩만, 어려움은 덩·쿵·덕
+  if (song.style === 'gugak') {
     if (diff !== 'easy') {
       for (const e of song.accEv) {
         if (!e.drum || !(e.drum in DRUM_LANE)) continue;
         if (diff === 'normal' && e.drum !== 'dung') continue;
         const t = song.secOf(e.b);
-        const near = melTimes.some(m => Math.abs(m.t - t) > 0.002 && Math.abs(m.t - t) < 0.08);
+        const near = melTimes.some(m => Math.abs(m.t - t) < 0.08);
         if (!near) add(t, DRUM_LANE[e.drum], 0);
       }
     }
   } else if (diff !== 'easy') {
     const bassAt = new Map();
     for (const e of song.accEv) {
-      if (e.inst === 'timp' || (e.inst === 'strings' && e.v < 0.2)) continue;
-      const lo = Math.min(...e.midi);
+      if (e.role !== 'bass') continue;
+      const lo = Math.min(...e.lm);
       const key = Math.round(e.b * 1000);
       if (!bassAt.has(key) || lo < bassAt.get(key).lo) bassAt.set(key, { lo, b: e.b });
     }
@@ -534,13 +847,12 @@ function makeChart(song, diff) {
 }
 function audioEvents(song) {
   const ev = [];
-  const sec = (b) => song.secOf(b);
+  const sec = b => song.secOf(b);
   for (const e of song.melEv) for (const m of e.midi) ev.push({ t: sec(e.b), dur: sec(e.b + e.d) - sec(e.b), midi: m, v: e.v, kind: e.inst, lead: true });
   for (const e of song.accEv) for (const m of e.midi) ev.push({ t: sec(e.b), dur: sec(e.b + e.d) - sec(e.b), midi: m, v: e.v, kind: e.inst, drum: e.drum });
   ev.sort((a, b) => a.t - b.t);
   return ev;
 }
-const rep = (s, n) => Array(n).fill(s).join(' ');
 
 
 </script>
@@ -849,39 +1161,97 @@ const SkinFX = (() => {
 
 </script>
 <script>
-// ===== 수록곡 (모두 저작권 보호기간이 끝난 원곡을 바탕으로 새로 편곡) =====
+// ===== 수록곡 =====
+// 모두 저작권 보호기간이 끝난 원곡(또는 작자 미상 민요)을 바탕으로 새로 편곡했다.
+// 곡마다 T(주제: 선율 m + 화음 ch)와 form(구간 설계도)을 둔다.
+//   lvl 0 도입 · 1 주제 제시 · 2 전개 · 3 상승 · 4 절정 · 5 종결
 const SONG_DEFS = (() => {
   const L = [];
-  // 1. 작은 별 변주곡 주제
+  const S = s => s.trim().split(/\s+/).map(x => x + '/.25').join(' ');
+  const Q = (notes, d) => notes.trim().split(/\s+/).map(x => x + '/' + d).join(' ');
+
+  // ───────── 3학년 ─────────
   const tw = 'C5 C5 G5 G5 A5 A5 G5/2 F5 F5 E5 E5 D5 D5 C5/2 G5 G5 F5 F5 E5 E5 D5/2 G5 G5 F5 F5 E5 E5 D5/2 C5 C5 G5 G5 A5 A5 G5/2 F5 F5 E5 E5 D5 D5 C5/2';
   const twP = 'C:2 C:2 F:2 C:2 Dm:2 C:2 G7:2 C:2 C:2 G7:2 C:2 G7:2 C:2 G7:2 C:2 G7:2 C:2 C:2 F:2 C:2 Dm:2 C:2 G7:2 C:2';
+  const twM = 'Cm:2 Cm:2 Fm:2 Cm:2 Ddim:2 Cm:2 G7:2 Cm:2 Cm:2 G7:2 Cm:2 G7:2 Cm:2 G7:2 Cm:2 G7:2 Cm:2 Cm:2 Fm:2 Cm:2 Ddim:2 Cm:2 G7:2 Cm:2';
   L.push({ id: 'twinkle', cat: 'g3', title: '작은 별 변주곡', composer: '모차르트', life: '1756–1791', tag: '3학년 교과서', stars: 1,
-    desc: '프랑스 민요 선율에 모차르트가 12개의 변주를 붙인 곡이에요.',
-    tonic: 60, mode: 'major', bar: 2, bpm: 100,
-    lead: 'violin', mel: [[tw, 0, 'violin'], [tw, 12, 'flute']], acc: [{ p: twP, s: 'block' }, { p: twP, s: 'alberti' }] });
+    desc: '같은 주제가 16분음표, 단조, 화려한 옥타브로 모습을 바꿔 가요. 원곡처럼 피아노로 연주해요.',
+    style: 'piano', tonic: 60, mode: 'major', bar: 2, bpm: 104, feel: 'bass',
+    T: { A: { m: tw, ch: twP } },
+    form: [{ t: 'A', lvl: 1, label: '주제' }, { t: 'A', lvl: 2, fig: true, label: '변주 1' }, { t: 'A', lvl: 2, feel: 'alberti', label: '변주 2' },
+      { t: 'A', lvl: 3, minor: true, ch: twM, feel: 'block', label: '단조 변주' }, { t: 'A', lvl: 4, feel: 'alberti', label: '절정' },
+      { s: 'end', m: 'E5/.5 G5/.5 C6/1 C4+E4+G4+C5/2', ch: 'C:1 G7:1 C:2', lvl: 5, rit: true }] });
 
-  // 2. 환희의 송가
-  const o1 = 'F#5 F#5 G5 A5 A5 G5 F#5 E5 D5 D5 E5 F#5 F#5/1.5 E5/.5 E5/2';
-  const o2 = 'F#5 F#5 G5 A5 A5 G5 F#5 E5 D5 D5 E5 F#5 E5/1.5 D5/.5 D5/2';
-  const o3 = 'E5 E5 F#5 D5 E5 F#5/.5 G5/.5 F#5 D5 E5 F#5/.5 G5/.5 F#5 E5 D5 E5 A4/2';
-  const oA = 'D:4 D:2 A:2 D:4 A:4', oB = 'D:4 D:2 A:2 D:4 A:2 D:2', oC = 'A:2 D:2 A:2 D:2 A:2 D:1 A:1 D:1 E7:1 A:2';
-  const oP = [oA, oB, oC, oB].join(' ');
-  L.push({ id: 'joy', cat: 'g6', title: '환희의 송가', composer: '베토벤', life: '1770–1827', tag: '6학년 교과서', stars: 1,
-    desc: '교향곡 9번 4악장에서 실러의 시에 붙인 합창 선율이에요.',
-    tonic: 62, mode: 'major', bar: 4, bpm: 120,
-    lead: 'violin', mel: [o1, o2, o3, o2, [o1, 0, 'brass'], [o2, 0, 'brass'], [o3, 0, 'brass'], [o2, 0, 'brass']], acc: [{ p: oP, s: 'pulse' }, { p: oP, s: 'trem', timp: true }] });
+  const sa = 'C5/.5 C5/.5 E5/.5 E5/.5 G5/.5 G5/.5 E5/1 F5/.5 F5/.5 D5/.5 D5/.5 B4/.5 B4/.5 G4/1';
+  const sb = 'C5/.5 C5/.5 E5/.5 E5/.5 G5/.5 G5/.5 C6/1 A5/.5 A5/.5 F#5/.5 F#5/.5 G5/1 r/1';
+  const sMin = 'Cm:2 Cm:2 G7:2 G:2 Cm:2 Cm:2 Ab:1 D7:1 G:2';
+  L.push({ id: 'surprise', cat: 'g3', title: '놀람 교향곡 2악장', composer: '하이든', life: '1732–1809', tag: '3학년 교과서', stars: 1,
+    desc: '아주 여리게 연주하다 갑자기 ‘꽝!’ 하고 울려요. 뒤이어 주제가 여러 모습으로 변주돼요.',
+    tonic: 60, mode: 'major', bar: 2, bpm: 84, feel: 'march', lead: 'violin',
+    T: { A: { m: sa + ' ' + sb, ch: 'C:2 C:2 G7:2 G:2 C:2 C:2 D7:2 G:2' } },
+    form: [{ t: 'A', lvl: 1, label: '주제' }, { t: 'A', lvl: 1, v: 0.45, stab: [[15, 'G', 1.5]], label: '여리게 → 꽝!' },
+      { t: 'A', lvl: 2, fig: true, label: '변주 1' }, { t: 'A', lvl: 2, fig: true },
+      { t: 'A', lvl: 3, minor: true, ch: sMin, label: '단조 변주' }, { t: 'A', lvl: 3, minor: true, ch: sMin },
+      { t: 'A', lvl: 2, lead: 'oboe', label: '오보에 변주' },
+      { t: 'A', lvl: 4, label: '총주' }, { t: 'A', lvl: 4 },
+      { t: 'A', lvl: 1, v: 0.6, label: '끝맺음' }, { s: 'end', m: 'C5/2 r/2 C4+E4+G4+C5/4', ch: 'C:2 G7:2 C:4', lvl: 1, rit: true }] });
 
-  // 3. 캐논
-  const cP = 'D:1 A:1 Bm:1 F#m:1 G:1 D:1 G:1 A:1';
-  const cA = 'F#5 E5 D5 C#5 B4 A4 B4 C#5', cB = 'D5 C#5 B4 A4 G4 F#4 G4 E4';
-  const cC = 'D5/.5 C#5/.5 D5/.5 D4/.5 C#4/.5 A4/.5 E4/.5 F#4/.5 D4/.5 D5/.5 C#5/.5 B4/.5 C#5/.5 F#5/.5 A5/.5 B5/.5 G5/.5 F#5/.5 E5/.5 G5/.5 F#5/.5 E5/.5 D5/.5 C#5/.5 B4/.5 A4/.5 G4/.5 F#4/.5 E4/.5 G4/.5 F#4/.5 E4/.5';
-  L.push({ id: 'canon', cat: 'cl', title: '캐논', composer: '파헬벨', life: '1653–1706', tag: '결혼식·광고 단골곡', stars: 2,
-    desc: '같은 8개의 베이스 음이 계속 반복되고, 그 위에 선율이 쌓여 가요.',
-    tonic: 62, mode: 'major', bar: 4, bpm: 72,
-    lead: 'violin', mel: ['r/8', cA, cB, cC, cC, cA, 'D5/4'],
-    acc: [{ p: cP, s: 'bass' }, { p: rep(cP, 2), s: 'block' }, { p: rep(cP, 5), s: 'arp' }, { p: 'D:4', s: 'block' }] });
+  const sm1 = 'G#4/.5 G#4/.5 G#4/.5 F#4/.25 E4/.25 B4/1.5 B4/.25 A4/.25';
+  const sm3 = 'G#4/.5 A4/.5 B4/.5 A4/.5 G#4/1 F#4/1';
+  const sm5 = 'B4/.5 G#4/.5 A4/.5 F#4/.5 G#4/.5 E4/.5 F#4/.5 D#4/.5';
+  const birds = 'G#5/.25 A5/.25 G#5/.25 A5/.25 G#5/.25 A5/.25 G#5/.25 A5/.25 B5/1 G#5/1 E5/.25 F#5/.25 E5/.25 F#5/.25 E5/.25 F#5/.25 E5/.25 F#5/.25 G#5/1 E5/1 B4/.25 C#5/.25 B4/.25 C#5/.25 D#5/.25 E5/.25 F#5/.25 G#5/.25 A5/.5 G#5/.5 F#5/.5 D#5/.5 E5/2 r/2';
+  const brook = S(rep('G#5 A5 G#5 F#5', 4)) + ' ' + S(rep('A5 B5 A5 G#5', 4)) + ' ' + S(rep('F#5 G#5 F#5 E5', 2) + ' ' + rep('D#5 E5 D#5 C#5', 2)) + ' ' + S(rep('E5 F#5 E5 D#5', 2)) + ' E5/2';
+  const thunder = S(rep('E4', 8)) + ' ' + S('B3 C#4 D#4 E4 F#4 G#4 A4 B4') + ' ' + S(rep('E4', 8)) + ' ' + S('E4 F#4 G#4 A4 B4 C#5 D#5 E5') + ' ' + S(rep('B4', 8)) + ' ' + S('B4 C#5 D#5 E5 F#5 G#5 A5 B5') + ' E5/1 B4/1 E4/2';
+  L.push({ id: 'spring', cat: 'g3', title: '사계 중 「봄」', composer: '비발디', life: '1678–1741', tag: '3학년 교과서', stars: 2,
+    desc: '봄 주제(리토르넬로) 사이사이에 새소리, 시냇물, 천둥 장면이 끼어들어요.',
+    tonic: 64, mode: 'major', bar: 4, bpm: 96, feel: 'pulse8', lead: 'violin', ens: 'strings',
+    T: { R: { m: `${sm1} ${sm1} ${sm3} E4/2 r/1.5 E4/.5`, ch: 'E:4 E:4 E:2 B7:2 E:4' },
+      R2: { m: `${sm5} E4/2 r/2 ${sm5} E4/2 r/2`, ch: 'E:1 B7:1 E:1 B7:1 E:4 E:1 B7:1 E:1 B7:1 E:4' },
+      B: { m: birds, ch: 'E:4 E:4 B7:4 E:4', feel: 'still' }, W: { m: brook, ch: 'E:4 A:4 B7:4 E:4' }, Th: { m: thunder, ch: 'E:4 E:4 B7:4 E:4', feel: 'storm' } },
+    form: [{ t: 'R', oct: 1, lvl: 2, label: '봄의 주제' }, { t: 'R', oct: 1, lvl: 1, v: 0.6, label: '메아리' }, { t: 'R2', oct: 1, lvl: 2 },
+      { t: 'B', lvl: 1, label: '새소리' }, { t: 'R', oct: 1, lvl: 2 }, { t: 'W', lvl: 1, label: '시냇물' }, { t: 'R', oct: 1, lvl: 2 },
+      { t: 'Th', lvl: 3, label: '천둥' }, { t: 'R', oct: 1, tr: -3, minor: true, ch: 'Em:4 Em:4 Em:2 B7:2 Em:4', lvl: 3, label: '단조 주제' },
+      { t: 'B', lvl: 1, label: '다시 새소리' }, { t: 'R', oct: 1, lvl: 4, label: '절정' }, { t: 'R2', oct: 1, lvl: 4 },
+      { s: 'end', m: 'E5+B4+G#4/4', ch: 'E:4', lvl: 5, rit: true }] });
 
-  // 4. 엘리제를 위하여 (박 = 8분음표)
+  // ───────── 4학년 ─────────
+  const mA1 = 'D5 G4/.5 A4/.5 B4/.5 C5/.5 D5 G4 G4 E5 C5/.5 D5/.5 E5/.5 F#5/.5 G5 G4 G4 C5 D5/.5 C5/.5 B4/.5 A4/.5 B4 C5/.5 B4/.5 A4/.5 G4/.5 F#4 G4/.5 A4/.5 B4/.5 G4/.5 A4/3';
+  const mA2 = 'D5 G4/.5 A4/.5 B4/.5 C5/.5 D5 G4 G4 E5 C5/.5 D5/.5 E5/.5 F#5/.5 G5 G4 G4 C5 D5/.5 C5/.5 B4/.5 A4/.5 B4 C5/.5 B4/.5 A4/.5 G4/.5 A4 B4/.5 A4/.5 G4/.5 F#4/.5 G4/3';
+  const mB1 = 'B5 G5/.5 A5/.5 B5/.5 G5/.5 A5 D5/.5 E5/.5 F#5/.5 D5/.5 G5 E5/.5 F#5/.5 G5/.5 D5/.5 C#5 B4/.5 C#5/.5 A4 A4/.5 B4/.5 C#5/.5 D5/.5 E5/.5 F#5/.5 G5 F#5 E5 F#5 A4 C#5 D5/3';
+  const mB2 = 'D5 G4/.5 F#4/.5 G4 E5 G4/.5 F#4/.5 G4 D5 C5 B4 A4/.5 G4/.5 F#4/.5 G4/.5 A4 D4/.5 E4/.5 F#4/.5 G4/.5 A4/.5 B4/.5 C5 B4 A4 B4/.5 D5/.5 G4 F#4 G4/3';
+  L.push({ id: 'minuet', cat: 'g4', title: '미뉴에트 G장조', composer: '페촐트', life: '1677–1733', tag: '4학년 교과서·피아노 입문곡', stars: 2,
+    desc: '「안나 막달레나를 위한 음악 노트」의 3박자 춤곡이에요. 원곡처럼 하프시코드로 연주해요.',
+    style: 'harpsi', tonic: 67, mode: 'major', bar: 3, bpm: 120, feel: 'bass',
+    T: { A: { m: mA1 + ' ' + mA2, ch: 'G:3 G:3 C:3 G:3 Am:3 G:3 D:3 D:3 G:3 G:3 C:3 G:3 Am:3 G:3 D7:3 G:3' },
+      B: { m: mB1 + ' ' + mB2, ch: 'G:3 D:3 Em:3 A:3 A:3 A7:3 A7:3 D:3 G:3 C:3 G:3 D:3 D:3 Am:3 D7:3 G:3' } },
+    form: [{ t: 'A', lvl: 1, label: 'A' }, { t: 'A', lvl: 2, label: 'A 반복' }, { t: 'B', lvl: 2, label: 'B' }, { t: 'B', lvl: 3, label: 'B 반복' },
+      { t: 'A', lvl: 4, dbl: false, label: '다시 A' }, { s: 'end', m: 'G4+B4+D5/3', ch: 'G:3', lvl: 5, rit: true }] });
+
+  const lu = 'E4/.5 E4/.5 G4/2 E4/.5 E4/.5 G4/2 E4/.5 G4/.5 C5/1 B4/1.5 A4/.5 A4/1 G4/1 D4/.5 E4/.5 F4/1 D4/1 D4/.5 E4/.5 F4/2 D4/.5 F4/.5 B4/.5 A4/.5 G4/1 B4/1 C5/2 C4/.5 C4/.5 C5/2 A4/.5 F4/.5 G4/2 E4/.5 C4/.5 F4/1 G4/1 A4/1 G4/2 C4/.5 C4/.5 C5/2 A4/.5 F4/.5 G4/2 E4/.5 C4/.5 F4/1 E4/1 D4/1 C4/2';
+  L.push({ id: 'lullaby', cat: 'g4', title: '브람스의 자장가', composer: '브람스', life: '1833–1897', tag: '4학년 감상곡·오르골', stars: 1,
+    desc: '오르골 소리로 시작해 현악기가 포근하게 감싸요. 3박자의 흔들림을 느껴 보세요.',
+    tonic: 60, mode: 'major', bar: 3, bpm: 84, feel: 'waltz', lead: 'bell',
+    T: { V: { m: lu, ch: 'N:1 C:3 C:3 C:3 G7:3 G7:3 G7:3 G7:3 C:3 F:3 C:3 G7:3 C:3 F:3 C:3 G7:3 C:2' } },
+    form: [{ s: 'intro', ch: 'C:3 G7:3 C:3 C:3', lvl: 0, label: '오르골' }, { t: 'V', oct: 1, lead: 'bell', lvl: 1, label: '1절' },
+      { t: 'V', oct: 1, lead: 'flute', lvl: 1, feel: 'lyric', label: '2절' }, { t: 'V', lead: 'violin', lvl: 2, feel: 'lyric', label: '3절' },
+      { t: 'V', lead: 'violin', oct: 1, lvl: 4, dbl: 'strings', feel: 'lyric', label: '절정' },
+      { s: 'end', m: 'C6/3', lead: 'bell', ch: 'C:3', lvl: 1, rit: true }] });
+
+  const k1 = 'B3/.5 C#4/.5 D4/.5 E4/.5 F#4/.5 D4/.5 F#4/1 E#4/.5 C#4/.5 E#4/1 E4/.5 C4/.5 E4/1 B3/.5 C#4/.5 D4/.5 E4/.5 F#4/.5 D4/.5 F#4/.5 B4/.5 A4/.5 F#4/.5 D4/.5 F#4/.5 A4/2';
+  const k2 = 'F#4/.5 G#4/.5 A#4/.5 B4/.5 C#5/.5 A#4/.5 C#5/1 D5/.5 A#4/.5 D5/1 C#5/.5 A#4/.5 C#5/1 F#4/.5 G#4/.5 A#4/.5 B4/.5 C#5/.5 A#4/.5 C#5/.5 F#5/.5 E5/.5 C#5/.5 A#4/.5 C#5/.5 E5/2';
+  const kc = 'Bm:4 F#:2 C:2 Bm:4 Bm:2 D:2';
+  const kc2 = 'F#:4 Bm:2 F#:2 F#:4 F#:2 F#7:2';
+  L.push({ id: 'mountain', cat: 'g4', title: '산왕의 궁전에서', composer: '그리그', life: '1843–1907', tag: '4학년 교과서', stars: 3,
+    desc: '낮은 악기의 살금살금 주제가 되풀이될수록 빨라지고, 악기가 늘어나 마지막에 폭발해요.',
+    tonic: 71, mode: 'minor', bar: 4, bpm: 92, feel: 'march',
+    T: { C: { m: [k1, k1, k2, k1].join(' '), ch: [kc, kc, kc2, kc].join(' ') } },
+    form: [{ s: 'intro', ch: 'Bm:4', lvl: 0, label: '도입' },
+      { t: 'C', lead: 'cello', lvl: 1, bpm: 92, label: '낮은 현·바순' }, { t: 'C', lead: 'violin', oct: 1, lvl: 1, bpm: 110, label: '바이올린' },
+      { t: 'C', lead: 'oboe', oct: 1, lvl: 2, bpm: 132, label: '목관' }, { t: 'C', lead: 'violin', oct: 1, lvl: 3, cres: true, bpm: 156, label: '점점 크게' },
+      { t: 'C', lead: 'violin', oct: 1, lvl: 4, bpm: 184, label: '총주' },
+      { s: 'end', m: 'B4+B5/1 r/1 F#4+F#5/1 r/1 B3+B4/2 r/2', ch: 'Bm:1 N:1 F#:1 N:1 Bm:2 N:2', lead: 'brass', lvl: 5 }] });
+
+  // ───────── 5학년 ─────────
   const eT1 = 'E5/.5 D#5/.5 E5/.5 B4/.5 D5/.5 C5/.5 A4/1 r/.5 C4/.5 E4/.5 A4/.5 B4/1 r/.5 E4/.5 G#4/.5 B4/.5 C5/1 r/.5 E4/.5 E5/.5 D#5/.5';
   const eT2 = 'E5/.5 D#5/.5 E5/.5 B4/.5 D5/.5 C5/.5 A4/1 r/.5 C4/.5 E4/.5 A4/.5 B4/1 r/.5 E4/.5 C5/.5 B4/.5';
   const eE1 = 'A4/1 r/1 E5/.5 D#5/.5', eE2 = 'A4/1 r/.5 B4/.5 C5/.5 D5/.5';
@@ -890,404 +1260,514 @@ const SONG_DEFS = (() => {
   const aT1 = `r/3 ${aA} ${aE} ${aA}`, aT2 = `r/3 ${aA} ${aE}`;
   const aB = 'C3/.5 G3/.5 C4/.5 r/1.5 G2/.5 G3/.5 B3/.5 r/1.5 A2/.5 E3/.5 A3/.5 r/1.5 E2/.5 E3/.5 E4/.5 r/1.5';
   L.push({ id: 'elise', cat: 'g5', title: '엘리제를 위하여', composer: '베토벤', life: '1770–1827', tag: '5학년 교과서·피아노 명곡', stars: 2,
-    desc: '왼손의 분산화음 위로 오른손이 반음을 오가며 노래하는 피아노 소품이에요.',
-    tonic: 69, mode: 'minor', bar: 3, bpm: 132,
-    mel: ['E5/.5 D#5/.5', eT1, eT2, eE1, eT1, eT2, eE2, eB, eT1, eT2, eE2, eB, eT1, eT2, 'A4/3'],
-    lead: 'piano', acc: [{ inst: 'piano', n: [ 'r/1', aT1, aT2, aA, aT1, aT2, aA, aB, aT1, aT2, aA, aB, aT1, aT2, 'A2/3' ].join(' ') }] });
+    desc: '‘미-레#-미’ 하고 반음을 오가는 주제가 돌아올 때마다 조금씩 힘이 실려요.',
+    style: 'piano', tonic: 69, mode: 'minor', bar: 3, bpm: 126,
+    T: { AA: { m: ['E5/.5 D#5/.5', eT1, eT2, eE1, eT1, eT2, eE2].join(' '), an: ['r/1', aT1, aT2, aA, aT1, aT2, aA].join(' ') },
+      AB: { m: [eB, eT1, eT2, eE2].join(' '), an: [aB, aT1, aT2, aA].join(' ') },
+      AE: { m: [eB, eT1, eT2, 'A4/3'].join(' '), an: [aB, aT1, aT2, 'A2+A3/3'].join(' ') } },
+    form: [{ t: 'AA', lvl: 1, label: '주제' }, { t: 'AB', lvl: 1 }, { t: 'AB', lvl: 2, label: '반복' }, { t: 'AA', lvl: 3, label: '힘 있게' },
+      { t: 'AB', lvl: 4, dbl: false, label: '절정' }, { t: 'AA', lvl: 1, v: 0.75, label: '다시 여리게' }, { t: 'AE', lvl: 1, rit: true, label: '끝맺음' }] });
 
-  // 5. 사계 중 '봄' 1악장
-  const sm1 = 'G#4/.5 G#4/.5 G#4/.5 F#4/.25 E4/.25 B4/1.5 B4/.25 A4/.25';
-  const sm3 = 'G#4/.5 A4/.5 B4/.5 A4/.5 G#4/1 F#4/1';
-  const sm5 = 'B4/.5 G#4/.5 A4/.5 F#4/.5 G#4/.5 E4/.5 F#4/.5 D#4/.5';
-  const birds = 'G#5/.25 A5/.25 G#5/.25 A5/.25 G#5/.25 A5/.25 G#5/.25 A5/.25 B5/1 G#5/1 E5/.25 F#5/.25 E5/.25 F#5/.25 E5/.25 F#5/.25 E5/.25 F#5/.25 G#5/1 E5/1 B4/.25 C#5/.25 B4/.25 C#5/.25 D#5/.25 E5/.25 F#5/.25 G#5/.25 A5/.5 G#5/.5 F#5/.5 D#5/.5 E5/2 r/1.5';
-  const sR = 'E:4 E:4 E:2 B7:2 E:4';
-  L.push({ id: 'spring', cat: 'g3', title: '사계 중 「봄」', composer: '비발디', life: '1678–1741', tag: '3학년 교과서', stars: 2,
-    desc: '바이올린 협주곡 「사계」의 첫 곡. 새들의 지저귐을 바이올린 트릴로 그려요.',
-    tonic: 64, mode: 'major', bar: 4, bpm: 100,
-    lead: 'violin', mel: [['E4/.5', 12], [`${sm1} ${sm1} ${sm3} E4/2 r/1.5 E4/.5`, 12], [`v0.6 ${sm1} ${sm1} ${sm3} E4/2 r/2 v1`, 12],
-      [`${sm5} E4/2 r/2`, 12], [birds, 12], ['E4/.5', 12], [`${sm1} ${sm1} ${sm3} E4/4`, 12]],
-    acc: [{ n: 'r/.5' }, { p: sR + ' ' + sR + ' E:1 B7:1 E:1 B7:1 E:4', s: 'trem' }, { p: 'E:4 E:4 B7:4 E:4', s: 'block' }, { p: sR, s: 'trem' }] });
-
-  // 6. 신세계 교향곡 2악장 (Going Home)
-  const g1 = 'F5/1.5 Ab5/.5 Ab5/2 F5/1.5 Eb5/.5 Db5/2 Eb5/1.5 F5/.5 Ab5/1.5 F5/.5 Eb5/4';
-  const g2 = 'F5/1.5 Ab5/.5 Ab5/2 F5/1.5 Eb5/.5 Db5/2 Eb5/1.5 F5/.5 Eb5/1.5 Db5/.5 Db5/4';
-  const gB = 'Bb5/1.5 Db6/.5 Db6/2 Bb5/1.5 Ab5/.5 F5/2 Ab5/1.5 Bb5/.5 Ab5/1.5 F5/.5 Eb5/4';
-  L.push({ id: 'newworld', cat: 'g6', title: '신세계 교향곡 2악장', composer: '드보르자크', life: '1841–1904', tag: '6학년 교과서', stars: 1,
-    desc: '잉글리시 호른이 부르는 느린 선율로, 「Going Home」으로도 알려져 있어요.',
-    tonic: 61, mode: 'major', bar: 4, bpm: 62,
-    lead: 'oboe', mel: [g1, g2, gB, g2],
-    acc: [{ p: 'Db:4 Db:2 Gb:2 Gb:2 Db:2 Ab7:4 Db:4 Db:2 Gb:2 Ebm:2 Ab7:2 Db:4 Bbm:4 Db:4 Db:4 Ab7:4 Db:4 Db:2 Gb:2 Ebm:2 Ab7:2 Db:4', s: 'arp' }] });
-
-  // 7. 터키 행진곡
-  const tk = 'C5/.5 r/.5 D5/.25 C5/.25 B4/.25 C5/.25 E5/.5 r/.5 F5/.25 E5/.25 D#5/.25 E5/.25 B5/.25 A5/.25 G#5/.25 A5/.25 B5/.25 A5/.25 G#5/.25 A5/.25 C6/1 A5/.5 B5/.5 C6/.5 B5/.5 A5/.5 G#5/.5 A5/.5 E5/.5 F5/.5 D5/.5 C5/1 B4/.75 A4/.25';
-  const tkP = 'Am:2 Am:2 Am:2 Am:2 Am:1 E:1 Am:1 Dm:1 Am:1 E7:1';
-  const tk8a = 'A4/1 B4/.25 A4/.25 G#4/.25 A4/.25', tk8b = 'A4/1 C5/.5 D5/.5';
-  const tkB = 'E5/.5 E5/.5 F5/.25 E5/.25 D5/.25 C5/.25 B4/1 C5/.5 D5/.5 E5/.5 E5/.5 F5/.25 E5/.25 D5/.25 C5/.25 B4/1 A4/.5 B4/.5 C5/.5 C5/.5 D5/.25 C5/.25 B4/.25 A4/.25 G#4/1 B4/.25 A4/.25 G#4/.25 A4/.25';
-  const tkBP = 'C:2 G:2 C:2 E:2 Am:2 E:2';
-  L.push({ id: 'turkish', cat: 'cl', title: '터키 행진곡', composer: '모차르트', life: '1756–1791', tag: '피아노 명곡', stars: 3,
-    desc: '피아노 소나타 11번 3악장. 터키 군악대의 씩씩한 소리를 피아노로 흉내 냈어요.',
-    tonic: 69, mode: 'minor', bar: 2, bpm: 120,
-    lead: 'piano', mel: ['B4/.25 A4/.25 G#4/.25 A4/.25', tk, tk8a, tk, tk8b, tkB, tk, tk8b, tkB, tk, 'A4/2'],
-    acc: [{ n: 'r/1' }, { p: `${tkP} Am:2 ${tkP} Am:2 ${tkBP} ${tkP} Am:2 ${tkBP} ${tkP} Am:2`, s: 'oompah', u: 0.5 }] });
-
-  // 8. 운명 교향곡 1악장
   const fO = 'r/.5 G4+G3/.5 G4+G3/.5 G4+G3/.5 Eb4+Eb3/4 r/.5 F4+F3/.5 F4+F3/.5 F4+F3/.5 D4+D3/6';
-  const fOa = 'r/.5 G2/.5 G2/.5 G2/.5 Eb2/4 r/.5 F2/.5 F2/.5 F2/.5 D2/6';
   const fS = 'r/.5 G4/.5 G4/.5 G4/.5 Eb4/2 r/.5 Ab4/.5 Ab4/.5 Ab4/.5 F4/2 r/.5 Bb4/.5 Bb4/.5 Bb4/.5 G4/2 r/.5 C5/.5 C5/.5 C5/.5 Ab4/2 r/.5 D5/.5 D5/.5 D5/.5 B4/2 r/.5 Eb5/.5 Eb5/.5 Eb5/.5 C5/2 r/.5 G5/.5 G5/.5 G5/.5 Eb5/2 r/.5 F5/.5 F5/.5 F5/.5 D5/2';
-  const fSP = 'Cm:4 Fm:4 Eb:4 Ab:4 G7:4 Cm:4 Cm:4 G:4';
   const fH = 'r/.5 Bb4/.5 Bb4/.5 Bb4/.5 Eb5/2 F5/2 Bb4/2';
   const fE = 'r/.5 G4/.5 G4/.5 G4/.5 Eb4/2 r/.5 F4/.5 F4/.5 F4/.5 D4/2 C5+C4/1 r/1 G4+G3/1 r/1 C5+C4/4';
   L.push({ id: 'fate', cat: 'g5', title: '운명 교향곡 1악장', composer: '베토벤', life: '1770–1827', tag: '5학년 교과서', stars: 3,
-    desc: '‘짧-짧-짧-길’ 네 음의 동기 하나로 악장 전체를 쌓아 올렸어요.',
-    tonic: 60, mode: 'minor', bar: 2, bpm: 176,
-    lead: 'violin', mel: [fO, fS, [fH, 0, 'brass'], [fH, 0, 'brass'], fO, fS, fE],
-    acc: [{ n: fOa }, { p: fSP, s: 'trem', timp: true }, { p: 'Eb:2 Eb:2 Bb:2 Eb:2 Eb:2 Eb:2 Bb:2 Eb:2', s: 'pulse' }, { n: fOa }, { p: fSP, s: 'trem', timp: true }, { p: 'Cm:4 G:4 Cm:2 G:2 Cm:4', s: 'pulse', timp: true }] });
+    desc: '‘짧-짧-짧-길’ 네 음의 동기가 여리게, 세게, 다른 조로 끝없이 되풀이되며 곡을 쌓아 올려요.',
+    tonic: 60, mode: 'minor', bar: 2, bpm: 144, feel: 'pulse8', lead: 'violin',
+    T: { O: { m: fO }, S: { m: fS, ch: 'Cm:4 Fm:4 Eb:4 Ab:4 G7:4 Cm:4 Cm:4 G:4' }, H: { m: fH + ' ' + fH, ch: 'Bb:2 Eb:2 Bb7:2 Eb:2 Bb:2 Eb:2 Bb7:2 Eb:2' },
+      E: { m: fE, ch: 'Cm:4 G7:4 Cm:2 G:2 Cm:4' } },
+    form: [{ t: 'O', lvl: 4, cym: false, dbl: 'cello', label: '운명의 동기' }, { t: 'S', lvl: 1, label: '여린 전개' }, { t: 'S', lvl: 3, cres: true, label: '크레셴도' },
+      { t: 'O', lvl: 4, cym: false, dbl: 'cello' }, { t: 'H', lead: 'horn', lvl: 3, label: '호른 신호' },
+      { t: 'S', tr: 5, lvl: 2, label: '전개부' }, { t: 'S', tr: 7, lvl: 3, cres: true },
+      { t: 'O', lvl: 4, cym: false, dbl: 'cello', label: '재현' }, { t: 'S', lvl: 3 }, { t: 'O', lvl: 4, cym: false, dbl: 'cello' },
+      { t: 'S', lvl: 4, label: '절정' }, { t: 'E', lvl: 5, label: '코다' }, { s: 'end', m: 'C4+C5/2', ch: 'Cm:2', lvl: 5 }] });
 
-  // 9. 산왕의 궁전에서 (점점 빨라짐)
-  const k1 = 'B3/.5 C#4/.5 D4/.5 E4/.5 F#4/.5 D4/.5 F#4/1 E#4/.5 C#4/.5 E#4/1 E4/.5 C4/.5 E4/1 B3/.5 C#4/.5 D4/.5 E4/.5 F#4/.5 D4/.5 F#4/.5 B4/.5 A4/.5 F#4/.5 D4/.5 F#4/.5 A4/2';
-  const k2 = 'F#4/.5 G#4/.5 A#4/.5 B4/.5 C#5/.5 A#4/.5 C#5/1 D5/.5 A#4/.5 D5/1 C#5/.5 A#4/.5 C#5/1 F#4/.5 G#4/.5 A#4/.5 B4/.5 C#5/.5 A#4/.5 C#5/.5 F#5/.5 E5/.5 C#5/.5 A#4/.5 C#5/.5 E5/2';
-  L.push({ id: 'mountain', cat: 'g4', title: '산왕의 궁전에서', composer: '그리그', life: '1843–1907', tag: '4학년 교과서', stars: 3,
-    desc: '같은 선율이 되풀이될수록 점점 빨라지고 커져요. 빠르기 변화를 느껴 보세요.',
-    tonic: 71, mode: 'minor', bar: 4, tempo: [[0, 96], [32, 110], [64, 128], [96, 150], [128, 176], [160, 176]],
-    lead: 'oboe', mel: [k1, k1, k2, k1, [k1, 12, 'violin'], [k1, 12, 'violin'], [k2, 12, 'violin'], [k1, 12, 'violin'], [k1, 12, 'brass'], [k2, 12, 'brass'], ['B4+B5/1 r/1 F#4+F#5/1 r/1 B3+B4/2 r/2', 0, 'brass']],
-    acc: [{ p: 'Bm:16 Bm:16 F#:16 Bm:16', s: 'pizz' }, { p: 'Bm:16 Bm:16 F#:16 Bm:16', s: 'pizz', timp: true }, { p: 'Bm:16 F#:16', s: 'trem', timp: true }, { p: 'Bm:1 N:1 F#:1 N:1 Bm:2 N:2', s: 'block', timp: true }] });
-
-  // 10. 천국과 지옥 '캉캉'
-  const cc = 'C5/2 D5/.5 F5/.5 E5/.5 D5/.5 G5/1 G5/1 G5/.5 A5/.5 E5/.5 F5/.5 D5/1 D5/1 D5/.5 F5/.5 E5/.5 D5/.5';
-  const ccA = cc + ' C5/.5 C6/.5 B5/.5 A5/.5 G5/.5 F5/.5 E5/.5 D5/.5';
-  const ccB = cc + ' C5/.5 G5/.5 D5/.5 E5/.5 C5/1 r/1';
-  const ccPA = 'C:2 G7:2 C:2 C:2 G:2 G7:2 C:2 G7:2', ccPB = 'C:2 G7:2 C:2 C:2 G:2 G7:2 C:1 G7:1 C:2';
-  L.push({ id: 'cancan', cat: 'g6', title: '천국과 지옥 「캉캉」', composer: '오펜바흐', life: '1819–1880', tag: '6학년 교과서·운동회', stars: 4,
-    desc: '오페레타 「지옥의 오르페」의 빠른 춤곡. 운동회 이어달리기 음악으로 유명해요.',
-    tonic: 60, mode: 'major', bar: 2, bpm: 150,
-    lead: 'violin', mel: [ccA, ccB, [ccA, -12, 'brass'], [ccB, -12, 'brass'], [ccA, 0, 'flute'], [ccB, 0, 'flute']],
-    acc: [{ p: rep(`${ccPA} ${ccPB}`, 3), s: 'oompah', u: 0.5 }] });
-
-  // 11. 윌리엄 텔 서곡 피날레
   const wt = 'B4/.25 B4/.25 B4/.5 B4/.25 B4/.25 B4/.5 B4/.25 B4/.25 E5/.5 F#5/.5 G#5/.5 B4/.25 B4/.25 B4/.5 B4/.25 B4/.25 E5/.5 G#5/.25 G#5/.25 F#5/.5 D#5/.5 B4/.5 B4/.25 B4/.25 B4/.5 B4/.25 B4/.25 B4/.5 B4/.25 B4/.25 E5/.5 F#5/.5 G#5/.5 B4/.25 B4/.25 E5/.5 G#5/.25 G#5/.25 B5/.5 A5/.5 F#5/.5 D#5/.5 E5/.5';
   const wtP = 'E:2 E:2 E:2 B7:2 E:2 E:2 E:2 B7:1.5 E:.5';
   L.push({ id: 'tell', cat: 'g5', title: '윌리엄 텔 서곡', composer: '로시니', life: '1792–1868', tag: '5학년 교과서·운동회', stars: 4,
-    desc: '말발굽 소리 같은 ‘따다닥’ 리듬이 쉬지 않고 달리는 서곡의 마지막 부분이에요.',
-    tonic: 64, mode: 'major', bar: 2, bpm: 138,
-    lead: 'brass', mel: ['r/4', wt, wt, [wt, 5, 'violin'], [wt, 5, 'violin'], wt, [wt, 12, 'flute'], 'E5/.5 B4/.5 E5+E4/1'],
-    acc: [{ p: 'E:4', s: 'oompah', u: 0.5 }, { p: rep(wtP, 2), s: 'oompah', u: 0.5 }, { p: rep(wtP, 2), s: 'oompah', u: 0.5, tr: 5 }, { p: rep(wtP, 2) + ' B7:1 E:1', s: 'oompah', u: 0.5 }] });
+    desc: '트럼펫 신호 뒤로 말발굽 같은 ‘따다닥’ 리듬이 달려요. 악기가 바뀔 때마다 더 힘차져요.',
+    tonic: 64, mode: 'major', bar: 2, bpm: 126, feel: 'galop', lead: 'violin',
+    T: { G: { m: wt + ' ' + wt, ch: wtP + ' ' + wtP } },
+    form: [{ s: 'intro', ch: 'B7:2 B7:2 B7:2 B7:2', lvl: 3, roll: true, label: '트럼펫 신호' },
+      { t: 'G', lvl: 2, label: '말발굽 주제' }, { t: 'G', lead: 'flute', oct: 1, lvl: 2 }, { t: 'G', lead: 'brass', lvl: 3 },
+      { t: 'G', tr: 5, lvl: 2, label: '다른 조' }, { t: 'G', tr: 5, lvl: 3, cres: true },
+      { s: 'bridge', ch: 'B7:2 B7:2 B7:2 B7:2', lvl: 3, roll: true },
+      { t: 'G', lvl: 4, label: '절정' }, { t: 'G', lvl: 4 },
+      { s: 'end', m: 'E5/.5 B4/.5 E5/.5 B4/.5 E5+E4/1 r/1 E4+B4+E5+G#5/2', ch: 'E:1 B7:1 E:2 E:2', lvl: 5 }] });
 
-  // 12. 왕벌의 비행
-  const S = s => s.trim().split(/\s+/).map(x => x + '/.25').join(' ');
+  const eO = 'G4+G3/1 r/.5 D4+D3/.5 G4+G3/1 r/.5 D4+D3/.5 G4/.5 D4/.5 G4/.5 B4/.5 D5/2 C5/1 r/.5 A4/.5 C5/1 r/.5 A4/.5 C5/.5 A4/.5 F#4/.5 A4/.5 D4/2';
+  const eC1 = 'G5/1 B5/.25 A5/.25 G5/.5 G5/.5 F#5/.5 F#5/1 A5/1 C6/.25 B5/.25 A5/.5 A5/.5 G5/.5 G5/1 B5/.5 A5/.5 G5/.5 F#5/.5 E5/.5 D5/.5 C5/.5 B4/.5 A4/1 G4/1 F#4/.5 E4/.5 D4/1';
+  const eC2 = 'G5/1 B5/.25 A5/.25 G5/.5 G5/.5 F#5/.5 F#5/1 A5/1 C6/.25 B5/.25 A5/.5 A5/.5 G5/.5 G5/1 B5/.5 A5/.5 G5/.5 F#5/.5 E5/.5 D5/.5 C5/.5 B4/.5 A4/1 F#4/1 G4/2';
+  L.push({ id: 'serenade', cat: 'g5', title: '아이네 클라이네 나흐트무지크', composer: '모차르트', life: '1756–1791', tag: '5학년 교과서', stars: 2,
+    desc: '현악기들이 한목소리로 ‘솟아오르는’ 첫 주제를 외치고, 여린 노래가 대답해요.',
+    tonic: 67, mode: 'major', bar: 4, bpm: 120, feel: 'pulse8', lead: 'violin', ens: 'strings',
+    T: { O: { m: eO, ch: 'G:4 G:4 D7:4 D7:4' }, C1: { m: eC1, ch: 'G:2 D7:2 D7:2 G:2 G:2 C:2 D:4' }, C2: { m: eC2, ch: 'G:2 D7:2 D7:2 G:2 G:2 C:2 D:2 G:2' } },
+    form: [{ t: 'O', lvl: 3, dbl: 'cello', label: '첫 주제' }, { t: 'C1', lvl: 1 }, { t: 'O', lvl: 3, dbl: 'cello' }, { t: 'C2', lvl: 2 },
+      { t: 'O', lvl: 2, dbl: 'cello', label: '반복' }, { t: 'C1', lvl: 1 }, { t: 'O', lvl: 2, dbl: 'cello' }, { t: 'C2', lvl: 2 },
+      { t: 'O', tr: 7, lvl: 2, label: '전개부' }, { t: 'C1', tr: 7, lvl: 2 }, { t: 'O', tr: 2, lvl: 3, cres: true }, { t: 'C2', tr: 2, lvl: 3 },
+      { t: 'O', lvl: 4, label: '재현·절정' }, { t: 'C1', lvl: 4 }, { t: 'C2', lvl: 2 },
+      { s: 'end', m: 'G4+G3/1 r/1 G4+B4+D5+G5/2', ch: 'G:1 N:1 G:2', lvl: 5 }] });
+
+  // ───────── 6학년 ─────────
+  const o1 = 'F#5 F#5 G5 A5 A5 G5 F#5 E5 D5 D5 E5 F#5 F#5/1.5 E5/.5 E5/2';
+  const o2 = 'F#5 F#5 G5 A5 A5 G5 F#5 E5 D5 D5 E5 F#5 E5/1.5 D5/.5 D5/2';
+  const o3 = 'E5 E5 F#5 D5 E5 F#5/.5 G5/.5 F#5 D5 E5 F#5/.5 G5/.5 F#5 E5 D5 E5 A4/2';
+  L.push({ id: 'joy', cat: 'g6', title: '환희의 송가', composer: '베토벤', life: '1770–1827', tag: '6학년 교과서', stars: 1,
+    desc: '원곡처럼 낮은 현악기 혼자 조용히 시작해, 악기가 하나씩 더해지다 오케스트라 전체가 노래해요.',
+    tonic: 62, mode: 'major', bar: 4, bpm: 112, feel: 'still', lead: 'violin',
+    T: { A: { m: [o1, o2, o3, o2].join(' '), ch: 'D:4 D:2 A:2 D:4 A:4 D:4 D:2 A:2 D:4 A:2 D:2 A:2 D:2 A:2 D:2 A:2 D:1 A:1 D:1 E7:1 A:2 D:4 D:2 A:2 D:4 A:2 D:2' }, C: { m: o2, ch: 'D:4 D:2 A:2 D:4 A:2 D:2' } },
+    form: [{ s: 'intro', ch: 'D:4 A7:4', lvl: 0, label: '도입' }, { t: 'A', oct: -1, lead: 'cello', solo: true, lvl: 1, label: '낮은 현 혼자' },
+      { t: 'A', oct: -1, lead: 'violin', lvl: 1, label: '비올라·첼로' }, { t: 'A', lvl: 2, label: '바이올린' },
+      { s: 'bridge', ch: 'A:4 A7:4', lvl: 3, roll: true }, { t: 'A', lvl: 4, label: '총주' },
+      { t: 'C', lvl: 5, label: '코다' }, { s: 'end', m: 'D5+F#5+A5/4', ch: 'D:4', lvl: 5, rit: true }] });
+
+  const g1 = 'F5/1.5 Ab5/.5 Ab5/2 F5/1.5 Eb5/.5 Db5/2 Eb5/1.5 F5/.5 Ab5/1.5 F5/.5 Eb5/4';
+  const g2 = 'F5/1.5 Ab5/.5 Ab5/2 F5/1.5 Eb5/.5 Db5/2 Eb5/1.5 F5/.5 Eb5/1.5 Db5/.5 Db5/4';
+  const gB = 'Bb5/1.5 Db6/.5 Db6/2 Bb5/1.5 Ab5/.5 F5/2 Ab5/1.5 Bb5/.5 Ab5/1.5 F5/.5 Eb5/4';
+  const gA1 = 'Db:4 Db:2 Gb:2 Gb:2 Db:2 Ab7:4', gA2 = 'Db:4 Db:2 Gb:2 Ebm:2 Ab7:2 Db:4';
+  L.push({ id: 'newworld', cat: 'g6', title: '신세계 교향곡 2악장', composer: '드보르자크', life: '1841–1904', tag: '6학년 교과서', stars: 1,
+    desc: '금관의 조용한 화음 뒤로 잉글리시 호른이 ‘고향 생각’ 가락을 불러요.',
+    tonic: 61, mode: 'major', bar: 4, bpm: 60, feel: 'still', lead: 'oboe',
+    T: { A: { m: g1 + ' ' + g2, ch: gA1 + ' ' + gA2 }, B: { m: gB + ' ' + g2, ch: 'Gb:4 Db:4 Db:2 Bbm:2 Ab7:4 ' + gA2 }, A1: { m: g1, ch: gA1 } },
+    form: [{ s: 'intro', ch: 'Db:4 Bbm:4 Gb:4 Ab7:4', lvl: 0, label: '금관 코랄' }, { t: 'A', lvl: 1, label: '고향 생각' }, { t: 'B', lvl: 1 },
+      { t: 'A', lead: 'violin', lvl: 2, feel: 'lyric', label: '현악' }, { t: 'B', lead: 'violin', lvl: 4, feel: 'lyric', label: '절정' },
+      { t: 'A1', lvl: 1, label: '다시 조용히' }, { s: 'end', m: 'Db5/4', ch: 'Db:4', lvl: 0, rit: true }] });
+
+  const cc = 'C5/2 D5/.5 F5/.5 E5/.5 D5/.5 G5/1 G5/1 G5/.5 A5/.5 E5/.5 F5/.5 D5/1 D5/1 D5/.5 F5/.5 E5/.5 D5/.5';
+  const ccA = cc + ' C5/.5 C6/.5 B5/.5 A5/.5 G5/.5 F5/.5 E5/.5 D5/.5';
+  const ccB = cc + ' C5/.5 G5/.5 D5/.5 E5/.5 C5/1 r/1';
+  L.push({ id: 'cancan', cat: 'g6', title: '천국과 지옥 「캉캉」', composer: '오펜바흐', life: '1819–1880', tag: '6학년 교과서·운동회', stars: 4,
+    desc: '북 소리 신호 뒤에 캉캉 춤 가락이 질주해요. 중간에 다른 조로 쉬어 갔다가 다시 터져요.',
+    tonic: 60, mode: 'major', bar: 2, bpm: 128, feel: 'galop', lead: 'violin',
+    T: { A: { m: ccA + ' ' + ccB, ch: 'C:2 G7:2 C:2 C:2 G:2 G7:2 C:2 G7:2 C:2 G7:2 C:2 C:2 G:2 G7:2 C:1 G7:1 C:2' } },
+    form: [{ s: 'intro', ch: 'G7:2 G7:2 G7:2 G7:2', lvl: 3, roll: true, label: '신호' }, { t: 'A', lvl: 2, label: '캉캉' }, { t: 'A', lead: 'flute', oct: 1, lvl: 2 },
+      { s: 'bridge', ch: 'C7:2 C7:2 C7:2 C7:2', lvl: 2 }, { t: 'A', tr: 5, lead: 'oboe', lvl: 2, label: '다른 조' }, { t: 'A', tr: 5, lead: 'brass', lvl: 3, cres: true },
+      { s: 'bridge', ch: 'G7:2 G7:2 G7:2 G7:2', lvl: 3, roll: true }, { t: 'A', lvl: 4, label: '절정' }, { t: 'A', lvl: 4 },
+      { s: 'end', m: 'C5/.5 G4/.5 C5/1 C4+E4+G4+C5/2', ch: 'C:1 G7:1 C:2', lvl: 5 }] });
+
+  // ───────── 클래식 ─────────
+  const cP = 'D:1 A:1 Bm:1 F#m:1 G:1 D:1 G:1 A:1';
+  const cA = 'F#5 E5 D5 C#5 B4 A4 B4 C#5', cB = 'D5 C#5 B4 A4 G4 F#4 G4 E4';
+  const cC = 'D5/.5 C#5/.5 D5/.5 D4/.5 C#4/.5 A4/.5 E4/.5 F#4/.5 D4/.5 D5/.5 C#5/.5 B4/.5 C#5/.5 F#5/.5 A5/.5 B5/.5 G5/.5 F#5/.5 E5/.5 G5/.5 F#5/.5 E5/.5 D5/.5 C#5/.5 B4/.5 A4/.5 G4/.5 F#4/.5 E4/.5 G4/.5 F#4/.5 E4/.5';
+  const cV = S('F#5 A5 D6 A5 E5 A5 C#6 A5 D5 F#5 B5 F#5 C#5 F#5 A5 F#5 B4 D5 G5 D5 A4 D5 F#5 D5 B4 D5 G5 D5 C#5 E5 A5 E5');
+  const cn = [{ at: 8, inst: 'violin', v: 0.5 }];
+  L.push({ id: 'canon', cat: 'cl', title: '캐논', composer: '파헬벨', life: '1653–1706', tag: '결혼식·광고 단골곡', stars: 2,
+    desc: '같은 8개의 베이스 위에서 바이올린들이 두 마디 차이로 같은 가락을 겹쳐 연주해요(카논).',
+    tonic: 62, mode: 'major', bar: 4, bpm: 66, feel: 'baroque', lead: 'violin', ens: 'strings',
+    T: { G: { ch: rep(cP, 2) }, A: { m: `${cA} ${cB} ${cA} ${cB}`, ch: rep(cP, 4) }, C: { m: cC, ch: rep(cP, 2) }, V: { m: cV + ' ' + cV, ch: rep(cP, 2) } },
+    form: [{ t: 'G', lvl: 1, label: '베이스 홀로' }, { t: 'A', lvl: 1, canon: cn, label: '바이올린 1·2' }, { t: 'C', lvl: 2, canon: cn, label: '8분음표 변주' },
+      { t: 'V', lvl: 3, canon: cn, label: '16분음표 변주' }, { t: 'A', lvl: 4, canon: [{ at: 8, inst: 'violin', v: 0.5 }, { at: 16, inst: 'violin', oct: -1, v: 0.45 }], label: '절정' },
+      { t: 'C', lvl: 2, canon: cn, label: '다시 고요히' }, { s: 'end', m: 'D5/4', ch: 'D:4', lvl: 5, rit: true }] });
+
+  const tk = 'C5/.5 r/.5 D5/.25 C5/.25 B4/.25 C5/.25 E5/.5 r/.5 F5/.25 E5/.25 D#5/.25 E5/.25 B5/.25 A5/.25 G#5/.25 A5/.25 B5/.25 A5/.25 G#5/.25 A5/.25 C6/1 A5/.5 B5/.5 C6/.5 B5/.5 A5/.5 G#5/.5 A5/.5 E5/.5 F5/.5 D5/.5 C5/1 B4/.75 A4/.25';
+  const tkP = 'Am:2 Am:2 Am:2 Am:2 Am:1 E:1 Am:1 Dm:1 Am:1 E7:1';
+  const tkB = 'E5/.5 E5/.5 F5/.25 E5/.25 D5/.25 C5/.25 B4/1 C5/.5 D5/.5 E5/.5 E5/.5 F5/.25 E5/.25 D5/.25 C5/.25 B4/1 A4/.5 B4/.5 C5/.5 C5/.5 D5/.25 C5/.25 B4/.25 A4/.25 G#4/1 B4/.25 A4/.25 G#4/.25 A4/.25';
+  const tkSec = { m: ['B4/.25 A4/.25 G#4/.25 A4/.25', tk, 'A4/1 B4/.25 A4/.25 G#4/.25 A4/.25', tk, 'A4/1 C5/.5 D5/.5', tkB, tk, 'A4/1 C5/.5 D5/.5', tkB, tk, 'A4/1 B4/.25 A4/.25 G#4/.25 A4/.25'].join(' '),
+    ch: ['E:1', tkP, 'Am:2', tkP, 'Am:2', 'C:2 G:2 C:2 E:2 Am:2 E:2', tkP, 'Am:2', 'C:2 G:2 C:2 E:2 Am:2 E:2', tkP, 'Am:2'].join(' ') };
+  L.push({ id: 'turkish', cat: 'cl', title: '터키 행진곡', composer: '모차르트', life: '1756–1791', tag: '피아노 명곡', stars: 3,
+    desc: '피아노 소나타 11번 3악장. 터키 군악대 북소리처럼 왼손이 점점 힘차게 울려요.',
+    style: 'piano', tonic: 69, mode: 'minor', bar: 2, bpm: 120, feel: 'march',
+    T: { A: tkSec }, form: [{ t: 'A', lvl: 1, label: 'A 단락' }, { t: 'A', lvl: 3, label: '힘차게' }, { t: 'A', lvl: 4, dbl: false, label: '절정' },
+      { s: 'end', m: 'C#5+E5+A5/1 r/1 A4+C#5+E5+A5/2', ch: 'A:1 N:1 A:2', lvl: 5 }] });
+
   const bIntro = S('E6 D#6 D6 C#6 D6 C#6 C6 B5 C6 B5 A#5 A5 G#5 G5 F#5 F5 E5 D#5 D5 C#5 D5 C#5 C5 B4 C5 B4 A#4 A4 G#4 G4 F#4 F4');
   const bm = 'E5 D#5 D5 C#5 C5 F5 E5 D#5 E5 D#5 D5 C#5 C5 C#5 D5 D#5';
   const bE = S(`${bm} ${bm} E5 D#5 D5 C#5 D5 C#5 C5 B4 C5 B4 A#4 A4 G#4 G4 F#4 F4 E4 F4 E4 D#4 E4 F4 F#4 G4 G#4 A4 A#4 B4 C5 C#5 D5 D#5`);
   const ba = 'A5 G#5 G5 F#5 F5 A#5 A5 G#5 A5 G#5 G5 F#5 F5 F#5 G5 G#5';
   const bA = S(`${ba} ${ba} A5 G#5 G5 F#5 G5 F#5 F5 E5 F5 E5 D#5 D5 C#5 C5 B4 A#4 A4 A#4 B4 C5 C#5 D5 D#5 E5 D5 C#5 C5 B4 C5 C#5 D5 D#5`);
-  const bEnd = S('E5 D#5 D5 C#5 C5 B4 A#4 A4') + ' A4/.5 r/.5 A3+A2/.5 r/.5';
   L.push({ id: 'bee', cat: 'cl', title: '왕벌의 비행', composer: '림스키코르사코프', life: '1844–1908', tag: '영상 배경음악', stars: 5,
-    desc: '반음계로 쉬지 않고 오르내리며 윙윙대는 벌의 날갯짓을 표현했어요.',
-    tonic: 69, mode: 'minor', bar: 2, bpm: 120,
-    lead: 'violin', mel: [bIntro, bE, bE, bA, bE, bEnd],
-    acc: [{ p: 'E7:8', s: 'oompah', u: 0.5 }, { p: rep('Am:4 Am:4 E7:4 E7:4', 2) + ' Dm:4 Dm:4 Am:4 E7:4 Am:4 Am:4 E7:4 E7:4', s: 'oompah', u: 0.5 }, { p: 'E7:2 Am:2', s: 'oompah', u: 0.5 }] });
-  // 13. 놀람 교향곡 2악장 (3학년)
-  const sa = 'C5/.5 C5/.5 E5/.5 E5/.5 G5/.5 G5/.5 E5/1 F5/.5 F5/.5 D5/.5 D5/.5 B4/.5 B4/.5 G4/1';
-  const sb = 'C5/.5 C5/.5 E5/.5 E5/.5 G5/.5 G5/.5 C6/1 A5/.5 A5/.5 F#5/.5 F#5/.5 G5/1 r/1';
-  const sbS = 'C5/.5 C5/.5 E5/.5 E5/.5 G5/.5 G5/.5 C6/1 A5/.5 A5/.5 F#5/.5 F#5/.5 G5/1 v1.7 G5+D5+B4+G4/1 v1';
-  const sP = 'C:2 C:2 G7:2 G:2 C:2 C:2 D7:2 G:2';
-  L.push({ id: 'surprise', cat: 'g3', title: '놀람 교향곡 2악장', composer: '하이든', life: '1732–1809', tag: '3학년 교과서', stars: 1,
-    desc: '아주 여리게 연주하다가 갑자기 ‘꽝!’ 하고 크게 울려 청중을 깜짝 놀라게 해요.',
-    tonic: 60, mode: 'major', bar: 2, bpm: 92,
-    lead: 'violin', mel: [sa, sb, 'v0.45 ' + sa, 'v0.45 ' + sbS, [sa, 12], [sb, 12], sa, sb, 'C5/2'],
-    acc: [{ p: sP, s: 'pizz' }, { p: sP, s: 'pizz', v: 0.45 }, { p: sP, s: 'arp' }, { p: sP, s: 'alberti' }, { p: 'C:2', s: 'block' }] });
+    desc: '반음계로 쉬지 않고 오르내리며 윙윙대는 벌의 날갯짓을 그렸어요. 원곡도 1분 남짓한 짧은 곡이에요.',
+    tonic: 69, mode: 'minor', bar: 2, bpm: 112, feel: 'galop', lead: 'violin',
+    T: { I: { m: bIntro, ch: 'E7:8' }, E: { m: bE, ch: 'Am:4 Am:4 E7:4 E7:4' }, A: { m: bA, ch: 'Dm:4 Dm:4 Am:4 E7:4' } },
+    form: [{ t: 'I', lvl: 2, label: '날아오름' }, { t: 'E', lvl: 1, label: '왕벌' }, { t: 'E', lvl: 2 }, { t: 'A', lvl: 2, label: '다른 조' }, { t: 'A', lvl: 3 },
+      { t: 'I', lvl: 3 }, { t: 'E', lvl: 3, cres: true }, { t: 'E', lvl: 4, label: '절정' },
+      { s: 'end', m: S('E5 D#5 D5 C#5 C5 B4 A#4 A4') + ' A4/.5 r/.5 A3+A2/.5 r/.5', ch: 'E7:2 Am:2', lvl: 5 }] });
 
-  // 14. 미뉴에트 G장조 (4학년)
-  const mA1 = 'D5 G4/.5 A4/.5 B4/.5 C5/.5 D5 G4 G4 E5 C5/.5 D5/.5 E5/.5 F#5/.5 G5 G4 G4 C5 D5/.5 C5/.5 B4/.5 A4/.5 B4 C5/.5 B4/.5 A4/.5 G4/.5 F#4 G4/.5 A4/.5 B4/.5 G4/.5 A4/3';
-  const mA2 = 'D5 G4/.5 A4/.5 B4/.5 C5/.5 D5 G4 G4 E5 C5/.5 D5/.5 E5/.5 F#5/.5 G5 G4 G4 C5 D5/.5 C5/.5 B4/.5 A4/.5 B4 C5/.5 B4/.5 A4/.5 G4/.5 A4 B4/.5 A4/.5 G4/.5 F#4/.5 G4/3';
-  const mB1 = 'B5 G5/.5 A5/.5 B5/.5 G5/.5 A5 D5/.5 E5/.5 F#5/.5 D5/.5 G5 E5/.5 F#5/.5 G5/.5 D5/.5 C#5 B4/.5 C#5/.5 A4 A4/.5 B4/.5 C#5/.5 D5/.5 E5/.5 F#5/.5 G5 F#5 E5 F#5 A4 C#5 D5/3';
-  const mB2 = 'D5 G4/.5 F#4/.5 G4 E5 G4/.5 F#4/.5 G4 D5 C5 B4 A4/.5 G4/.5 F#4/.5 G4/.5 A4 D4/.5 E4/.5 F#4/.5 G4/.5 A4/.5 B4/.5 C5 B4 A4 B4/.5 D5/.5 G4 F#4 G4/3';
-  const mPA1 = 'G:3 G:3 C:3 G:3 Am:3 G:3 D:3 D:3', mPA2 = 'G:3 G:3 C:3 G:3 Am:3 G:3 D7:3 G:3';
-  const mPB1 = 'G:3 D:3 Em:3 A:3 A:3 A7:3 A7:3 D:3', mPB2 = 'G:3 C:3 G:3 D:3 D:3 Am:3 D7:3 G:3';
-  L.push({ id: 'minuet', cat: 'g4', title: '미뉴에트 G장조', composer: '페촐트', life: '1677–1733', tag: '4학년 교과서·피아노 입문곡', stars: 2,
-    desc: '바흐의 「안나 막달레나를 위한 음악 노트」에 실린 3박자 춤곡이에요.',
-    tonic: 67, mode: 'major', bar: 3, bpm: 126,
-    lead: 'flute', mel: [mA1, mA2, mB1, mB2, mA2],
-    acc: [{ p: `${mPA1} ${mPA2} ${mPB1} ${mPB2} ${mPA2}`, s: 'waltz' }] });
-
-  // 15. 브람스의 자장가 (4학년)
-  const lu = 'E4/.5 E4/.5 G4/2 E4/.5 E4/.5 G4/2 E4/.5 G4/.5 C5/1 B4/1.5 A4/.5 A4/1 G4/1 D4/.5 E4/.5 F4/1 D4/1 D4/.5 E4/.5 F4/2 D4/.5 F4/.5 B4/.5 A4/.5 G4/1 B4/1 C5/2 C4/.5 C4/.5 C5/2 A4/.5 F4/.5 G4/2 E4/.5 C4/.5 F4/1 G4/1 A4/1 G4/2 C4/.5 C4/.5 C5/2 A4/.5 F4/.5 G4/2 E4/.5 C4/.5 F4/1 E4/1 D4/1 C4/2';
-  const luP = 'C:3 C:3 C:3 G7:3 G7:3 G7:3 G7:3 C:3 F:3 C:3 G7:3 C:3 F:3 C:3 G7:3 C:2';
-  L.push({ id: 'lullaby', cat: 'g4', title: '브람스의 자장가', composer: '브람스', life: '1833–1897', tag: '4학년 감상곡·오르골', stars: 1,
-    desc: '친구의 아기가 태어난 것을 축하하며 지은 노래로, 오르골 소리로도 익숙해요.',
-    tonic: 60, mode: 'major', bar: 3, bpm: 88,
-    mel: [[lu, 12, 'harp'], [lu, 0, 'violin']],
-    acc: [{ n: 'r/1' }, { p: luP, s: 'waltz' }, { p: 'N:1 ' + luP, s: 'arp' }, { n: 'r/1' }].slice(0, 3) });
-
-  // 16. 아이네 클라이네 나흐트무지크 1악장 (5학년)
-  const eO = 'G4+G3/1 r/.5 D4+D3/.5 G4+G3/1 r/.5 D4+D3/.5 G4/.5 D4/.5 G4/.5 B4/.5 D5/2 C5/1 r/.5 A4/.5 C5/1 r/.5 A4/.5 C5/.5 A4/.5 F#4/.5 A4/.5 D4/2';
-  const eC1 = 'G5/1 B5/.25 A5/.25 G5/.5 G5/.5 F#5/.5 F#5/1 A5/1 C6/.25 B5/.25 A5/.5 A5/.5 G5/.5 G5/1 B5/.5 A5/.5 G5/.5 F#5/.5 E5/.5 D5/.5 C5/.5 B4/.5 A4/1 G4/1 F#4/.5 E4/.5 D4/1';
-  const eC2 = 'G5/1 B5/.25 A5/.25 G5/.5 G5/.5 F#5/.5 F#5/1 A5/1 C6/.25 B5/.25 A5/.5 A5/.5 G5/.5 G5/1 B5/.5 A5/.5 G5/.5 F#5/.5 E5/.5 D5/.5 C5/.5 B4/.5 A4/1 F#4/1 G4/2';
-  const eOP = 'G:4 G:4 D7:4 D7:4', eCP1 = 'G:2 D7:2 D7:2 G:2 G:2 C:2 D:4', eCP2 = 'G:2 D7:2 D7:2 G:2 G:2 C:2 D:2 G:2';
-  L.push({ id: 'serenade', cat: 'g5', title: '아이네 클라이네 나흐트무지크', composer: '모차르트', life: '1756–1791', tag: '5학년 교과서', stars: 2,
-    desc: '‘작은 밤의 음악’이라는 뜻의 현악 합주곡. 힘찬 첫 부분이 광고에도 자주 나와요.',
-    tonic: 67, mode: 'major', bar: 4, bpm: 124,
-    lead: 'violin', mel: [eO, eC1, eO, eC2, eO, 'G4+G3/1 r/1 G4+B4+D5+G5/2'],
-    acc: [{ p: eOP, s: 'pulse' }, { p: eCP1, s: 'trem' }, { p: eOP, s: 'pulse' }, { p: eCP2, s: 'trem' }, { p: eOP, s: 'pulse' }, { p: 'G:4', s: 'block' }] });
-
-  // 17. 엔터테이너
-  const et1 = 'E4/.25 C5/.5 E4/.25 C5/.5 E4/.25 C5/.25', et2 = 'C5/1 C5/.25 D5/.25 D#5/.25 E5/.25', et3 = 'C5/.25 D5/.25 E5/.5 B4/.25 D5/.5 C5/.25';
-  const etA = `${et1} ${et2} ${et3} C5/1.5 D4/.25 D#4/.25 ${et1} C5/1.5 A4/.25 G4/.25 F#4/.25 A4/.25 C5/.25 E5/.5 D5/.25 C5/.25 A4/.25 D5/1.5 D4/.25 D#4/.25`;
-  const etP = 'C:2 C:2 G7:1 C:1 C:2 C:2 C:1 A7:1 D7:2 G7:2';
-  L.push({ id: 'entertainer', cat: 'cl', title: '엔터테이너', composer: '스콧 조플린', life: '1868–1917', tag: '영화·오르골 인기곡', stars: 3,
-    desc: '왼손은 쿵-짝, 오른손은 엇박으로 통통 튀는 래그타임 피아노곡이에요.',
-    tonic: 60, mode: 'major', bar: 2, bpm: 80,
-    lead: 'piano', mel: ['D4/.25 D#4/.25', etA, etA, etA, `${et1} ${et2} ${et3} C5/2`],
-    acc: [{ n: 'r/.5' }, { p: rep(etP, 3) + ' C:2 C:2 G7:1 C:1 C:2', s: 'oompah', u: 0.5 }] });
-
-  // 18. 월광 소나타 3악장
   const mo = (notes, top) => 'r/.25 ' + notes.split(' ').map(x => x + '/.25').join(' ') + ` ${top}/.5 ${top}/.5`;
   const mCm = mo('G#2 C#3 E3 G#3 C#4 E4 G#4 C#5 E5 G#5 C#6', 'C#6+G#5+E5');
-  const mAm = mo('A2 C#3 E3 A3 C#4 E4 A4 C#5 E5 A5 C#6', 'C#6+A5+E5');
+  const mA = mo('A2 C#3 E3 A3 C#4 E4 A4 C#5 E5 A5 C#6', 'C#6+A5+E5');
   const mG7 = mo('G#2 B#2 D#3 G#3 B#3 D#4 F#4 G#4 B#4 D#5 F#5', 'F#5+D#5+B#4');
-  const mRound = `${mCm} ${mCm} ${mAm} ${mG7}`;
+  const mFm = mo('F#2 A2 C#3 F#3 A3 C#4 F#4 A4 C#5 F#5 A5', 'A5+F#5+C#5');
+  const mGm = mo('G#2 B2 D#3 G#3 B3 D#4 G#4 B4 D#5 G#5 B5', 'B5+G#5+D#5');
+  const mD7 = mo('D#2 G2 A#2 D#3 G3 A#3 D#4 G4 A#4 D#5 G5', 'G5+D#5+A#4');
   L.push({ id: 'moonlight', cat: 'cl', title: '월광 소나타 3악장', composer: '베토벤', life: '1770–1827', tag: '피아노 명곡', stars: 5,
-    desc: '조용한 1악장과 달리, 폭풍처럼 솟구치는 분산화음과 강한 화음이 몰아쳐요.',
-    tonic: 61, mode: 'minor', bar: 4, bpm: 132,
-    lead: 'piano', mel: [mRound, mRound, mRound, `${mCm} ${mG7} ${mCm} ${mG7}`, 'C#5+G#4+E4/2 C#4+C#3/2'],
-    acc: [{ n: rep('C#2+C#3/4 B1+B2/4 A1+A2/4 G#1+G#2/4', 3) + ' C#2+C#3/4 G#1+G#2/4 C#2+C#3/4 G#1+G#2/4 C#2+C#3/4' }] });
+    desc: '폭풍처럼 솟구치는 분산화음과 ‘쾅쾅’ 내리치는 화음이 몰아쳐요.',
+    style: 'piano', tonic: 61, mode: 'minor', bar: 4, bpm: 104, feel: 'block',
+    T: { R1: { m: [mCm, mCm, mA, mG7].join(' '), ch: 'C#m:4 C#m:4 A:4 G#7:4' }, R2: { m: [mCm, mFm, mG7, mCm].join(' '), ch: 'C#m:4 F#m:4 G#7:4 C#m:4' },
+      R3: { m: [mGm, mD7, mGm, mD7].join(' '), ch: 'G#m:4 D#7:4 G#m:4 D#7:4' } },
+    form: [{ t: 'R1', lvl: 1, label: '폭풍' }, { t: 'R1', lvl: 2 }, { t: 'R2', lvl: 2 }, { t: 'R2', lvl: 2 }, { t: 'R1', lvl: 2 }, { t: 'R3', lvl: 3, label: '다른 조' }, { t: 'R3', lvl: 3 },
+      { t: 'R2', lvl: 3, cres: true }, { t: 'R1', lvl: 4, dbl: false, label: '절정' }, { t: 'R2', lvl: 4, dbl: false },
+      { t: 'R1', lvl: 2 }, { s: 'end', m: 'C#5+G#4+E4/2 C#4+C#3/2', ch: 'C#m:4', lvl: 5 }] });
 
-  // 19. 사계 중 '여름' 3악장
   const su = 'G4/.5 G4/.5 G4/.5 G4/.5 G4/.5 G4/.5 G4/.5 G4/.5 G4/.5 G4/.5 G4/.5 G4/.5 ' + S('G5 F#5 Eb5 D5 C5 Bb4 A4 G4 F#4 G4 A4 Bb4') + ' G4/1 D4/1 G3/1';
-  const suP = 'Gm:3 Gm:3 D7:3 Gm:3';
+  const sEp = S('G4 Bb4 D5 G5 Bb5 G5 D5 Bb4 G4 D5 G5 D5 C5 Eb5 G5 C6 Eb6 C6 G5 Eb5 C5 G5 C6 G5 D5 F#5 A5 C6 D6 C6 A5 F#5 D5 A5 C6 A5 G5 D5 Bb4 G4 D4 G4 Bb4 D5 G5 D5 Bb4 G4');
   L.push({ id: 'summer', cat: 'cl', title: '사계 중 「여름」 3악장', composer: '비발디', life: '1678–1741', tag: '영상 배경음악', stars: 4,
-    desc: '여름날의 천둥과 소나기를 몰아치는 반복음과 빠른 음계로 그렸어요.',
-    tonic: 67, mode: 'minor', bar: 3, bpm: 150,
-    lead: 'violin', mel: [su, [su, 12], [su, 5], [su, 7], su, [su, 12], su, 'G4+G3+D4/3'],
-    acc: [{ p: rep(suP, 2), s: 'trem', timp: true }, { p: suP, s: 'trem', tr: 5, timp: true }, { p: suP, s: 'trem', tr: 7, timp: true }, { p: rep(suP, 3), s: 'trem', timp: true }, { p: 'Gm:3', s: 'block', timp: true }] });
-  // 20. 아리랑 (본조) — 세마치장단, 8분음표 3개 = 1박
-  const ar1 = 'G4/4 A4/2 G4/2 A4/1 C5/4 D5/2 C5/2 D5/1 E5/3 D5/1 C5/2 D5/1 C5/2 A4/9';
-  const ar2 = 'G4/4 A4/2 G4/2 A4/1 C5/4 D5/2 C5/2 D5/1 E5/2 G5/1 E5/2 D5/1 C5/2 D5/1 C5/2 A4/1 C5/6';
-  const ar3 = 'C5/4 D5/2 E5/2 G5/1 E5/2 G5/1 A5/2 G5/1 E5/2 D5/1 C5/3 D5/2 C5/1 A4/3 G4/9';
-  const arV = [ar1, ar2, ar3, ar2].join(' ');
-  L.push({ id: 'arirang', grade: 'g3', cat: 'gu', title: '아리랑', composer: '경기민요', life: '작자 미상', tag: '3·4학년 교과서 · 세마치장단', stars: 1,
-    desc: '대금이 가락을 부르고 장구가 세마치장단(덩-덩 덕 쿵 덕)을 쳐요. 둘째 절은 가야금이 이어받아요.',
-    gugak: true, laneMode: 'rank', unit: 3, tonic: 60, mode: 'major', bar: 9, bpm: 270,
-    mel: ['r/9', [arV, 0, 'daegeum'], [arV, 0, 'gayageum']],
-    acc: [{ g: 'semachi', bars: 33, root: 48 }] });
+    desc: '천둥 같은 반복음과 폭풍 같은 음계 사이로 독주 바이올린이 번개처럼 오르내려요.',
+    tonic: 67, mode: 'minor', bar: 3, bpm: 112, feel: 'storm', lead: 'violin', ens: 'strings',
+    T: { T: { m: su, ch: 'Gm:3 Gm:3 D7:3 Gm:3' }, E: { m: sEp, ch: 'Gm:3 Cm:3 D7:3 Gm:3', feel: 'baroque' } },
+    form: [{ t: 'T', lvl: 3, label: '폭풍' }, { t: 'T', lvl: 3 }, { t: 'T', tr: 5, lvl: 3 }, { t: 'E', lvl: 1, label: '독주' }, { t: 'E', tr: 5, lvl: 1 },
+      { t: 'T', lvl: 3 }, { t: 'E', lvl: 2 }, { t: 'E', tr: -2, lvl: 2 }, { t: 'T', tr: 5, lvl: 3, cres: true }, { t: 'T', lvl: 3, cres: true },
+      { t: 'E', tr: 3, lvl: 2, label: '번개' }, { t: 'E', tr: 5, lvl: 3 }, { t: 'T', tr: 3, lvl: 3 },
+      { t: 'T', lvl: 4, label: '절정' }, { t: 'E', lvl: 4 }, { t: 'T', lvl: 4 }, { t: 'T', tr: 5, lvl: 4 }, { s: 'end', m: 'G4+G3+D4/3', ch: 'Gm:3', lvl: 5 }] });
 
-  // 21. 백조의 호수 '정경'
   const sw = 'F#5/2 B4/.5 C#5/.5 D5/.5 E5/.5 F#5/3 D5/1 F#5/3 D5/1 F#5/3 B4/1 D5/1 B4/1 G4/1 D5/1 B4/4';
   const swP = 'Bm:4 Bm:4 G:4 Bm:4 Em:2 F#7:2 Bm:4';
   L.push({ id: 'swan', cat: 'cl', title: '백조의 호수 「정경」', composer: '차이콥스키', life: '1840–1893', tag: '발레 음악', stars: 2,
-    desc: '오보에가 부르는 쓸쓸한 선율을 바이올린, 금관이 차례로 이어받으며 점점 커져요.',
-    tonic: 71, mode: 'minor', bar: 4, bpm: 76, lead: 'oboe',
-    mel: [[sw, 0, 'oboe'], [sw, 0, 'violin'], [sw, 0, 'brass'], ['B4+F#4+D4+B3/4', 0, 'brass']],
-    acc: [{ p: swP, s: 'trem', v: 0.7 }, { p: swP, s: 'pulse' }, { p: swP, s: 'trem', timp: true }, { p: 'Bm:4', s: 'block', timp: true }] });
+    desc: '떨리는 현과 하프 위로 오보에가 쓸쓸한 백조 가락을 부르고, 마지막엔 금관이 크게 외쳐요.',
+    tonic: 71, mode: 'minor', bar: 4, bpm: 68, feel: 'storm', lead: 'oboe',
+    T: { A: { m: sw, ch: swP } },
+    form: [{ s: 'intro', ch: 'Bm:4 Bm:4', lvl: 0, label: '호수' }, { t: 'A', lvl: 1, label: '오보에' }, { t: 'A', lvl: 1 }, { t: 'A', lead: 'violin', lvl: 2, label: '바이올린' },
+      { s: 'bridge', ch: 'Em:4 F#7:4', lvl: 3, roll: true }, { t: 'A', lvl: 4, label: '금관 절정' }, { t: 'A', lvl: 4 },
+      { s: 'end', m: 'B4+F#4+D4+B3/4', ch: 'Bm:4', lvl: 5 }] });
 
-  // 22. 토카타와 푸가 d단조
   const tcO = 'A5/.125 G5/.125 A5/2.75 r/1 G5/.25 F5/.25 E5/.25 D5/.25 C#5/1 D5/3 r/3';
   const tcR = S('A4 G4 A4 F4 A4 E4 A4 D4 A4 C#4 A4 D4 A4 E4 A4 F4') + ' ' + S('Bb4 A4 Bb4 G4 Bb4 F4 Bb4 E4 Bb4 D4 Bb4 E4 Bb4 F4 Bb4 G4') + ' ' +
     S('A4 G4 F4 E4 D4 C#4 D4 E4 F4 G4 A4 Bb4 C#5 D5 E5 F5') + ' ' + S('E5 D5 C#5 B4 A4 G4 F4 E4 D4 F4 A4 D5 C#5 E5 G5 Bb5');
   L.push({ id: 'toccata', cat: 'cl', title: '토카타와 푸가 d단조', composer: '바흐', life: '1685–1750', tag: '파이프오르간 명곡', stars: 4,
-    desc: '‘빠라밤~’ 하는 극적인 오르간 도입부로 유명해요. 뒤로 갈수록 손가락이 바빠져요.',
-    tonic: 62, mode: 'minor', bar: 4, bpm: 80, lead: 'organ',
-    mel: [tcO, [tcO, -12], [tcO, -24], 'C#4+E4+G4+Bb4/2 C#4+E4+G4+Bb4+E5/2 D4+F4+A4+D5/4', tcR, tcR, 'A5/2 A4+C#5+E5+G5/2 D4+F4+A4+D5/4'],
-    acc: [{ inst: 'organ', n: 'r/12 r/12 D2/12 C#2/4 D2/4 D2/4 A1/4 G1/4 A1/4 D2/4 A1/4 Bb1/4 A1/4 A1/4 D2/4' }] });
-  // ===== 동요 (외국 민요·작자 미상 곡, 가사 없이 가락만) =====
+    desc: '‘빠라밤~’ 하는 극적인 도입이 세 옥타브를 내려오고, 바쁜 손가락 음형이 이어져요.',
+    style: 'organ', tonic: 62, mode: 'minor', bar: 4, bpm: 76, lead: 'organ',
+    T: { O: { m: tcO }, D: { m: 'C#4+E4+G4+Bb4/2 C#4+E4+G4+Bb4+E5/2 D4+F4+A4+D5/4', an: 'D2/8' }, R: { m: tcR, ch: 'Dm:4 Gm:4 Dm:4 A7:4' } },
+    form: [{ t: 'O', lvl: 3, dbl: true, label: '도입' }, { t: 'O', oct: -1, lvl: 3, dbl: true }, { t: 'O', oct: -2, lvl: 4, dbl: true }, { t: 'D', lvl: 4 },
+      { t: 'R', lvl: 1, label: '손가락 음형' }, { t: 'R', lvl: 2 }, { t: 'R', tr: 7, lvl: 2 }, { t: 'R', tr: 5, lvl: 3 },
+      { t: 'O', lvl: 4, dbl: true, label: '절정' }, { t: 'D', lvl: 4 }, { t: 'R', lvl: 4 },
+      { s: 'end', m: 'A5/2 A4+C#5+E5+G5/2 D4+F4+A4+D5/4', ch: 'A7:4 Dm:4', lvl: 5, rit: true }] });
+
+  const et1 = 'E4/.25 C5/.5 E4/.25 C5/.5 E4/.25 C5/.25', et2 = 'C5/1 C5/.25 D5/.25 D#5/.25 E5/.25', et3 = 'C5/.25 D5/.25 E5/.5 B4/.25 D5/.5 C5/.25';
+  const etA = `${et1} ${et2} ${et3} C5/1.5 D4/.25 D#4/.25 ${et1} C5/1.5 A4/.25 G4/.25 F#4/.25 A4/.25 C5/.25 E5/.5 D5/.25 C5/.25 A4/.25 D5/1.5 D4/.25 D#4/.25`;
+  const etI = 'D6/.25 E6/.25 C6/.25 A5/.5 B5/.25 G5/.5 D5/.25 E5/.25 C5/.25 A4/.5 B4/.25 G4/.5 D4/.25 E4/.25 C4/.25 A3/.5 B3/.25 A3/.25 Ab3/.25 G3/1.5 r/.5 D4/.25 D#4/.25';
+  L.push({ id: 'entertainer', cat: 'cl', title: '엔터테이너', composer: '스콧 조플린', life: '1868–1917', tag: '영화·오르골 인기곡', stars: 3,
+    desc: '‘레미도라시솔’ 도입이 세 번 내려온 뒤, 엇박으로 통통 튀는 래그타임이 시작돼요.',
+    style: 'piano', tonic: 60, mode: 'major', bar: 2, bpm: 76, feel: 'oompah',
+    T: { I: { m: etI, ch: 'N:6 G7:2.5' }, A: { m: etA, ch: 'C:2 C:2 G7:1 C:1 C:2 C:2 C:1 A7:1 D7:2 G7:2' } },
+    form: [{ t: 'I', lvl: 1, label: '도입' }, { t: 'A', lvl: 1, label: 'A' }, { t: 'A', lvl: 2 }, { t: 'I', lvl: 2 }, { t: 'A', oct: 1, lvl: 2, label: '높은 음' },
+      { t: 'A', lvl: 2 }, { t: 'A', lvl: 3 }, { t: 'A', lvl: 4, dbl: false, label: '절정' }, { t: 'A', lvl: 4, dbl: false },
+      { s: 'end', m: 'C5/.25 E5/.25 G5/.25 C6/.25 r/1 C4+E4+G4+C5/2', ch: 'C:2 C:2', lvl: 5 }] });
+
+  // ───────── 동요 (외국 민요·작자 미상) ─────────
+  const kids = (o) => L.push(Object.assign({ feel: 'march', ens: 'kids' }, o));
   const nb = 'G5 E5 E5/2 F5 D5 D5/2 C5 D5 E5 F5 G5 G5 G5/2 G5 E5 E5 E5 F5 D5 D5 D5 C5 E5 G5 G5 E5 E5 E5/2';
-  const nbP = 'C:2 C:2 G7:2 G7:2 C:2 C:2 C:2 C:2 C:2 C:2 G7:2 G7:2 C:2 C:2 C:2 C:2';
-  L.push({ id: 'nabiya', grade: 'g3', cat: 'dy', title: '나비야', composer: '독일 민요', life: '작자 미상', tag: '1~3학년 동요', stars: 1,
-    desc: '독일 민요 「꼬마 한스」의 가락에 우리말 노랫말을 붙인 동요예요.',
-    tonic: 60, mode: 'major', bar: 2, bpm: 104, lead: 'bell',
-    mel: [[nb, 0, 'bell'], [nb, 0, 'flute']], acc: [{ p: nbP, s: 'oompah', u: 0.5 }, { p: nbP, s: 'arp' }] });
+  kids({ id: 'nabiya', grade: 'g3', cat: 'dy', title: '나비야', composer: '독일 민요', life: '작자 미상', tag: '1~3학년 동요', stars: 1,
+    desc: '실로폰으로 시작해 악기가 하나씩 늘고, 절정에서 한 음 높여 신나게 불러요.',
+    tonic: 60, mode: 'major', bar: 2, bpm: 96, lead: 'bell',
+    T: { V: { m: nb, ch: 'C:2 C:2 G7:2 G7:2 C:2 C:2 C:2 C:2 C:2 C:2 G7:2 G7:2 C:2 C:2 C:2 C:2' } },
+    form: [{ s: 'intro', ch: 'C:2 G7:2 C:2 C:2', lvl: 0 }, { t: 'V', lvl: 1, label: '1절' }, { t: 'V', lead: 'flute', lvl: 1, label: '2절' }, { t: 'V', lead: 'violin', lvl: 2, label: '3절' },
+      { t: 'V', lead: 'oboe', tr: 2, lvl: 3, label: '한 음 높여' }, { t: 'V', lead: 'violin', tr: 2, lvl: 4, label: '절정' }, { t: 'V', tr: 2, lvl: 2 },
+      { s: 'end', m: 'C5+E5+G5/2 r/2', ch: 'C:2 N:2', tr: 2, lvl: 5 }] });
 
   const ap = 'E5 D5 C5 D5 E5 E5 E5/2 D5 D5 D5/2 E5 G5 G5/2 E5 D5 C5 D5 E5 E5 E5/2 D5 D5 E5 D5 C5/4';
-  const apP = 'C:4 C:4 G7:4 C:4 C:4 C:4 G7:4 C:4';
-  L.push({ id: 'airplane', grade: 'g3', cat: 'dy', title: '비행기', composer: '미국 민요', life: '작자 미상', tag: '1~3학년 동요', stars: 1,
-    desc: '미국 동요 「메리의 어린 양」 가락이에요. 미·레·도·솔 네 음으로 리듬을 익혀요.',
-    tonic: 60, mode: 'major', bar: 4, bpm: 112, lead: 'bell',
-    mel: [[ap, 0, 'bell'], [ap, 0, 'flute'], [ap, 12, 'violin']], acc: [{ p: apP, s: 'pulse' }, { p: apP, s: 'oompah', u: 1 }, { p: apP, s: 'trem' }] });
-
-  const fj = 'C5 D5 E5 C5 C5 D5 E5 C5 E5 F5 G5/2 E5 F5 G5/2 G5/.5 A5/.5 G5/.5 F5/.5 E5 C5 G5/.5 A5/.5 G5/.5 F5/.5 E5 C5 C5 G4 C5/2 C5 G4 C5/2';
-  L.push({ id: 'round', grade: 'g4', cat: 'dy', title: '동네 한 바퀴', composer: '프랑스 민요', life: '작자 미상', tag: '3·4학년 돌림노래', stars: 2,
-    desc: '두 마디 늦게 같은 가락이 따라 들어오는 돌림노래예요. 두 가락이 겹치는 소리를 들어 보세요.',
-    tonic: 60, mode: 'major', bar: 4, bpm: 116, lead: 'flute',
-    mel: [[fj, 0, 'flute'], [fj, 0, 'flute'], 'r/8'],
-    acc: [{ n: 'r/8 ' + fj + ' ' + fj, tr: -12, inst: 'oboe' }],
-    acc2: [{ p: rep('C:4', 18), s: 'pizz' }] });
+  kids({ id: 'airplane', grade: 'g3', cat: 'dy', title: '비행기', composer: '미국 민요', life: '작자 미상', tag: '1~3학년 동요', stars: 1,
+    desc: '‘미레도레미미미’ 가락이 이륙해서 점점 높이 날아올라요.',
+    tonic: 60, mode: 'major', bar: 4, bpm: 100, lead: 'bell',
+    T: { V: { m: ap, ch: 'C:4 C:4 G7:4 C:4 C:4 C:4 G7:4 C:4' } },
+    form: [{ s: 'intro', ch: 'C:4 G7:4', lvl: 0 }, { t: 'V', lvl: 1, label: '이륙' }, { t: 'V', lead: 'flute', oct: 1, lvl: 1 }, { t: 'V', lead: 'violin', lvl: 2 },
+      { t: 'V', tr: 2, lead: 'oboe', lvl: 3, label: '더 높이' }, { t: 'V', tr: 2, lead: 'violin', lvl: 4, label: '절정' }, { t: 'V', tr: 2, lvl: 2, label: '착륙' },
+      { s: 'end', m: 'C5+E5+G5/4', ch: 'C:4', tr: 2, lvl: 5 }] });
 
   const lb = 'G5/1.5 A5/.5 G5 F5 E5 F5 G5/2 D5 E5 F5/2 E5 F5 G5/2 G5/1.5 A5/.5 G5 F5 E5 F5 G5/2 D5/2 G5/2 E5 C5/3';
-  const lbP = 'C:4 C:4 G7:4 C:4 C:4 C:4 G7:4 C:4';
-  L.push({ id: 'london', grade: 'g3', cat: 'dy', title: '런던 다리', composer: '영국 전래동요', life: '작자 미상', tag: '2·3학년 놀이노래', stars: 1,
-    desc: '두 사람이 팔로 다리를 만들고 지나가는 놀이를 하며 부르는 영국 전래동요예요.',
-    tonic: 60, mode: 'major', bar: 4, bpm: 116, lead: 'brass',
-    mel: [[lb, 0, 'bell'], [lb, 0, 'brass'], [lb, 12, 'flute']], acc: [{ p: lbP, s: 'oompah', u: 1 }, { p: lbP, s: 'pulse', timp: true }, { p: lbP, s: 'oompah', u: 0.5 }] });
+  kids({ id: 'london', grade: 'g3', cat: 'dy', title: '런던 다리', composer: '영국 전래동요', life: '작자 미상', tag: '2·3학년 놀이노래', stars: 1,
+    desc: '다리 놀이를 하며 부르는 영국 전래동요예요. 금관이 들어오면 다리가 무너질 듯 힘차져요.',
+    tonic: 60, mode: 'major', bar: 4, bpm: 104, lead: 'bell',
+    T: { V: { m: lb, ch: 'C:4 C:4 G7:4 C:4 C:4 C:4 G7:4 C:4' } },
+    form: [{ s: 'intro', ch: 'C:4 G7:4', lvl: 0 }, { t: 'V', lvl: 1 }, { t: 'V', lead: 'flute', lvl: 1 }, { t: 'V', lead: 'violin', lvl: 2 },
+      { t: 'V', tr: 2, lead: 'brass', lvl: 3 }, { t: 'V', tr: 2, lead: 'violin', lvl: 4, label: '절정' }, { t: 'V', tr: 2, lead: 'bell', lvl: 2 },
+      { s: 'end', m: 'C5+E5+G5/4', ch: 'C:4', tr: 2, lvl: 5 }] });
 
-  const cl = 'C5/.75 C5/.25 C5/1 G4/1 E5/.75 E5/.25 E5/1 C5/1 C5/.75 E5/.25 G5/1.5 G5/.5 F5/.5 E5/.5 D5/2 D5/.75 E5/.25 F5/1 F5/1 E5/.75 D5/.25 E5/1 C5/1 C5/.75 E5/.25 D5/1.5 G4/.5 B4/.5 D5/.5';
-  const clP = 'C:3 C:3 C:3 G7:3 G7:3 C:3 G7:3';
-  L.push({ id: 'clementine', grade: 'g4', cat: 'dy', title: '클레멘타인', composer: '미국 민요', life: '작자 미상', tag: '4·5학년 가창곡', stars: 1,
-    desc: '3박자의 느긋한 미국 민요예요. 점8분음표와 16분음표의 ‘따-단’ 리듬이 반복돼요.',
-    tonic: 60, mode: 'major', bar: 3, bpm: 120, lead: 'violin',
-    mel: [cl + ' C5/2', [cl + ' C5/2', 0, 'flute'], [cl + ' C5/2', 0, 'brass']],
-    acc: [{ p: `N:1 ${clP} C:3 ${clP} C:3 ${clP} C:2`, s: 'waltz' }] });
+  const fj = 'C5 D5 E5 C5 C5 D5 E5 C5 E5 F5 G5/2 E5 F5 G5/2 G5/.5 A5/.5 G5/.5 F5/.5 E5 C5 G5/.5 A5/.5 G5/.5 F5/.5 E5 C5 C5 G4 C5/2 C5 G4 C5/2';
+  const rcn = [{ at: 8, inst: 'oboe', v: 0.6 }, { at: 16, inst: 'violin', oct: -1, v: 0.55 }, { at: 24, inst: 'bell', oct: 1, v: 0.5 }];
+  kids({ id: 'round', grade: 'g4', cat: 'dy', title: '동네 한 바퀴', composer: '프랑스 민요', life: '작자 미상', tag: '3·4학년 돌림노래', stars: 2,
+    desc: '두 마디씩 늦게 다른 악기가 같은 가락으로 따라 들어와요. 몇 개의 가락이 겹치는지 세어 보세요.',
+    tonic: 60, mode: 'major', bar: 4, bpm: 104, lead: 'flute', feel: 'lyric',
+    T: { V: { m: fj, ch: rep('C:4', 8) }, P: { ch: rep('C:4', 6) } },
+    form: [{ t: 'V', lvl: 1, label: '혼자' }, { t: 'V', lvl: 1, canon: rcn.slice(0, 1), label: '둘이' }, { t: 'V', lvl: 2, canon: rcn.slice(0, 2), label: '셋이' },
+      { t: 'V', lvl: 3, canon: rcn, label: '넷이' }, { t: 'V', lvl: 4, canon: rcn, label: '절정' }, { t: 'V', lvl: 2, canon: rcn },
+      { t: 'P', lvl: 2, label: '하나씩 끝나요' }, { s: 'end', m: 'C5+E5+G5/4', ch: 'C:4', lvl: 5 }] });
 
-  const os = 'E5/1 G5/1 G5/1.5 A5/.5 G5/1 E5/1 C5/1.5 D5/.5 E5/1 E5/1 D5/1 C5/1 D5/3 C5/.5 D5/.5 E5/1 G5/1 G5/1.5 A5/.5 G5/1 E5/1 C5/1.5 D5/.5 E5/1 E5/1 D5/1 D5/1';
-  const osP = 'C:4 C:4 C:4 G7:4 C:4 C:4 G7:4 C:4';
-  L.push({ id: 'susanna', grade: 'g5', cat: 'dy', title: '오 수재너', composer: '포스터', life: '1826–1864', tag: '5·6학년 가창곡', stars: 2,
-    desc: '미국 작곡가 포스터의 경쾌한 노래예요. 밴조처럼 통통 튀는 반주에 맞춰 쳐 보세요.',
-    tonic: 60, mode: 'major', bar: 4, bpm: 132, lead: 'violin',
-    mel: ['C5/.5 D5/.5', os + ' C5/3 C5/.5 D5/.5', [os + ' C5/3 C5/.5 D5/.5', 0, 'brass'], [os + ' C5/3 r/1', 0, 'flute']],
-    acc: [{ p: 'N:1 ' + rep(osP, 3), s: 'oompah', u: 0.5 }] });
+  const cl = 'C5/.75 C5/.25 C5/1 G4/1 E5/.75 E5/.25 E5/1 C5/1 C5/.75 E5/.25 G5/1.5 G5/.5 F5/.5 E5/.5 D5/2 D5/.75 E5/.25 F5/1 F5/1 E5/.75 D5/.25 E5/1 C5/1 C5/.75 E5/.25 D5/1.5 G4/.5 B4/.5 D5/.5 C5/2';
+  kids({ id: 'clementine', grade: 'g4', cat: 'dy', title: '클레멘타인', composer: '미국 민요', life: '작자 미상', tag: '4·5학년 가창곡', stars: 1,
+    desc: '3박자로 느긋하게 흔들리는 미국 민요예요. ‘따-단’ 리듬을 끝까지 지켜 보세요.',
+    tonic: 60, mode: 'major', bar: 3, bpm: 108, lead: 'violin', feel: 'waltz',
+    T: { V: { m: cl, ch: 'N:1 C:3 C:3 C:3 G7:3 G7:3 C:3 G7:3 C:2' } },
+    form: [{ s: 'intro', ch: 'C:3 G7:3 C:3', lvl: 0 }, { t: 'V', lvl: 1 }, { t: 'V', lead: 'flute', lvl: 1 }, { t: 'V', lead: 'oboe', lvl: 2 }, { t: 'V', lvl: 2 },
+      { t: 'V', tr: 2, lvl: 3 }, { t: 'V', tr: 2, lvl: 4, label: '절정' }, { t: 'V', tr: 2, lead: 'flute', lvl: 2 }, { t: 'V', tr: 2, lead: 'bell', lvl: 1 },
+      { s: 'end', m: 'C5/3', ch: 'C:3', tr: 2, lvl: 5, rit: true }] });
+
+  const os = 'E5/1 G5/1 G5/1.5 A5/.5 G5/1 E5/1 C5/1.5 D5/.5 E5/1 E5/1 D5/1 C5/1 D5/3 C5/.5 D5/.5 E5/1 G5/1 G5/1.5 A5/.5 G5/1 E5/1 C5/1.5 D5/.5 E5/1 E5/1 D5/1 D5/1 C5/3 C5/.5 D5/.5';
+  kids({ id: 'susanna', grade: 'g5', cat: 'dy', title: '오 수재너', composer: '포스터', life: '1826–1864', tag: '5·6학년 가창곡', stars: 2,
+    desc: '밴조처럼 통통 튀는 반주 위로 경쾌한 노래가 흘러요.',
+    tonic: 60, mode: 'major', bar: 4, bpm: 116, lead: 'violin',
+    T: { V: { m: os, ch: 'C:4 C:4 C:4 G7:4 C:4 C:4 G7:4 C:4' } },
+    form: [{ s: 'intro', m: 'r/7 C5/.5 D5/.5', ch: 'C:4 G7:4', lvl: 1 }, { t: 'V', lvl: 1 }, { t: 'V', lead: 'flute', lvl: 1 }, { t: 'V', lvl: 2 },
+      { t: 'V', tr: 2, lead: 'brass', lvl: 3 }, { t: 'V', tr: 2, lvl: 4, label: '절정' }, { t: 'V', tr: 2, lead: 'flute', lvl: 2 },
+      { s: 'end', m: 'C5+E5+G5/4', ch: 'C:4', tr: 2, lvl: 5 }] });
 
   const jbV = 'G4 E5 D5 C5 G4/3 G4/.5 G4/.5 G4 E5 D5 C5 A4/4 A4 F5 E5 D5 B4/4 G5 G5 F5 D5 E5/4 G4 E5 D5 C5 G4/4 G4 E5 D5 C5 A4/3 A4 A4 F5 E5 D5 G5 G5 G5 G5 A5 G5 F5 D5 C5/2 G5/2';
   const jbC = 'E5 E5 E5/2 E5 E5 E5/2 E5 G5 C5/1.5 D5/.5 E5/4 F5 F5 F5/1.5 F5/.5 F5 E5 E5 E5/.5 E5/.5 E5 D5 D5 E5 D5/2 G5/2 E5 E5 E5/2 E5 E5 E5/2 E5 G5 C5/1.5 D5/.5 E5/4 F5 F5 F5 F5 F5 E5 E5 E5/.5 E5/.5 G5 G5 F5 D5 C5/4';
-  const jbVP = 'C:4 C:4 C:4 F:4 G7:4 G:4 G7:4 C:4 C:4 C:4 C:4 F:4 F:4 G7:4 G7:4 C:2 G7:2';
-  const jbCP = 'C:4 C:4 C:4 C:4 F:4 C:4 D7:4 G7:4 C:4 C:4 C:4 C:4 F:4 C:4 G7:4 C:4';
-  L.push({ id: 'jingle', grade: 'g4', cat: 'dy', title: '징글벨', composer: '피어폰트', life: '1822–1893', tag: '겨울 노래', stars: 2,
-    desc: '눈 위를 달리는 썰매를 노래한 곡이에요. 같은 음을 연달아 치는 후렴이 재미있어요.',
-    tonic: 60, mode: 'major', bar: 4, bpm: 140, lead: 'bell',
-    mel: [[jbV, 0, 'bell'], [jbC, 0, 'brass'], [jbC, 0, 'bell']],
-    acc: [{ p: jbVP, s: 'oompah', u: 1 }, { p: jbCP, s: 'oompah', u: 0.5, timp: true }, { p: jbCP, s: 'oompah', u: 0.5 }] });
-  // ===== 추가 클래식 =====
-  const Q = (notes, d) => notes.trim().split(/\s+/).map(x => x + '/' + d).join(' ');
+  kids({ id: 'jingle', grade: 'g4', cat: 'dy', title: '징글벨', composer: '피어폰트', life: '1822–1893', tag: '겨울 노래', stars: 2,
+    desc: '썰매 방울 같은 반주 위로 절과 후렴이 번갈아 나와요.',
+    tonic: 60, mode: 'major', bar: 4, bpm: 132, lead: 'bell',
+    T: { V: { m: jbV, ch: 'C:4 C:4 C:4 F:4 G7:4 G:4 G7:4 C:4 C:4 C:4 C:4 F:4 F:4 G7:4 G7:4 C:2 G7:2' }, C: { m: jbC, ch: 'C:4 C:4 C:4 C:4 F:4 C:4 D7:4 G7:4 C:4 C:4 C:4 C:4 F:4 C:4 G7:4 C:4' } },
+    form: [{ s: 'intro', ch: 'C:4 G7:4', lvl: 0 }, { t: 'V', lvl: 1, label: '1절' }, { t: 'C', lead: 'brass', lvl: 2, label: '후렴' }, { t: 'V', lead: 'flute', lvl: 2, label: '2절' },
+      { t: 'C', lvl: 3, cres: true }, { t: 'C', lead: 'violin', lvl: 4, label: '절정' }, { s: 'end', m: 'C5+E5+G5/4', ch: 'C:4', lvl: 5 }] });
 
-  // 교향곡 40번 1악장
+  // ───────── 국악 ─────────
+  const ar1 = 'G4/4 A4/2 G4/2 A4/1 C5/4 D5/2 C5/2 D5/1 E5/3 D5/1 C5/2 D5/1 C5/2 A4/9';
+  const ar2 = 'G4/4 A4/2 G4/2 A4/1 C5/4 D5/2 C5/2 D5/1 E5/2 G5/1 E5/2 D5/1 C5/2 D5/1 C5/2 A4/1 C5/6';
+  const ar3 = 'C5/4 D5/2 E5/2 G5/1 E5/2 G5/1 A5/2 G5/1 E5/2 D5/1 C5/3 D5/2 C5/1 A4/3 G4/9';
+  L.push({ id: 'arirang', grade: 'g3', cat: 'gu', title: '아리랑', composer: '경기민요', life: '작자 미상', tag: '3·4학년 교과서 · 세마치장단', stars: 1,
+    desc: '장구의 세마치장단으로 열고, 대금·가야금·해금·피리가 차례로 더해져요.',
+    style: 'gugak', jd: 'semachi', laneMode: 'rank', unit: 3, tonic: 60, mode: 'major', bar: 9, bpm: 270,
+    T: { V: { m: [ar1, ar2, ar3, ar2].join(' ') } },
+    form: [{ s: 'intro', cycles: 2, lvl: 0, label: '장구' }, { t: 'V', lead: 'daegeum', lvl: 1, label: '대금' }, { t: 'V', lead: 'gayageum', lvl: 2, label: '가야금' },
+      { s: 'bridge', cycles: 1, lvl: 2 }, { t: 'V', lead: 'daegeum', lvl: 3, label: '해금과 함께' }, { t: 'V', lead: 'daegeum', lvl: 4, label: '모두 함께' },
+      { s: 'end', m: 'C5/9', lead: 'daegeum', lvl: 5 }] });
+
+  // ───────── 추가 클래식 ─────────
   const m40 = 'D5/1 Eb5/.5 D5/.5 D5/1 Eb5/.5 D5/.5 D5/1 Bb5/2 Bb5/.5 A5/.5 G5/1 G5/.5 F5/.5 Eb5/1 Eb5/.5 D5/.5 C5/1 C5/1 r/1 D5/.5 C5/.5 C5/1 D5/.5 C5/.5 C5/1 D5/.5 C5/.5 C5/1 A5/2 A5/.5 G5/.5 F#5/1 F#5/.5 Eb5/.5 D5/1 D5/.5 C5/.5 Bb4/1 Bb4/1 r/1 Eb5/.5 D5/.5';
-  const m40P = 'Gm:4 Gm:4 Cm:4 D7:4 D7:4 D7:4 D7:2 Gm:2 Gm:4';
   L.push({ id: 'sym40', cat: 'cl', title: '교향곡 40번 1악장', composer: '모차르트', life: '1756–1791', tag: '광고·벨소리', stars: 3,
-    desc: '‘미♭-레-레’ 반음 동기가 숨 가쁘게 이어지는 단조 교향곡이에요.',
-    tonic: 67, mode: 'minor', bar: 4, bpm: 200, lead: 'violin',
-    mel: ['Eb5/.5 D5/.5', m40, [m40, 0, 'flute'], [m40, 0, 'violin'], 'G5/1 D5/1 Bb4/1 G4/1 D5/1 r/1 G4+D5+G5/2'],
-    acc: [{ p: 'N:1 ' + m40P, s: 'trem' }, { p: m40P, s: 'trem' }, { p: m40P, s: 'trem', timp: true }, { p: 'Gm:4 D7:2 Gm:2', s: 'pulse', timp: true }] });
+    desc: '비올라의 바쁜 8분음표 위로 ‘미♭-레-레’ 주제가 숨 가쁘게 이어져요. 원곡처럼 제시부를 반복해요.',
+    tonic: 67, mode: 'minor', bar: 4, bpm: 168, feel: 'pulse8', lead: 'violin',
+    T: { M: { m: m40, ch: 'Gm:4 Gm:4 Cm:4 D7:4 D7:4 D7:4 D7:2 Gm:2 Gm:4' }, F: { ch: 'Gm:4 Gm:4 Cm:4 D7:4 Gm:4 D7:4 Gm:4 D7:4' } },
+    form: [{ s: 'intro', m: 'r/3 Eb5/.5 D5/.5', ch: 'Gm:4', lvl: 1, label: '비올라' }, { t: 'M', lvl: 1, label: '주제' }, { t: 'M', lead: 'flute', lvl: 2 }, { t: 'F', lvl: 3, label: '총주' },
+      { t: 'M', lvl: 1, label: '반복' }, { t: 'M', lead: 'flute', lvl: 2 }, { t: 'F', lvl: 3 },
+      { t: 'M', lead: 'oboe', tr: 5, lvl: 2, label: '전개부' }, { t: 'F', tr: 5, lvl: 3, cres: true }, { t: 'M', lvl: 4, label: '절정' }, { t: 'M', lvl: 2 },
+      { s: 'end', m: 'G5/1 D5/1 Bb4/1 G4/1 D5/1 r/1 G4+D5+G5/2', ch: 'Gm:4 D7:2 Gm:2', lvl: 5 }] });
 
-  // 피아노 소나타 16번 1악장
   const s16a = 'C5/2 E5/1 G5/1 B4/1.5 C5/.25 D5/.25 C5/2 A5/2 G5/1 C6/1 G5/1 F5/.5 E5/.5 E5/2';
   const s16b = S('A4 B4 C5 D5 E5 F5 G5 A5 G5 F5 E5 D5 C5 B4 A4 G4') + ' ' + S('F4 G4 A4 B4 C5 D5 E5 F5 E5 D5 C5 B4 A4 G4 F4 E4') + ' ' + S('D4 E4 F4 G4 A4 B4 C5 D5 C5 B4 A4 G4 F4 E4 D4 C4') + ' ' + S('G4 A4 B4 C5 D5 E5 F5 G5') + ' C5/1 r/1';
-  const s16P = 'C:4 G7:2 C:2 F:2 C:2 G7:2 C:2 Am:4 Dm:4 G7:4 G7:2 C:2';
   L.push({ id: 'sonata16', cat: 'cl', title: '피아노 소나타 16번 1악장', composer: '모차르트', life: '1756–1791', tag: '피아노 입문 명곡', stars: 2,
-    desc: '‘쉬운 소나타’로 불려요. 왼손의 ‘도솔미솔’ 알베르티 베이스와 오른손 음계를 함께 들어 보세요.',
-    tonic: 60, mode: 'major', bar: 4, bpm: 120, lead: 'piano',
-    mel: [s16a + ' ' + s16b, s16a + ' ' + s16b, 'C5/2 G4/1 C5/1'],
-    acc: [{ p: s16P + ' ' + s16P + ' C:2 G7:1 C:1', s: 'alberti', u: 0.5 }] });
+    desc: '‘쉬운 소나타’예요. 왼손 ‘도솔미솔’ 반주 위로 오른손이 노래하고 음계를 달려요.',
+    style: 'piano', tonic: 60, mode: 'major', bar: 4, bpm: 108, feel: 'alberti',
+    T: { A: { m: s16a + ' ' + s16b, ch: 'C:4 G7:2 C:2 F:2 C:2 G7:2 C:2 Am:4 Dm:4 G7:4 G7:2 C:2' } },
+    form: [{ t: 'A', lvl: 1, label: '주제' }, { t: 'A', lvl: 1 }, { t: 'A', tr: 7, lvl: 2, label: '딸림조' },
+      { t: 'A', lvl: 3, minor: true, ch: 'Cm:4 G7:2 Cm:2 Fm:2 Cm:2 G7:2 Cm:2 Ab:4 Fm:4 G7:4 G7:2 Cm:2', label: '단조 전개' },
+      { t: 'A', lvl: 4, dbl: false, label: '재현' }, { t: 'A', lvl: 2 }, { s: 'end', m: 'C5/2 G4/1 C4+C5/1', ch: 'C:2 G7:1 C:1', lvl: 5 }] });
 
-  // 평균율 1권 1번 전주곡
   const pc = [['C4', 'E4', 'G4', 'C5', 'E5'], ['C4', 'D4', 'A4', 'D5', 'F5'], ['B3', 'D4', 'G4', 'D5', 'F5'], ['C4', 'E4', 'G4', 'C5', 'E5'],
     ['C4', 'E4', 'A4', 'E5', 'A5'], ['C4', 'D4', 'F#4', 'A4', 'D5'], ['B3', 'D4', 'G4', 'D5', 'G5'], ['B3', 'C4', 'E4', 'G4', 'C5'],
     ['A3', 'C4', 'E4', 'G4', 'C5'], ['D3', 'A3', 'D4', 'F#4', 'C5'], ['G3', 'B3', 'D4', 'G4', 'B4'], ['G3', 'Bb3', 'E4', 'G4', 'C#5'],
     ['F3', 'A3', 'D4', 'A4', 'D5'], ['F3', 'Ab3', 'D4', 'F4', 'B4'], ['E3', 'G3', 'C4', 'G4', 'C5'], ['E3', 'F3', 'A3', 'C4', 'F4'],
     ['D3', 'F3', 'A3', 'C4', 'F4'], ['G2', 'D3', 'G3', 'B3', 'F4'], ['C3', 'E3', 'G3', 'C4', 'E4']];
   const prel = pc.map(([a, b, c, d, e]) => { const g = Q(`${a} ${b} ${c} ${d} ${e} ${c} ${d} ${e}`, '.25'); return g + ' ' + g; }).join(' ');
+  const prelCh = 'C:4 Dm7/C:4 G7/B:4 C:4 Am/C:4 D7/C:4 G/B:4 Cmaj7/B:4 Am7:4 D7:4 G:4 C#dim7/G:4 Dm/F:4 Bdim7/F:4 C/E:4 Fmaj7/E:4 Dm7:4 G7:4 C:4';
   L.push({ id: 'prelude', cat: 'cl', title: '평균율 1권 1번 전주곡', composer: '바흐', life: '1685–1750', tag: '「아베 마리아」 반주', stars: 3,
-    desc: '마디마다 같은 분산화음 모양이지만 화음이 계속 바뀌어요. 화음이 바뀌는 순간을 느껴 보세요.',
-    tonic: 60, mode: 'major', bar: 4, bpm: 72, lead: 'piano',
-    mel: [prel, 'C3+E3+G3+C4+E4/4'],
-    acc: [{ n: pc.map(x => x[0].replace(/(\d)$/, (m, o) => String(+o - 1)) + '/4').join(' ') + ' C2/4', inst: 'cello', v: 0.7 }] });
+    desc: '마디마다 같은 분산화음 모양으로 화음만 바뀌어요. 두 번째에는 현악기가 화음을 받쳐 줘요.',
+    style: 'piano', tonic: 60, mode: 'major', bar: 4, bpm: 72,
+    T: { P: { m: prel, ch: prelCh } },
+    form: [{ t: 'P', lvl: 1, solo: true, label: '피아노 홀로' }, { t: 'P', lvl: 2, solo: true, pad: true, cres: true, label: '현악기와 함께' },
+      { s: 'end', m: 'C3+E3+G3+C4+E4/4', ch: 'C:4', lvl: 5, pad: true, rit: true }] });
 
-  // 짐노페디 1번
   const gy1 = 'r/1 F#5/1 A5/1 G5/1 F#5/1 C#5/1 B4/1 C#5/1 D5/1 A4/3 F#4/12';
   const gy2 = 'r/1 F#5/1 A5/1 G5/1 F#5/1 C#5/1 B4/1 C#5/1 D5/1 A4/3 C#5/3 F#5/3 E5/6';
   L.push({ id: 'gymnopedie', cat: 'cl', title: '짐노페디 1번', composer: '사티', life: '1866–1925', tag: '영화·광고 배경음악', stars: 1,
-    desc: '두 화음이 천천히 번갈아 흔들리는 위로 느린 선율이 떠다녀요. 서두르지 말고 박을 느껴 보세요.',
-    tonic: 62, mode: 'major', bar: 3, bpm: 84, lead: 'flute',
-    mel: ['r/12', [gy1, 0, 'flute'], [gy2, 0, 'oboe'], [gy1, 0, 'flute']],
-    acc: [{ p: rep('Gmaj7:3 Dmaj7:3', 14), s: 'waltz' }] });
+    desc: '두 화음이 천천히 흔들리는 위로 느린 가락이 떠다녀요. 원곡처럼 피아노 한 대로 연주해요.',
+    style: 'piano', tonic: 62, mode: 'major', bar: 3, bpm: 76, feel: 'waltz',
+    T: { I: { ch: 'Gmaj7:3 Dmaj7:3 Gmaj7:3 Dmaj7:3' }, A: { m: gy1, ch: rep('Gmaj7:3 Dmaj7:3', 4) }, B: { m: gy2, ch: rep('Gmaj7:3 Dmaj7:3', 4) } },
+    form: [{ t: 'I', lvl: 1, label: '도입' }, { t: 'A', lvl: 1 }, { t: 'B', lvl: 1 }, { t: 'A', lvl: 2 }, { t: 'B', lvl: 2 }, { t: 'I', lvl: 1 },
+      { t: 'A', lvl: 3, dbl: false }, { t: 'B', lvl: 3, dbl: false }, { s: 'end', m: 'D5/6', ch: 'Dmaj7:6', lvl: 1, rit: true }] });
 
-  // 결혼 행진곡 (로엔그린)
   const brA = 'G4/1 C5/.75 C5/.25 C5/2 G4/1 D5/.75 B4/.25 C5/2 G4/1 C5/.75 F5/.25 F5/1 E5/.75 D5/.25 C5/1 B4/.75 C5/.25 D5/2';
   const brB = 'G4/1 C5/.75 C5/.25 C5/2 G4/1 D5/.75 B4/.25 C5/2 G4/1 C5/.75 F5/.25 F5/1 E5/.75 D5/.25 C5/1 B4/.75 D5/.25 C5/2';
-  const brP = 'C:4 G:2 C:2 C:1 F:2 G7:1 C:1 G:1 G:2 C:4 G:2 C:2 C:1 F:2 G7:1 C:1 G7:1 C:2';
   L.push({ id: 'bridal', cat: 'cl', title: '결혼 행진곡', composer: '바그너', life: '1813–1883', tag: '결혼식 신부 입장곡', stars: 1,
-    desc: '오페라 「로엔그린」의 합창곡이에요. 점8분음표+16분음표의 ‘따-단’ 리듬을 익혀요.',
-    tonic: 60, mode: 'major', bar: 4, bpm: 92, lead: 'organ',
-    mel: [[brA + ' ' + brB, 0, 'organ'], [brA + ' ' + brB, 0, 'brass']],
-    acc: [{ p: brP, s: 'block' }, { p: brP, s: 'pulse', timp: true }] });
+    desc: '금관의 신호로 문이 열리고, 오페라 「로엔그린」의 합창 가락이 점점 장엄해져요.',
+    tonic: 60, mode: 'major', bar: 4, bpm: 84, feel: 'still', lead: 'violin',
+    T: { A: { m: brA + ' ' + brB, ch: 'C:4 G:2 C:2 C:1 F:2 G7:1 C:1 G:1 G:2 C:4 G:2 C:2 C:1 F:2 G7:1 C:1 G7:1 C:2' } },
+    form: [{ s: 'intro', ch: 'G7:4 G7:4', lvl: 3, roll: true, label: '금관 신호' }, { t: 'A', lvl: 1, label: '합창 가락' }, { t: 'A', lead: 'flute', lvl: 2, feel: 'lyric' },
+      { s: 'bridge', ch: 'F:4 C:4 G7:4 G7:4', lvl: 2 }, { t: 'A', lead: 'brass', lvl: 3, cres: true }, { t: 'A', lvl: 4, label: '절정' }, { t: 'A', lead: 'oboe', lvl: 2 },
+      { s: 'end', m: 'C5/4', ch: 'C:4', lvl: 5, rit: true }] });
 
-  // 아침의 기분 (6/8, 8분음표 = 1)
   const mmN = 'B4 G#4 F#4 E4 F#4 G#4 B4 G#4 F#4 E4 F#4 G#4 B4 G#4 B4 C#5 G#4 C#5 B4 G#4 F#4 E4'.split(' ');
   const mm = mmN.map((n, i) => n + '/' + (i === mmN.length - 1 ? 4 : i % 2 ? 1 : 2)).join(' ');
-  const mmP = 'E:6 E:6 E:6 C#m:6 A:6 B7:2 E:4';
   L.push({ id: 'morning', cat: 'g4', title: '아침의 기분', composer: '그리그', life: '1843–1907', tag: '4학년 감상곡 · 페르 귄트', stars: 2,
-    desc: '플루트와 오보에가 같은 가락을 주고받으며 해가 떠오르는 아침을 그려요. 산왕의 궁전과 같은 모음곡이에요.',
-    tonic: 64, mode: 'major', bar: 6, unit: 3, bpm: 168, lead: 'flute',
-    mel: [[mm, 12, 'flute'], [mm, 0, 'oboe'], [mm, 12, 'flute'], [mm, 0, 'oboe'], [mm, 12, 'violin']],
-    acc: [{ p: rep(mmP, 4), s: 'block' }, { p: mmP, s: 'arp', u: 1, timp: true }] });
+    desc: '플루트와 오보에가 가락을 주고받다, 해가 떠오르듯 오케스트라 전체가 노래해요. 호른이 조용히 마무리해요.',
+    tonic: 64, mode: 'major', bar: 6, unit: 3, bpm: 132, feel: 'lyric', lead: 'flute',
+    T: { A: { m: mm, ch: 'E:6 E:6 E:6 C#m:6 A:6 B7:2 E:4' } },
+    form: [{ t: 'A', oct: 1, lvl: 1, label: '플루트' }, { t: 'A', lead: 'oboe', lvl: 1, label: '오보에' }, { t: 'A', oct: 1, lvl: 2 }, { t: 'A', lead: 'oboe', lvl: 2 },
+      { t: 'A', lead: 'violin', lvl: 3, cres: true, label: '해가 떠올라요' }, { t: 'A', lead: 'violin', lvl: 4, label: '절정' }, { t: 'A', lead: 'violin', lvl: 2 },
+      { t: 'A', lead: 'horn', oct: -1, lvl: 1, label: '호른' }, { s: 'end', m: 'E5/6', ch: 'E:6', lvl: 1, rit: true }] });
 
-  // 몰다우 (6/8, 8분음표 = 1)
-  const mo1 = 'E5/2 F#5/1 G5/2 A5/1 B5/3 B5/3 C6/3 C6/3 B5/6 A5/3 A5/3 G5/6 F#5/3 F#5/3';
-  const mo2 = 'E5/2 F#5/1 G#5/2 A5/1 B5/3 B5/3 C#6/3 C#6/3 B5/6 A5/3 A5/3 G#5/6 F#5/3 F#5/3';
+  const mo1 = 'E5/2 F#5/1 G5/2 A5/1 B5/3 B5/3 C6/3 C6/3 B5/6 A5/3 A5/3 G5/6 F#5/3 F#5/3 E5/5 B4/1';
+  const mo2 = 'E5/2 F#5/1 G#5/2 A5/1 B5/3 B5/3 C#6/3 C#6/3 B5/6 A5/3 A5/3 G#5/6 F#5/3 F#5/3 E5/6';
+  const water = Q('E5 F#5 G5 B5 G5 F#5 E5 F#5 G5 B5 G5 F#5 A5 B5 C6 E6 C6 B5 A5 B5 C6 E6 C6 B5 B4 D#5 F#5 A5 F#5 D#5 B4 D#5 F#5 A5 F#5 D#5 E5 G5 B5 E6 B5 G5 E5 G5 B5 E6 B5 G5', '.5');
   L.push({ id: 'moldau', cat: 'cl', title: '몰다우', composer: '스메타나', life: '1824–1884', tag: '감상곡 · 교향시', stars: 2,
-    desc: '작은 샘물이 모여 큰 강이 되어 흐르는 모습이에요. 마지막에는 단조 가락이 밝은 장조로 바뀌어요.',
-    tonic: 64, mode: 'minor', bar: 6, unit: 3, bpm: 210, lead: 'violin',
-    mel: ['B4/1', [mo1 + ' E5/5 B4/1', 0, 'flute'], [mo1 + ' E5/5 B4/1', 0, 'violin'], [mo2 + ' E5/6', 0, 'brass']],
-    acc: [{ p: 'N:1' }, { p: rep('Em:6 Em:6 Am:6 Em:6 Am:6 Em:6 B7:6 Em:6', 2), s: 'arp', u: 1 }, { p: 'E:6 E:6 A:6 E:6 A:6 E:6 B7:6 E:6', s: 'arp', u: 1, timp: true }] });
+    desc: '두 플루트의 샘물이 모여 강의 주제가 흐르고, 마지막엔 장조로 바뀌어 힘차게 끝나요.',
+    tonic: 64, mode: 'minor', bar: 6, unit: 3, bpm: 180, feel: 'lyric', lead: 'violin',
+    T: { W: { m: water, ch: 'Em:6 Am:6 B7:6 Em:6', feel: 'still' }, M: { m: mo1, ch: 'Em:6 Em:6 Am:6 Em:6 Am:6 Em:6 B7:6 Em:6' }, M2: { m: mo2, ch: 'E:6 E:6 A:6 E:6 A:6 E:6 B7:6 E:6' } },
+    form: [{ t: 'W', lead: 'flute', lvl: 1, label: '샘물' }, { t: 'W', lead: 'flute', lvl: 1, canon: [{ at: 1.5, inst: 'flute', oct: -1, v: 0.5 }] },
+      { t: 'M', lvl: 1, label: '강의 주제' }, { t: 'M', lvl: 2 }, { t: 'W', lead: 'flute', lvl: 2, label: '물결' }, { t: 'W', lead: 'flute', lvl: 3, cres: true },
+      { t: 'M', lvl: 3, cres: true }, { t: 'M2', lvl: 4, label: '장조 절정' }, { t: 'M2', lvl: 4 }, { s: 'end', m: 'E5+B4+G#4/3 r/3 E4+E5/6', ch: 'E:3 N:3 E:6', lvl: 5 }] });
 
-  // 아름답고 푸른 도나우 (3/4)
   const bd = 'r/2 D4/1 D4/1 F#4/1 A4/1 A4/3 r/1 A5/1 A5/1 r/1 F#5/1 F#5/1 r/2 D4/1 D4/1 F#4/1 A4/1 A4/3 r/1 A5/1 A5/1 r/1 G5/1 G5/1 r/2 C#4/1 C#4/1 E4/1 B4/1 B4/3 r/1 B5/1 B5/1 r/1 G5/1 G5/1 r/2 C#4/1 C#4/1 E4/1 B4/1 B4/3 r/1 B5/1 B5/1 r/1 F#5/1 F#5/1 r/2 D4/1 D4/1 F#4/1 A4/1 D5/3 r/1 D6/1 D6/1 r/1 A5/1 A5/1 r/2 D4/1 D4/1 F#4/1 A4/1 D5/3 r/1 D6/1 D6/1 r/1 B5/1 B5/1 r/2 E4/1 E4/1 G4/1 B4/1 B4/3 A4/1 F#4/1 E4/1 D4/3';
   const bdP = 'D:3 D:3 D:3 D:3 D:3 D:3 D:3 D:3 D:3 D:3 A7:3 A7:3 A7:3 A7:3 A7:3 A7:3 A7:3 A7:3 A7:3 A7:3 D:3 D:3 D:3 D:3 D:3 D:3 D:3 D:3 G:3 G:3 G:3 Em:3 Em:3 A7:3 D:3';
   L.push({ id: 'danube', cat: 'cl', title: '아름답고 푸른 도나우', composer: '요한 슈트라우스 2세', life: '1825–1899', tag: '신년 음악회 왈츠', stars: 2,
-    desc: '‘쿵-짝-짝’ 왈츠 반주 위로 가락이 흐르고, 호른이 ‘빰빰’ 하고 대답해요.',
-    tonic: 62, mode: 'major', bar: 3, bpm: 180, lead: 'violin',
-    mel: [bd, [bd, 0, 'flute']], acc: [{ p: bdP, s: 'waltz' }, { p: bdP, s: 'waltz', timp: true }] });
+    desc: '떨리는 현 위로 호른이 ‘레-파#-라’를 부르며 시작해, ‘쿵-짝-짝’ 왈츠가 강물처럼 흘러요.',
+    tonic: 62, mode: 'major', bar: 3, bpm: 168, feel: 'waltz', lead: 'violin',
+    T: { W: { m: bd, ch: bdP } },
+    form: [{ s: 'intro', m: 'r/6 D4/1 F#4/1 A4/1 A4/6 r/3', lead: 'horn', ch: 'D:3 D:3 D:3 D:3 A7:3 A7:3', lvl: 0, feel: 'storm', label: '도입' },
+      { t: 'W', lvl: 1, label: '왈츠' }, { t: 'W', lead: 'flute', lvl: 2 }, { s: 'bridge', ch: 'A7:3 A7:3 A7:3 A7:3', lvl: 3, roll: true },
+      { t: 'W', lvl: 4, label: '절정' }, { s: 'end', m: 'D5+F#5+A5/3 r/3 D4+D5/3', ch: 'D:3 N:3 D:3', lvl: 5 }] });
 
-  // 예수, 인간 소망의 기쁨 (셋잇단, 8분음표 = 1)
   const jj = 'G4 A4 B4 D5 C5 C5 E5 D5 D5 G5 F#5 G5 D5 B4 G4 A4 B4 C5 D5 E5 D5 C5 B4 A4 B4 G4 F#4 G4 A4 D4 F#4 A4 C5 B4 A4 B4 G4 A4 B4 D5 C5 C5 E5 D5 D5 G5 F#5 G5 D5 B4 G4 A4 B4 E4 D5 C5 B4 A4 G4 D4 G4 F#4 G4';
   const jjP = 'G:3 Am:3 G:3 G:3 G:3 C:3 G:3 Am:3 D7:3 G:3 D7:3 G:3 G:3 Am:3 G:3 G:3 G:3 Em:3 G:3 D7:3 G:3';
   L.push({ id: 'jesu', cat: 'cl', title: '예수, 인간 소망의 기쁨', composer: '바흐', life: '1685–1750', tag: '결혼식·교회 음악', stars: 3,
-    desc: '셋잇단음으로 쉼 없이 흐르는 가락이에요. ‘하나-둘-셋’이 한 박인 느낌을 살려 쳐 보세요.',
-    tonic: 67, mode: 'major', bar: 9, unit: 3, bpm: 216, lead: 'oboe',
-    mel: [[Q(jj, 1), 0, 'oboe'], [Q(jj, 1), 0, 'violin'], [Q(jj, 1), 12, 'flute'], 'G4+B4+D5+G5/9'],
-    acc: [{ p: rep(jjP, 3) + ' G:9', s: 'block' }] });
+    desc: '셋잇단음 가락이 끊임없이 흘러요. ‘하나-둘-셋’이 한 박인 느낌을 살려 쳐 보세요.',
+    tonic: 67, mode: 'major', bar: 9, unit: 3, bpm: 200, feel: 'lyric', lead: 'oboe',
+    T: { J: { m: Q(jj, 1), ch: jjP } },
+    form: [{ t: 'J', lvl: 1, label: '오보에' }, { t: 'J', lead: 'violin', lvl: 1 }, { t: 'J', tr: 7, lead: 'flute', lvl: 2, label: '딸림조' }, { t: 'J', tr: 7, lvl: 2 },
+      { t: 'J', lvl: 3, cres: true }, { t: 'J', lead: 'violin', lvl: 4, label: '절정' }, { s: 'end', m: 'G4+B4+D5+G5/9', ch: 'G:9', lvl: 5, rit: true }] });
 
-  // ===== 별 5개 고난도 =====
-  // 카프리스 24번: 주제와 변주 (원곡의 화성 진행 위에 변주 음형을 편곡)
+  // ───────── 별 5개 고난도 (원곡의 대표 음형을 바탕으로 편곡) ─────────
   const cpC = [['Am', 'A4', 'C5', 'B4', 'E5'], ['E', 'E5', 'G#5', 'F#5', 'B5'], ['Am', 'A4', 'C5', 'B4', 'E5'], ['E', 'E5', 'G#5', 'F#5', 'B5'],
     ['Am', 'A4', 'C5', 'B4', 'E5'], ['Dm', 'D5', 'F5', 'E5', 'A5'], ['G', 'G4', 'B4', 'A4', 'D5'], ['C', 'C5', 'E5', 'D5', 'G5'],
     ['F', 'F4', 'A4', 'G4', 'C5'], ['Bdim', 'B4', 'D5', 'C5', 'F5'], ['E', 'E5', 'G#5', 'F#5', 'B5'], ['Am', 'A4', 'C5', 'B4', 'E5']];
   const up = n => n.replace(/(\d)$/, (m, o) => String(+o + 1));
-  const cpTheme = cpC.map(([, r, t, s2, f]) => `${r}/.5 ${r}/.25 ${t}/.25 ${s2}/.25 ${r}/.25 ${f}/.5`).join(' ');
-  const cpV1 = cpC.map(([, r, t, s2, f]) => S(`${r} ${t} ${f} ${up(r)} ${f} ${t} ${r} ${t}`)).join(' ');
-  const cpV2 = cpC.map(([, r, t, s2, f]) => S(`${up(r)} ${f} ${t} ${s2} ${r} ${s2} ${t} ${f}`)).join(' ');
-  const cpV3 = cpC.map(([, r, t, s2, f]) => S(`${r} ${up(r)} ${f} ${up(r)} ${t} ${up(r)} ${f} ${up(t)}`)).join(' ');
-  const cpP = cpC.map(c => c[0] + ':2').join(' ');
+  const cpT = cpC.map(([, r, t, s2, f]) => `${r}/.5 ${r}/.25 ${t}/.25 ${s2}/.25 ${r}/.25 ${f}/.5`);
+  const cpV1 = cpC.map(([, r, t, s2, f]) => S(`${r} ${t} ${f} ${up(r)} ${f} ${t} ${r} ${t}`));
+  const cpV2 = cpC.map(([, r, t, s2, f]) => S(`${up(r)} ${f} ${t} ${s2} ${r} ${s2} ${t} ${f}`));
+  const cpV3 = cpC.map(([, r, t, s2, f]) => S(`${r} ${up(r)} ${f} ${up(r)} ${t} ${up(r)} ${f} ${up(t)}`));
+  const cpCh = cpC.map(c => c[0] + ':2');
+  const cpFull = arr => ({ m: [...arr.slice(0, 4), ...arr.slice(0, 4), ...arr.slice(4)].join(' '), ch: [...cpCh.slice(0, 4), ...cpCh.slice(0, 4), ...cpCh.slice(4)].join(' ') });
   L.push({ id: 'caprice', cat: 'cl', title: '카프리스 24번', composer: '파가니니', life: '1782–1840', tag: '바이올린 명곡', stars: 5,
     desc: '짧은 주제가 점점 빠르고 화려한 변주로 바뀌어요. 원곡의 화성 위에 변주를 새로 편곡했어요.',
-    tonic: 69, mode: 'minor', bar: 2, lead: 'violin', tempo: [[0, 92], [24, 112], [48, 126], [72, 138]],
-    mel: [cpTheme, cpV1, cpV2, cpV3, 'A4+E5+A5/2'],
-    acc: [{ p: cpP, s: 'pizz' }, { p: cpP, s: 'trem' }, { p: cpP, s: 'trem' }, { p: cpP, s: 'trem', timp: true }, { p: 'Am:2', s: 'block', timp: true }] });
+    tonic: 69, mode: 'minor', bar: 2, bpm: 92, feel: 'march', lead: 'violin', ens: 'strings',
+    T: { T: cpFull(cpT), V1: cpFull(cpV1), V2: cpFull(cpV2), V3: cpFull(cpV3) },
+    form: [{ t: 'T', lvl: 1, label: '주제' }, { t: 'V1', lvl: 2, bpm: 100, label: '변주 1' }, { t: 'V2', lvl: 2, bpm: 108, label: '변주 2' },
+      { t: 'V3', lvl: 3, bpm: 116, cres: true, label: '변주 3' }, { t: 'T', lvl: 4, label: '절정' }, { t: 'V3', lvl: 4 },
+      { s: 'end', m: 'A4+E5+A5/2', ch: 'Am:2', lvl: 5 }] });
 
-  // 관현악 모음곡 2번 '바디네리'
   const bdn = 'B5/.5 D6/.25 B5/.25 F#5/.5 B5/.25 F#5/.25 D5/.5 F#5/.25 D5/.25 B4/1 F#4/.25 B4/.25 C#5/.25 B4/.25 C#5/.25 B4/.25 C#5/.25 B4/.25 A#4/.25 C#5/.25 E5/.25 C#5/.25 D5/1 B4/1';
   L.push({ id: 'badinerie', cat: 'cl', title: '바디네리', composer: '바흐', life: '1685–1750', tag: '플루트 명곡 · 벨소리', stars: 5,
-    desc: '‘장난’이라는 뜻의 아주 빠른 플루트 곡이에요. 첫 부분 가락을 조를 바꿔 가며 이어 붙였어요.',
-    tonic: 71, mode: 'minor', bar: 2, bpm: 132, lead: 'flute',
-    mel: [bdn, [bdn, 3], [bdn, -2], bdn, [bdn, 3], [bdn, -2], bdn, 'B4+F#5+B5/2'],
-    acc: [{ p: rep('Bm:1 Bm:2 Bm:2 F#7:2 Bm:2', 1), s: 'pizz' }, { p: 'D:1 D:2 D:2 A7:2 D:2', s: 'pizz' }, { p: 'Am:1 Am:2 Am:2 E7:2 Am:2', s: 'pizz' },
-      { p: 'Bm:1 Bm:2 Bm:2 F#7:2 Bm:2', s: 'trem' }, { p: 'D:1 D:2 D:2 A7:2 D:2', s: 'trem' }, { p: 'Am:1 Am:2 Am:2 E7:2 Am:2', s: 'trem' }, { p: 'Bm:1 Bm:2 Bm:2 F#7:2 Bm:2', s: 'trem', timp: true }, { p: 'Bm:2', s: 'block', timp: true }] });
+    desc: '‘장난’이라는 뜻의 아주 빠른 플루트 곡이에요. 첫 부분 가락을 여러 조로 이어 편곡했어요.',
+    tonic: 71, mode: 'minor', bar: 2, bpm: 108, feel: 'baroque', lead: 'flute', ens: 'strings',
+    T: { A: { m: bdn, ch: 'Bm:1 Bm:2 Bm:2 F#7:2 Bm:2' } },
+    form: [{ t: 'A', lvl: 1, label: '주제' }, { t: 'A', tr: 3, lvl: 1 }, { t: 'A', lvl: 2 }, { t: 'A', tr: 3, lvl: 2 },
+      { t: 'A', tr: -2, lvl: 2, label: '다른 조' }, { t: 'A', tr: -7, lvl: 2 }, { t: 'A', tr: -2, lvl: 3 }, { t: 'A', tr: -7, lvl: 3 },
+      { t: 'A', tr: 5, lvl: 3, label: '되돌아오기' }, { t: 'A', tr: 3, lvl: 3, cres: true },
+      { t: 'A', lvl: 4, label: '절정' }, { t: 'A', tr: 3, lvl: 4 }, { t: 'A', tr: -2, lvl: 4 }, { t: 'A', lvl: 4 }, { s: 'end', m: 'B4+F#5+B5/2', ch: 'Bm:2', lvl: 5 }] });
 
-  // 즉흥환상곡 (원곡 음형 편곡, 왼손 셋잇단 vs 오른손 16분음표)
   const im = S('G#4 A4 G#4 F##4 G#4 C#5 E5 D#5 C#5 D#5 C#5 B#4 C#5 E5 G#5 A5') + ' ' + S('G#5 A5 G#5 F##5 G#5 C#6 E6 D#6 C#6 D#6 C#6 B#5 C#6 G#5 E5 C#5') + ' ' +
     S('F##4 G#4 B#4 D#5 F#5 D#5 B#4 G#4 F##4 G#4 B#4 D#5 F#5 G#5 F#5 D#5') + ' ' + S('E5 D#5 C#5 B#4 C#5 G#4 E4 C#4 E4 G#4 C#5 E5 G#5 E5 C#5 G#4');
-  const imP = 'C#m:4 C#m:4 G#7:4 C#m:4';
   L.push({ id: 'impromptu', cat: 'cl', title: '즉흥 환상곡', composer: '쇼팽', life: '1810–1849', tag: '피아노 명곡', stars: 5,
-    desc: '오른손 16분음표 4개와 왼손 셋잇단음 3개가 동시에 흐르는 어려운 곡이에요. 원곡의 대표 음형으로 편곡했어요.',
-    tonic: 61, mode: 'minor', bar: 4, lead: 'piano', tempo: [[0, 104], [16, 112], [32, 120], [48, 126]],
-    mel: [im, [im, 5], im, [im, 5], 'C#4+E4+G#4+C#5/2 C#3+C#4/2'],
-    acc: [{ p: imP, s: 'arp', u: 1 / 3 }, { p: imP, s: 'arp', u: 1 / 3, tr: 5 }, { p: imP, s: 'arp', u: 1 / 3 }, { p: imP, s: 'arp', u: 1 / 3, tr: 5 }, { p: 'C#m:4', s: 'block', timp: true }] });
+    desc: '오른손 16분음표 넷과 왼손 셋잇단음 셋이 동시에 흐르는 어려운 곡이에요. 원곡의 대표 음형으로 편곡했어요.',
+    style: 'piano', tonic: 61, mode: 'minor', bar: 4, bpm: 100, feel: 'arp', u: 1 / 3,
+    T: { A: { m: im, ch: 'C#m:4 C#m:4 G#7:4 C#m:4' } },
+    form: [{ t: 'A', lvl: 1, label: '주제' }, { t: 'A', lvl: 1 }, { t: 'A', lvl: 2 }, { t: 'A', tr: 5, lvl: 2, label: '다른 조' }, { t: 'A', tr: 5, lvl: 2 }, { t: 'A', tr: -2, lvl: 3 }, { t: 'A', lvl: 3, cres: true },
+      { t: 'A', lvl: 4, dbl: false, label: '절정' }, { t: 'A', lvl: 4, dbl: false }, { s: 'end', m: 'C#4+E4+G#4+C#5/2 C#3+C#4/2', ch: 'C#m:4', lvl: 5 }] });
 
-  // 혁명 에튀드 (원곡 음형 편곡)
   const rv = S('G5 F5 Eb5 D5 C5 B4 G4 F4 Eb4 D4 C4 B3 G3 F3 Eb3 D3') + ' ' + S('C3 G3 C4 Eb4 G4 C5 Eb5 G5 F5 Eb5 D5 C5 B4 C5 D5 Eb5') + ' ' +
     S('F5 D5 B4 G4 F4 D4 B3 G3 Ab3 B3 D4 F4 Ab4 B4 D5 F5') + ' ' + S('Eb5 C5 G4 Eb4 C4 G3 Eb3 C3') + ' C3+C4/2';
-  const rvP = 'Cm:4 Cm:4 G7:4 Cm:4';
   L.push({ id: 'revolution', cat: 'cl', title: '혁명 에튀드', composer: '쇼팽', life: '1810–1849', tag: '피아노 연습곡', stars: 5,
     desc: '왼손이 폭풍처럼 오르내리는 연습곡이에요. 원곡의 왼손 음형을 바탕으로 편곡했어요.',
-    tonic: 60, mode: 'minor', bar: 4, lead: 'piano', tempo: [[0, 112], [32, 124]],
-    mel: [rv, [rv, 5], [rv, 7], rv, 'C4+Eb4+G4+C5/4'],
-    acc: [{ p: rvP, s: 'trem', timp: true }, { p: rvP, s: 'trem', tr: 5 }, { p: rvP, s: 'trem', tr: 7, timp: true }, { p: rvP, s: 'trem', timp: true }, { p: 'Cm:4', s: 'block', timp: true }] });
+    style: 'piano', tonic: 60, mode: 'minor', bar: 4, bpm: 104, feel: 'block',
+    T: { A: { m: rv, ch: 'Cm:4 Cm:4 G7:4 Cm:4' } },
+    form: [{ t: 'A', lvl: 1, label: '폭풍' }, { t: 'A', lvl: 2 }, { t: 'A', tr: 5, lvl: 2 }, { t: 'A', tr: 3, lvl: 2, label: '다른 조' }, { t: 'A', tr: 7, lvl: 3 }, { t: 'A', tr: 5, lvl: 3 }, { t: 'A', lvl: 3, cres: true },
+      { t: 'A', tr: 5, lvl: 4, dbl: false, label: '절정' }, { t: 'A', lvl: 4, dbl: false }, { s: 'end', m: 'C4+Eb4+G4+C5/4', ch: 'Cm:4', lvl: 5 }] });
 
-  // 사계 중 '겨울' 1악장 (원곡 음형 편곡)
   const wA = Q('F4 F4 F4 F4 G4 G4 G4 G4 Ab4 Ab4 Ab4 Ab4 Bb4 Bb4 Bb4 Bb4 C5 C5 C5 C5 Db5 Db5 Db5 Db5 C5 C5 C5 C5 B4 B4 B4 B4', '.5');
   const wB = S(rep('F5 Ab5 C6 Ab5', 4)) + ' ' + S(rep('E5 G5 Bb5 G5', 4)) + ' ' + S('F5 Ab5 C6 Ab5 F5 Ab5 C6 Ab5 F5 Bb5 Db6 Bb5 F5 Bb5 Db6 Bb5') + ' ' + S('E5 G5 C6 G5 E5 G5 Bb5 G5 C5 E5 G5 Bb5 C6 Bb5 G5 E5');
   const wC = S('C6 Bb5 Ab5 G5 F5 E5 F5 G5 Ab5 G5 F5 Eb5 Db5 C5 Bb4 Ab4') + ' ' + S('Bb4 Db5 F5 Bb5 Ab5 F5 Db5 Bb4 Db5 F5 Bb5 Db6 C6 Bb5 Ab5 G5') + ' ' + S('E5 G5 Bb5 C6 Bb5 G5 E5 C5 E5 G5 Bb5 C6 Db6 C6 Bb5 G5') + ' F5/1 C5/1 F4/2';
   L.push({ id: 'winter', cat: 'cl', title: '사계 중 「겨울」 1악장', composer: '비발디', life: '1678–1741', tag: '바이올린 협주곡', stars: 5,
     desc: '덜덜 떨리는 추위를 반복음으로, 매서운 바람을 빠른 분산화음으로 그렸어요. 원곡의 음형으로 편곡했어요.',
-    tonic: 65, mode: 'minor', bar: 4, bpm: 124, lead: 'violin',
-    mel: [wA, wB, wC, [wA, 0, 'violin'], wB, wC, 'F4+Ab4+C5+F5/4'],
-    acc: [{ p: rep('Fm:8 Db:4 C7:4 Fm:4 C7:4 Fm:2 Bbm:2 C7:4 Fm:4 Bbm:4 C7:4 Fm:4', 2), s: 'trem', timp: true }, { p: 'Fm:4', s: 'block', timp: true }] });
+    tonic: 65, mode: 'minor', bar: 4, bpm: 108, feel: 'pulse8', lead: 'violin', ens: 'strings',
+    T: { A: { m: wA, ch: 'Fm:2 C7:2 Fm:2 Bbm:2 Fm:2 Bbm:2 Fm:2 C7:2' }, B: { m: wB, ch: 'Fm:4 C7:4 Fm:2 Bbm:2 C7:4' }, C: { m: wC, ch: 'Fm:2 Db:2 Bbm:4 C7:4 Fm:1 C7:1 Fm:2' } },
+    form: [{ t: 'A', lvl: 1, label: '떨림' }, { t: 'A', lvl: 2 }, { t: 'B', lvl: 2, label: '바람' }, { t: 'C', lvl: 2 }, { t: 'A', lvl: 3 }, { t: 'B', lvl: 3, cres: true },
+      { t: 'C', lvl: 3 }, { t: 'A', tr: 5, lvl: 3, label: '다른 조' }, { t: 'B', tr: 5, lvl: 3 }, { t: 'B', lvl: 4, label: '절정' }, { t: 'C', lvl: 4 }, { t: 'A', lvl: 4 }, { s: 'end', m: 'F4+Ab4+C5+F5/4', ch: 'Fm:4', lvl: 5 }] });
+  // ───────── 교과서 악보로 추가 (아이스크림 교과서) ─────────
+  // 어깨동무: 자진모리장단(12/8), 메나리토리 — 한 절 4마디
+  const eb1 = 'A4/2 A4/1 A4/2 A4/1 A4/2 G4/1 E4/1 E4/2', eb2 = 'C5/1 C5/2 A4/2 A4/1 A4/2 G4/1 E4/1 E4/2';
+  L.push({ id: 'eokkae', grade: 'g3', cat: 'gu', title: '어깨동무', composer: '전래동요', life: '작자 미상', tag: '3학년 교과서 · 자진모리장단', stars: 1,
+    desc: '‘동무동무 어깨동무’ 놀이노래예요. 장구의 자진모리장단에 맞춰 점점 신나게 빨라져요.',
+    style: 'gugak', jd: 'jajin', laneMode: 'rank', unit: 3, tonic: 64, mode: 'minor', bar: 12, bpm: 264,
+    T: { V: { m: [eb1, eb2, eb1, eb2].join(' ') } },
+    form: [{ s: 'intro', cycles: 2, lvl: 0, label: '장구' }, { t: 'V', lead: 'daegeum', lvl: 1, label: '1절' }, { t: 'V', lead: 'gayageum', lvl: 1, label: '2절' },
+      { t: 'V', lead: 'daegeum', lvl: 2 }, { s: 'bridge', cycles: 1, lvl: 2 }, { t: 'V', lead: 'haegeum', lvl: 2, label: '해금' },
+      { t: 'V', lead: 'daegeum', lvl: 3, bpm: 288, label: '빠르게' }, { t: 'V', lead: 'daegeum', lvl: 4, bpm: 300, label: '모두 함께' }, { t: 'V', lead: 'piri', lvl: 4, bpm: 312 },
+      { s: 'end', m: 'E4/12', lead: 'daegeum', lvl: 5 }] });
+
+  // 청청 맑아라: 자진모리장단(12/8)
+  const cq1 = 'A4/3 A4/3 A4/2 G4/1 E4/3', cq2 = 'A4/2 A4/1 C5/2 C5/1 A4/1 A4/1 A4/1 E4/2 E4/1';
+  L.push({ id: 'cheongcheong', grade: 'g3', cat: 'gu', title: '청청 맑아라', composer: '전래동요', life: '작자 미상', tag: '3학년 교과서 · 자진모리장단', stars: 1,
+    desc: '맑은 물에 비친 하늘을 노래한 전래동요예요. 소고 대신 장구와 함께 자진모리장단을 익혀요.',
+    style: 'gugak', jd: 'jajin', laneMode: 'rank', unit: 3, tonic: 64, mode: 'minor', bar: 12, bpm: 252,
+    T: { V: { m: [cq1, cq2, cq1, cq2].join(' ') } },
+    form: [{ s: 'intro', cycles: 2, lvl: 0, label: '장구' }, { t: 'V', lead: 'daegeum', lvl: 1, label: '1절' }, { t: 'V', lead: 'gayageum', lvl: 1 },
+      { t: 'V', lead: 'daegeum', lvl: 2 }, { s: 'bridge', cycles: 1, lvl: 2 }, { t: 'V', lead: 'haegeum', lvl: 2, label: '해금' },
+      { t: 'V', lead: 'daegeum', lvl: 3, bpm: 276 }, { t: 'V', lead: 'daegeum', lvl: 4, bpm: 288, label: '모두 함께' }, { t: 'V', lead: 'piri', lvl: 4, bpm: 300 },
+      { s: 'end', m: 'E4/12', lead: 'daegeum', lvl: 5 }] });
+
+  // 동물의 사육제 「사자 왕의 행진」: 사자의 포효(반음계 셋잇단) ↔ 행진 주제
+  const lion = 'A3/1 E4/1 E4/1 E4/1 F#4/1.5 E4/.5 D4/1 E4/1 C4/.5 B3/.5 A3/.5 B3/.5 C4/1 D4/1 B3/4';
+  const T3 = (notes) => notes.trim().split(/\s+/).map(x => x + '/' + (1 / 3)).join(' ');
+  const roar = T3('A2 A#2 B2 C3 C#3 D3 D#3 E3 F3 F#3 G3 G#3') + ' ' + T3('A3 G#3 G3 F#3 F3 E3 D#3 D3 C#3 C3 B2 A#2');
+  L.push({ id: 'lion', cat: 'g4', title: '동물의 사육제 「사자 왕의 행진」', composer: '생상스', life: '1835–1921', tag: '4학년 교과서', stars: 2,
+    desc: '피아노의 ‘으르렁’ 반음계 포효 사이로 현악기가 위풍당당한 사자의 행진을 연주해요.',
+    tonic: 69, mode: 'minor', bar: 4, bpm: 96, feel: 'march', lead: 'violin',
+    T: { L: { m: lion, ch: 'Am:4 B7:2 E7:2 Am:2 Dm:2 E:4' }, R: { m: roar, ch: 'Am:4 E7:4', lead: 'piano', feel: 'still' } },
+    form: [{ t: 'R', lvl: 3, roll: true, label: '포효' }, { t: 'L', lvl: 1, label: '행진' }, { t: 'L', lvl: 2 }, { t: 'R', lvl: 2, label: '포효' },
+      { t: 'L', lead: 'cello', oct: -1, lvl: 2, label: '낮은 현' }, { t: 'L', tr: -5, lvl: 3, cres: true, label: '다른 조' }, { t: 'R', lvl: 3 },
+      { t: 'L', lvl: 4, label: '절정' }, { t: 'L', lvl: 4 }, { t: 'R', lvl: 3 }, { s: 'end', m: 'A3+E4+A4/2 A2+A3/2', ch: 'Am:4', lvl: 5 }] });
+
+  // 동물의 사육제 「백조」: 하프의 물결 위로 첼로가 노래 (교과서와 같은 다장조)
+  const swn = 'C5/1 B4/1 E4/1 A4/1 G4/1 C4/1 D4/2.5 E4/.5 F4/2 r/1 A3/2 B3/.5 C4/.5 D4/.5 E4/.5 F4/.5 G4/.5 A4/.5 B4/.5 E5/3.5 r/2.5';
+  L.push({ id: 'cygne', cat: 'g4', title: '동물의 사육제 「백조」', composer: '생상스', life: '1835–1921', tag: '4학년 교과서', stars: 1,
+    desc: '하프가 잔잔한 호수 물결을 그리고, 첼로가 백조처럼 우아하게 미끄러지는 가락을 불러요.',
+    tonic: 60, mode: 'major', bar: 6, bpm: 84, feel: 'lyric', lead: 'cello',
+    T: { S: { m: swn, ch: 'C:3 Am:3 Dm:3 G7:3 Am:2 Dm:2 G7:2 C:6' }, H: { ch: 'C:6 C:6' } },
+    form: [{ t: 'H', lvl: 1, label: '호수' }, { t: 'S', lvl: 1, label: '첼로' }, { t: 'S', lvl: 1 }, { t: 'S', lead: 'violin', oct: 1, lvl: 2, label: '바이올린' },
+      { t: 'S', lvl: 3, cres: true }, { t: 'S', lvl: 4, dbl: 'strings', label: '절정' }, { t: 'S', lvl: 1, v: 0.7, label: '다시 고요히' },
+      { s: 'end', m: 'C4/6', ch: 'C:6', lvl: 1, rit: true }] });
+  // ───────── 기억으로 옮긴 곡 (악보 확인 전, 카드에 ‘가락 확인 중’ 표시) ─────────
+  const dr = ['G4/3 E4/3 G4/3', 'G4/3 E4/3 G4/3', 'A4/2 G4/1 E4/3 D4/3', 'C4/9',
+    'C4/2 D4/1 E4/3 G4/2 E4/1', 'D4/3 E4/2 D4/1 C4/3', 'G4/2 G4/1 A4/3 G4/2 E4/1', 'G4/3 E4/3 D4/3',
+    'C4/2 D4/1 E4/3 G4/2 E4/1', 'D4/3 E4/2 D4/1 C4/3', 'D4/3 C4/6',
+    'A4/3 G4/3 E4/3', 'A4/3 G4/3 E4/3', 'C5/3 A4/3 G4/3', 'A4/2 G4/1 E4/3 D4/2 E4/1', 'G4/3 E4/2 D4/1 E4/3', 'D4/9',
+    'G4/2 G4/1 A4/3 G4/2 E4/1', 'G4/3 E4/2 D4/1 E4/3', 'D4/3 E4/2 D4/1 C4/3', 'C4/9'].join(' ');
+  L.push({ id: 'doraji', grade: 'g5', cat: 'gu', title: '도라지타령', composer: '경기민요', life: '작자 미상', tag: '5학년 교과서 · 세마치장단', stars: 1, draft: true,
+    desc: '세마치장단에 맞춰 ‘도라지 도라지 백도라지’를 불러요. 기억으로 옮긴 가락이라 교과서와 다를 수 있어요.',
+    style: 'gugak', jd: 'semachi', laneMode: 'rank', unit: 3, tonic: 60, mode: 'major', bar: 9, bpm: 240,
+    T: { V: { m: dr } },
+    form: [{ s: 'intro', cycles: 2, lvl: 0, label: '장구' }, { t: 'V', lead: 'daegeum', lvl: 1, label: '1절' }, { t: 'V', lead: 'gayageum', lvl: 2, label: '2절' },
+      { s: 'bridge', cycles: 1, lvl: 2 }, { t: 'V', lead: 'daegeum', lvl: 4, label: '모두 함께' }, { s: 'end', m: 'C4/9', lead: 'daegeum', lvl: 5 }] });
+
+  const nl = ['G4/3 A4/2 G4/1 E4/3 G4/3', 'A4/3 C5/2 A4/1 G4/6', 'A4/2 G4/1 E4/3 G4/2 E4/1 D4/3', 'E4/3 G4/2 E4/1 D4/3 C4/3', 'C4/12',
+    'G4/2 A4/1 C5/3 A4/6', 'G4/2 A4/1 C5/3 A4/6', 'C5/3 A4/3 G4/6', 'A4/2 G4/1 E4/3 G4/2 E4/1 D4/3', 'E4/3 D4/3 C4/6',
+    'G4/3 A4/2 G4/1 E4/3 G4/2 A4/1', 'C5/3 A4/3 G4/6'].join(' ');
+  L.push({ id: 'nilliriya', grade: 'g6', cat: 'gu', title: '늴리리야', composer: '경기민요', life: '작자 미상', tag: '6학년 교과서 · 굿거리장단', stars: 2, draft: true,
+    desc: '굿거리장단의 흥겨운 경기민요예요. ‘늴리리야 늴리리야 니나노’ 후렴을 함께 쳐 보세요. 기억으로 옮긴 가락이에요.',
+    style: 'gugak', jd: 'gutgeori', laneMode: 'rank', unit: 3, tonic: 60, mode: 'major', bar: 12, bpm: 210,
+    T: { V: { m: nl } },
+    form: [{ s: 'intro', cycles: 2, lvl: 0, label: '장구' }, { t: 'V', lead: 'daegeum', lvl: 1, label: '1절' }, { t: 'V', lead: 'gayageum', lvl: 2, label: '2절' },
+      { s: 'bridge', cycles: 1, lvl: 2 }, { t: 'V', lead: 'daegeum', lvl: 4, label: '모두 함께' }, { s: 'end', m: 'C5/12', lead: 'daegeum', lvl: 5 }] });
+
+  const ca = ['G4/3 A4/3 C5/2 A4/1', 'G4/3 E4/3 r/3', 'G4/2 A4/1 C5/3 A4/2 G4/1', 'E4/3 D4/3 r/3', 'E4/2 G4/1 A4/3 G4/2 E4/1', 'G4/3 A4/2 C5/1 A4/3',
+    'G4/2 E4/1 D4/3 C4/3', 'C5/3 A4/3 G4/3', 'A4/3 G4/3 E4/3', 'G4/2 A4/1 G4/3 E4/2 D4/1', 'D4/3 C4/6'].join(' ');
+  L.push({ id: 'cheonan', grade: 'g5', cat: 'gu', title: '천안삼거리', composer: '경기민요', life: '작자 미상', tag: '5학년 교과서 · 세마치장단', stars: 1, draft: true,
+    desc: '‘천안 삼거리 흥~’ 하고 추임새가 들어가는 경기민요예요. 기억으로 옮긴 가락이라 교과서와 다를 수 있어요.',
+    style: 'gugak', jd: 'semachi', laneMode: 'rank', unit: 3, tonic: 60, mode: 'major', bar: 9, bpm: 240,
+    T: { V: { m: ca } },
+    form: [{ s: 'intro', cycles: 2, lvl: 0, label: '장구' }, { t: 'V', lead: 'daegeum', lvl: 1, label: '1절' }, { t: 'V', lead: 'gayageum', lvl: 1 }, { t: 'V', lead: 'daegeum', lvl: 2 },
+      { s: 'bridge', cycles: 1, lvl: 2 }, { t: 'V', lead: 'haegeum', lvl: 3, label: '해금' }, { t: 'V', lead: 'daegeum', lvl: 4, label: '모두 함께' }, { s: 'end', m: 'C4/9', lead: 'daegeum', lvl: 5 }] });
+
+  const gcA = 'C5/1.5 B4/.5 C5/1 D5/1 E5/1.5 D5/.5 E5/1 F5/1 E5/1.5 A4/.5 D5/1 D5/1 C5/3 G4/1';
+  const gcA2 = 'C5/1.5 B4/.5 C5/1 D5/1 E5/1.5 D5/.5 E5/1 F5/1 E5/1.5 A4/.5 D5/1 D5/1 C5/3 C5/.5 E5/.5';
+  const gcB = 'G5/1.5 E5/.5 D5/1 C5/1 B4/1.5 C5/.5 D5/1 B4/1 C5/1.5 A4/.5 G4/1 E4/1 G4/3 G4/1';
+  const gcC = 'G5/1 G5/1 E5/1 E5/1 F5/1 F5/1 D5/2 E5/1 E5/1 C5/1 C5/1 D5/1 D5/1 B4/2 C5/1 G4/1 C5/1 G4/1 C5/1 G4/1 C5/1 G4/1 E5/1.5 D5/.5 C5/1 B4/1 C5/3 G4/1';
+  const gcAch = 'C:4 C:2 F:2 Am:2 G7:2 C:4';
+  kids({ id: 'gclock', grade: 'g4', cat: 'dy', title: '할아버지 시계', composer: '워크', life: '1832–1884', tag: '4학년 교과서 · 칼림바', stars: 1, draft: true,
+    desc: '할아버지와 평생을 함께한 큰 괘종시계 노래예요. 후렴에서 ‘똑딱똑딱’ 시계 소리가 나요. 기억으로 옮긴 가락이에요.',
+    tonic: 60, mode: 'major', bar: 4, bpm: 104, lead: 'bell',
+    T: { V: { m: [gcA, gcA2, gcB, gcA, gcC].join(' '), ch: [gcAch, gcAch, 'C:4 G7:4 F:2 C:2 G7:4', gcAch, 'C:2 F:2 G7:4 Am:2 F:2 G7:4 C:2 G7:2 C:2 G7:2 C:2 G7:2 C:4'].join(' ') } },
+    form: [{ s: 'intro', m: 'r/7 G4/1', ch: 'C:4 G7:4', lvl: 0, label: '똑딱' }, { t: 'V', lead: 'bell', lvl: 1, label: '1절' }, { t: 'V', lead: 'violin', lvl: 2, label: '2절' },
+      { t: 'V', lead: 'violin', tr: 2, lvl: 4, label: '절정' }, { s: 'end', m: 'C5+E5+G5/4', ch: 'C:4', tr: 2, lvl: 5, rit: true }] });
+
+  const cs = [rep('F4+G4/1', 6), rep('E4+G4/1', 6), rep('D4+B4/1', 6), 'C4+C5/1 C4+C5/1 C4+C5/1 C5/1 G4/1 E4/1'].join(' ');
+  L.push({ id: 'chopsticks', cat: 'g5', title: '젓가락 행진곡', composer: '드 륄리', life: '1863–1949', tag: '5학년 교과서 · 건반 악기', stars: 1, draft: true,
+    desc: '두 손가락을 젓가락처럼 세워 치는 3박자 피아노곡이에요. 두 음을 동시에 눌러 보세요. 기억으로 옮긴 가락이에요.',
+    style: 'piano', tonic: 60, mode: 'major', bar: 3, bpm: 144, feel: 'waltz',
+    T: { A: { m: cs, ch: 'G7:6 C:6 G7:6 C:6' } },
+    form: [{ t: 'A', lvl: 1, solo: true, label: '두 손가락' }, { t: 'A', lvl: 1 }, { t: 'A', lvl: 2, label: '왈츠 반주' }, { t: 'A', tr: 5, lvl: 2, label: '다른 조' },
+      { t: 'A', tr: 5, lvl: 3 }, { t: 'A', lvl: 3, cres: true }, { t: 'A', lvl: 4, dbl: false, label: '절정' }, { t: 'A', lvl: 4, dbl: false }, { t: 'A', lvl: 1, solo: true, label: '다시 둘이서' },
+      { s: 'end', m: 'C4+E4+G4+C5/3', ch: 'C:3', lvl: 5 }] });
   return L;
 })();
 
@@ -1410,7 +1890,11 @@ function voice(midi, t, dur, vel, kind, drumKind) {
   let stop = rel + 0.8, rev = 0.25;
   const hi = midi > 84 ? 0.75 : 1;
   switch (kind) {
-    case 'strings': case 'violin': case 'cello': {
+    case 'strings': if (vel < 0.2) { // 가벼운 현악 받침(음이 많아도 가볍게)
+      const o = osc('sawtooth', f, t, stop), lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 1500; o.detune.value = (Math.random() - 0.5) * 10;
+      o.connect(lp); lp.connect(out); env(0.12, 0.07 * vel, 0.9, 0.3, 0.25); rev = 0.4; break;
+    } // falls through
+    case 'violin': case 'cello': {
       const lead = kind === 'violin', lo = kind === 'cello';
       const lp = ctx.createBiquadFilter(); lp.type = 'lowpass';
       lp.frequency.value = lo ? 900 : lead ? 3600 : 1700 + vel * 1200; lp.Q.value = 0.7;
@@ -1469,6 +1953,42 @@ function voice(midi, t, dur, vel, kind, drumKind) {
       const ng = ctx.createGain(); ng.gain.value = 0.6; n.connect(lp); lp.connect(ng); ng.connect(out);
       g.setValueAtTime(0.0001, t); g.linearRampToValueAtTime(0.42 * vel, t + 0.005); g.setTargetAtTime(0.0001, t + 0.01, 0.38);
       stop = t + 1.4; rev = 0.3; break;
+    }
+    case 'horn': {
+      const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.Q.value = 0.8; lp.frequency.value = Math.min(2600, f * 3);
+      const o1 = osc('sawtooth', f, t, stop), o2 = osc('triangle', f, t, stop), g1 = ctx.createGain(); g1.gain.value = 0.5;
+      vib(o2, t, 4.8, 5, 0.4, stop); o1.connect(g1); g1.connect(lp); o2.connect(lp); lp.connect(out);
+      env(0.07, 0.16 * vel * hi, 0.85, 0.4, 0.18); rev = 0.4; break;
+    }
+    case 'harpsi': {
+      const hp = ctx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 180;
+      const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.setValueAtTime(Math.min(12000, f * 10), t); lp.frequency.setTargetAtTime(Math.max(1500, f * 3), t + 0.01, 0.4);
+      const o1 = osc('sawtooth', f, t, stop), o2 = osc('square', f * 2, t, stop), g2 = ctx.createGain(); g2.gain.value = 0.18;
+      o1.connect(hp); o2.connect(g2); g2.connect(hp); hp.connect(lp); lp.connect(out);
+      g.setValueAtTime(0.0001, t); g.linearRampToValueAtTime(0.11 * vel * hi, t + 0.002); g.setTargetAtTime(0.0001, t + 0.004, 0.25 + Math.max(0, 72 - midi) * 0.01); g.setTargetAtTime(0.0001, rel, 0.05);
+      rev = 0.25; break;
+    }
+    case 'haegeum': case 'piri': {
+      const hg = kind === 'haegeum';
+      const o = osc('sawtooth', f, t, stop); o.frequency.setValueAtTime(f * (hg ? 0.965 : 0.98), t); o.frequency.linearRampToValueAtTime(f, t + (hg ? 0.14 : 0.08));
+      vib(o, t, hg ? 5.4 : 5, hg ? 26 : 18, 0.25, stop);
+      const bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = Math.max(700, f * (hg ? 2.6 : 1.8)); bp.Q.value = hg ? 1.4 : 0.8;
+      const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = hg ? 3800 : 3200;
+      o.connect(bp); bp.connect(lp); lp.connect(out);
+      env(hg ? 0.08 : 0.04, (hg ? 0.34 : 0.4) * vel * hi, 0.85, 0.4, 0.12); rev = 0.3; break;
+    }
+    case 'buk': {
+      const o = osc('sine', 70, t, t + 0.8); o.frequency.setValueAtTime(90, t); o.frequency.exponentialRampToValueAtTime(48, t + 0.25); o.connect(out);
+      const n = noiseSrc(t, t + 0.1), lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 300;
+      const ng = ctx.createGain(); ng.gain.value = 0.5; n.connect(lp); lp.connect(ng); ng.connect(out);
+      g.setValueAtTime(0.0001, t); g.linearRampToValueAtTime(0.6 * vel, t + 0.005); g.setTargetAtTime(0.0001, t + 0.01, 0.2);
+      stop = t + 0.8; rev = 0.2; break;
+    }
+    case 'cym': {
+      const n = noiseSrc(t, t + 2.2), hp = ctx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 5500;
+      n.connect(hp); hp.connect(out);
+      g.setValueAtTime(0.0001, t); g.linearRampToValueAtTime(0.13 * vel, t + 0.004); g.setTargetAtTime(0.0001, t + 0.01, 0.6);
+      stop = t + 2.2; rev = 0.35; break;
     }
     case 'gayageum': {
       const s = ctx.createBufferSource(); s.buffer = ksBuffer(midi);
@@ -1887,6 +2407,49 @@ function drawAmbient(dt) {
   }
   cx.globalCompositeOperation = 'source-over';
 }
+// 곡 선택·시작 화면: 노트 없는 레인 위로 스킨 효과가 피어오름
+let menuFx = [];
+function drawMenuLanes(dt, tm) {
+  const { fx, fw, topY, judgeY } = geo, span = judgeY - topY;
+  if (SK.img && skinCache.layer) {
+    cx.save(); cx.beginPath(); cx.rect(0, 0, W, judgeY + 2); cx.clip();
+    cx.globalAlpha = 0.85; cx.drawImage(skinCache.layer, 0, 0, W, H); cx.restore(); cx.globalAlpha = 1;
+  } else {
+    for (let l = 0; l < 7; l++) {
+      const lg = cx.createLinearGradient(0, topY, 0, judgeY);
+      lg.addColorStop(0, hexA(COL[l], 0)); lg.addColorStop(1, hexA(COL[l], 0.1));
+      cx.fillStyle = lg; cx.fillRect(geo.lx[l], topY, geo.lw[l], span);
+      cx.fillStyle = 'rgba(210,180,255,.1)'; cx.fillRect(geo.lx[l], topY, 1, span);
+    }
+  }
+  // 레인마다 빛기둥이 아래에서 위로 천천히 올라감
+  if (!reduceMotion) {
+    cx.globalCompositeOperation = SK.light ? 'source-over' : 'lighter';
+    for (let l = 0; l < 7; l++) {
+      const ph = ((tm * 0.22 + l * 0.37) % 1.6) / 1.6, y = judgeY - ph * span * 1.2, h = span * 0.35;
+      const g = cx.createLinearGradient(0, y - h, 0, y);
+      g.addColorStop(0, hexA(COL[l], 0)); g.addColorStop(1, hexA(COL[l], SK.light ? 0.16 : 0.22));
+      cx.fillStyle = g; cx.fillRect(geo.lx[l] + 2, Math.max(topY, y - h), geo.lw[l] - 4, Math.min(h, y - topY));
+    }
+    if (menuFx.length < 46 && Math.random() < dt * 16) {
+      const l = (Math.random() * 7) | 0, k = SK.img ? SK.burst : null;
+      menuFx.push({ x: geo.lx[l] + geo.lw[l] * (0.2 + Math.random() * 0.6), y: judgeY - 4, vx: (Math.random() - 0.5) * 14, vy: -(28 + Math.random() * 46), life: 1, c: k === 'firefly' ? '#fff6a8' : k === 'bubble' ? 'rgba(255,255,255,.9)' : COL[l], sz: 2.5 + Math.random() * 3.5, k, rot: Math.random() * 6, decay: 0.16 + Math.random() * 0.12 });
+    }
+    for (const p of menuFx) {
+      p.x += p.vx * dt + Math.sin(tm * 2 + p.y * 0.02) * 0.3; p.y += p.vy * dt; p.life -= dt * p.decay; p.rot += dt * 2;
+      if (p.life <= 0 || p.y < topY) { p.life = 0; continue; }
+      const a = Math.min(1, p.life * 1.4);
+      if (p.k) SkinFX.drawParticle(cx, Object.assign({}, p, { life: a }));
+      else { cx.globalAlpha = a; cx.fillStyle = p.c; cx.fillRect(p.x - p.sz / 2, p.y - p.sz / 2, p.sz, p.sz); cx.globalAlpha = 1; }
+    }
+    menuFx = menuFx.filter(p => p.life > 0);
+    cx.globalCompositeOperation = 'source-over';
+  }
+  // 판정선 자리의 은은한 빛
+  const jl = cx.createLinearGradient(fx, 0, fx + fw, 0);
+  jl.addColorStop(0, hexA(COL[0], 0)); jl.addColorStop(0.5, hexA(COL[3], 0.5)); jl.addColorStop(1, hexA(COL[6], 0));
+  cx.fillStyle = jl; cx.fillRect(fx, judgeY - 1.5, fw, 3);
+}
 function hexA(hex, a) { const n = parseInt(hex.slice(1), 16); return `rgba(${n >> 16},${(n >> 8) & 255},${n & 255},${a})`; }
 let lastF = performance.now();
 function frame(ts) {
@@ -1896,12 +2459,13 @@ function frame(ts) {
   if (G && ctx) {
     now = songNow();
     if (now >= 0) {
-      const s = G.song; const spb = 60 / (s.tempo ? s.tempo[0][1] : s.bpm);
+      const s = G.song; const spb = 60 / (s.bpm0 || s.bpm || 100);
       const ph = (now % spb) / spb; pulse = Math.max(0, 1 - ph * 3);
     }
   }
   drawBg(ts / 1000, pulse);
   if (G) drawField(now, dt, pulse);
+  else drawMenuLanes(dt, ts / 1000);
   requestAnimationFrame(frame);
 }
 
@@ -1950,8 +2514,46 @@ function toMenu() {
   if (G) stopAll();
   G = null; for (let l = 0; l < 7; l++) { pressed[l] = false; flash[l] = 0; }
   $('hud').hidden = true; $('prog').hidden = true; $('result').hidden = true; $('pause').hidden = true;
-  $('menu').hidden = false; renderList(); releaseWake();
+  $('title').hidden = true; $('menu').hidden = false; renderList(); releaseWake();
 }
+// ---------- 시작 화면 ----------
+function recordSummary() {
+  const rs = Object.values(records);
+  if (!rs.length) return null;
+  const songs = new Set(Object.keys(records).map(k => k.split(':')[0])).size;
+  const best = Math.max(...rs.map(r => r.score));
+  return { songs, s: rs.filter(r => r.grade === 'S').length, fc: rs.filter(r => r.fc).length, best };
+}
+function renderTitle() {
+  const sm = recordSummary();
+  $('startBtn').textContent = sm ? '이어하기' : '시작하기';
+  $('recLine').textContent = sm ? `이 기기에 저장된 기록: ${sm.songs}곡 플레이 · S등급 ${sm.s}개 · 최고 ${(sm.best / 10000).toFixed(1)}만점` : '아직 이 기기에 저장된 기록이 없어요';
+}
+function toTitle() {
+  $('menu').hidden = true; $('title').hidden = false; renderTitle();
+}
+function renderSources() {
+  const tb = $('srcBody'); tb.textContent = '';
+  const order = ['g3', 'g4', 'g5', 'g6', 'dy', 'gu', 'cl'];
+  const sorted = SONGS.slice().sort((a, b) => order.indexOf(a.grade || a.cat) - order.indexOf(b.grade || b.cat));
+  for (const s of sorted) {
+    const y = /(\d{4})\s*$/.exec(s.life);
+    const basis = y ? `작곡가 ${y[1]}년 사망 · 보호기간 만료` : '작자 미상 · 전래곡';
+    const arr = s.draft ? '기억으로 옮긴 가락 · 확인 중' : /편곡/.test(s.desc) ? '대표 음형으로 새로 편곡' : s.cat === 'dy' || s.cat === 'gu' ? '가락만 사용(가사 없음)' : '원곡 가락';
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td><b>${s.title}</b></td><td>${s.composer}<small>${s.life}</small></td><td>${basis}</td><td>${arr}</td>`;
+    tb.appendChild(tr);
+  }
+}
+$('startBtn').addEventListener('click', () => { initAudio(); ctx.resume(); toMenu(); });
+$('homeBtn').addEventListener('click', toTitle);
+$('srcBtn').addEventListener('click', () => { renderSources(); openModal('sources'); });
+$('srcClose').addEventListener('click', () => closeModal('sources'));
+$('tClearBtn').addEventListener('click', () => openModal('confirm'));
+$('noteToggle').addEventListener('click', () => {
+  const box = $('noteBox'), open = box.hidden;
+  box.hidden = !open; $('noteToggle').setAttribute('aria-expanded', String(open));
+});
 // 이미 예약된 소리를 끊기 위해 출력 노드를 새로 만든다
 function stopAll() {
   if (!ctx) return;
@@ -1975,7 +2577,7 @@ function stopAndReset() { stopAll(); G = null; }
 
 // ---------- 입력 ----------
 window.addEventListener('keydown', e => {
-  if (!$('settings').hidden || !$('confirm').hidden) { if (e.code === 'Escape') { closeModal('settings'); closeModal('confirm'); } return; }
+  if (!$('settings').hidden || !$('confirm').hidden || !$('sources').hidden) { if (e.code === 'Escape') { closeModal('settings'); closeModal('confirm'); closeModal('sources'); } return; }
   if (G && !G.finished) {
     if (e.code === 'Escape') { e.preventDefault(); G.paused ? resumeGame() : pauseGame(); return; }
     const l = KEYS.indexOf(e.code);
@@ -2029,7 +2631,7 @@ function songCard(s, i) {
     const r = records[s.id + ':' + d];
     return `<div class="rec${d === curDiff ? ' on' : ''}"><small>${DIFFS[d].name}</small><b>${r ? `${r.grade} · ${(r.score / 10000).toFixed(1)}만` : '—'}</b></div>`;
   }).join('');
-  b.innerHTML = `<span class="no">${String(i + 1).padStart(2, '0')}</span>${s.grade ? `<span class="chip ${s.cat}">${GENRE[s.cat]}</span>` : ''}<h3>${s.title}</h3>
+  b.innerHTML = `<span class="no">${String(i + 1).padStart(2, '0')}</span>${s.grade || s.draft ? `<span class="chips">${s.grade ? `<span class="chip ${s.cat}">${GENRE[s.cat]}</span>` : ''}${s.draft ? '<span class="chip draft" title="악보를 확인하기 전, 기억으로 옮긴 가락이에요">가락 확인 중</span>' : ''}</span>` : ''}<h3>${s.title}</h3>
     <div class="meta"><span>${s.composer} (${s.life})</span><span>${s.tag}</span><span>${fmt(s.duration)}</span><span class="stars" aria-label="곡 난도 ${s.stars}">${'★'.repeat(s.stars)}${'☆'.repeat(5 - s.stars)}</span></div>
     <p>${s.desc}</p><div class="recs">${recs}</div>`;
   b.addEventListener('click', () => startGame(s));
@@ -2073,7 +2675,7 @@ $('clearBtn').addEventListener('click', () => openModal('confirm'));
 $('clearNo').addEventListener('click', () => closeModal('confirm'));
 $('clearYes').addEventListener('click', () => {
   records = {}; try { localStorage.removeItem(K_REC); } catch (e) {}
-  closeModal('confirm'); renderList(); toast('기록을 모두 지웠어요');
+  closeModal('confirm'); renderList(); renderTitle(); toast('기록을 모두 지웠어요');
 });
 function toast(msg) { const t = $('toast'); t.textContent = msg; t.hidden = false; clearTimeout(toast.h); toast.h = setTimeout(() => t.hidden = true, 2200); }
 const sSpeed = $('sSpeed'), sOffset = $('sOffset'), sVol = $('sVol'), sHit = $('sHit');
@@ -2109,7 +2711,7 @@ let wake = null;
 function requestWake() { try { navigator.wakeLock && navigator.wakeLock.request('screen').then(w => wake = w).catch(() => {}); } catch (e) {} }
 function releaseWake() { try { wake && wake.release(); } catch (e) {} wake = null; }
 
-applySkin(settings.skin); resize(); renderList(); syncSettings();
+applySkin(settings.skin); resize(); renderList(); syncSettings(); renderTitle();
 requestAnimationFrame(frame);
 })();
 
