@@ -191,7 +191,7 @@ table.src td small{display:block;color:var(--faint);font-size:11.5px}
 .grade{font-family:var(--f-display);font-size:88px;line-height:.9;text-align:center;background:linear-gradient(180deg,#fff,var(--neon2));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px rgba(255,95,200,.5))}
 .rscore{text-align:center;font-family:var(--f-num);font-weight:700;font-size:34px;font-variant-numeric:tabular-nums}
 .newrec{align-self:center;font-size:12px;font-weight:700;letter-spacing:.12em;color:#1a0b24;background:var(--warn);padding:3px 10px;border-radius:99px}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;text-align:center}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;text-align:center}
 .stats div{background:rgba(255,255,255,.04);border-radius:10px;padding:8px 2px;display:flex;flex-direction:column;gap:2px}
 .stats small{font-size:11px;color:var(--dim);font-family:var(--f-num);letter-spacing:.06em}
 .stats b{font-family:var(--f-num);font-size:18px;font-variant-numeric:tabular-nums}
@@ -251,7 +251,7 @@ table.src td small{display:block;color:var(--faint);font-size:11.5px}
         <div class="fk"><span class="kc">K</span><small>중지</small></div>
         <div class="fk"><span class="kc">L</span><small>약지</small></div>
       </div>
-      <p class="tip">양손 검지를 <b>F</b>·<b>J</b>의 오톨도톨한 돌기에 올리고, 엄지는 <b>Space</b>에 두세요. 새끼손가락은 쉬어요. 자주 나오는 음일수록 힘센 엄지·검지 쪽으로 내려와요.<br>패드·폰은 레인을 손가락으로 터치 · 긴 노트는 끝까지 누르기 · 놓치면 에너지가 줄고, 콤보를 이으면 다시 차올라요 · Esc 일시정지</p>
+      <p class="tip">양손 검지를 <b>F</b>·<b>J</b>의 오톨도톨한 돌기에 올리고, 엄지는 <b>Space</b>에 두세요. 새끼손가락은 쉬어요. 자주 나오는 음일수록 힘센 엄지·검지 쪽으로 내려와요.<br>패드·폰은 레인을 손가락으로 터치 · 긴 노트는 끝까지 누르기 · 놓치거나 노트 없는 키를 마구 누르면(헛누름) 콤보가 끊기고 에너지가 줄어요 · 콤보를 이으면 다시 차올라요 · Esc 일시정지</p>
     </div>
     <div class="tabsWrap"><div class="tabs" id="tabs" role="tablist" aria-label="곡 분류"></div></div>
     <div class="summary" id="summary"></div>
@@ -294,6 +294,7 @@ table.src td small{display:block;color:var(--faint);font-size:11.5px}
       <div><small>GREAT</small><b id="rG">0</b></div>
       <div><small>GOOD</small><b id="rB">0</b></div>
       <div><small>MISS</small><b id="rM">0</b></div>
+      <div><small>헛누름</small><b id="rX">0</b></div>
     </div>
     <div class="row"><button class="btn primary" id="againBtn" type="button">다시 하기</button><button class="btn" id="backBtn" type="button">곡 선택으로</button></div>
   </div>
@@ -2881,8 +2882,8 @@ let COL = SKINS[0].col.slice();
 let SK = SKINS[0];
 const skinCache = { sprites: null, layer: null };
 let ambient = [];
-const JNAME = ['PERFECT', 'GREAT', 'GOOD', 'MISS'];
-const JCOL = ['#ffe9ff', '#7fe8ff', '#9dffb8', '#ff6b86'];
+const JNAME = ['PERFECT', 'GREAT', 'GOOD', 'MISS', '헛누름'];
+const JCOL = ['#ffe9ff', '#7fe8ff', '#9dffb8', '#ff6b86', '#ffa04d'];
 const JVAL = [1, 0.75, 0.4, 0];
 const EN_GAIN = [1.5, 1, 0.3];
 const EN_LOSS = { easy: 4, normal: 6, hard: 8 };
@@ -3254,7 +3255,7 @@ function startGame(song) {
   G = {
     song, diff: curDiff, D: DIFFS[curDiff], chart, lanes, ptr: new Array(7).fill(0), units,
     ev: audioEvents(song), evi: 0, startAt: ctx.currentTime + 3.4, held: new Array(7).fill(null),
-    counts: [0, 0, 0, 0], sum: 0, combo: 0, maxCombo: 0, done: 0, paused: false, finished: false, failed: false, lastJ: null, energy: 100, enShow: 100, enPop: 0
+    counts: [0, 0, 0, 0], stray: 0, lastHit: new Array(7).fill(-9), sum: 0, combo: 0, maxCombo: 0, done: 0, paused: false, finished: false, failed: false, lastJ: null, energy: 100, enShow: 100, enPop: 0
   };
   particles = []; popups = []; voiceEnds = []; bgState.key = '';
   $('menu').hidden = true; $('result').hidden = true; $('pause').hidden = true;
@@ -3266,20 +3267,19 @@ function startGame(song) {
 function latency() { return ctx ? (ctx.outputLatency || ctx.baseLatency || 0) : 0; }
 // 오디오 시계는 계산 단위(수 ms~수십 ms)로 뚝뚝 끊겨 올라가므로, 화면용으로 매끄럽게 이어 준다.
 // 실제 시간(performance.now)으로 앞으로 예측하고, 오디오 시계와의 차이는 조금씩만 따라잡는다.
-const clk = { a: 0, p: 0, ok: false };
+const clk = { a: 0, p: 0, ok: false, off: 0 };
 // 화면 프레임마다 한 번(rAF 시각 기준) 시계를 앞으로 민다 — 프레임 간격이 그대로 이동 거리가 되어 매끄럽다
 function clockTick(ts) {
   if (!ctx) return;
   const ct = ctx.currentTime, pn = ts / 1000;
   if (ctx.state !== 'running') { clk.ok = false; return; }
-  if (!clk.ok) { clk.a = ct; clk.p = pn; clk.ok = true; return; }
-  const pred = clk.a + Math.max(0, pn - clk.p), err = ct - pred;
-  clk.p = pn;
-  // 오디오 시계는 기기에 따라 수십 ms씩 들쭉날쭉하므로 바로 맞추지 않는다.
-  // 화면 시계는 절대 뒤로 가지 않고, 프레임마다 최대 1.5ms까지만 오디오 쪽으로 미끄러지듯 따라간다.
-  // (일시정지·탭 전환처럼 0.25초 넘게 어긋날 때만 한 번에 맞춘다)
-  if (Math.abs(err) > 0.25) clk.a = ct;
-  else clk.a = pred + Math.max(-0.0015, Math.min(0.0015, err * 0.04));
+  // 화면 시계 = 화면 시각(pn) + 두 시계의 차이(off). 노트는 화면 시각에 정확히 비례해 움직이고,
+  // 오디오 시계의 들쭉날쭉함은 off를 아주 천천히(1초 남짓에 걸쳐, 프레임당 0.3ms 이하) 고쳐서만 반영한다.
+  // 예전처럼 프레임마다 1.5ms씩 당기면 속도가 최대 9%씩 출렁여 노트가 울컥거렸다.
+  const raw = ct - pn;
+  if (!clk.ok || Math.abs(raw - clk.off) > 0.25) { clk.off = raw; clk.ok = true; }
+  else clk.off += Math.max(-0.0003, Math.min(0.0003, (raw - clk.off) * 0.02));
+  clk.p = pn; clk.a = pn + clk.off;
 }
 // 키 입력 등 프레임 사이 시각: 마지막 프레임 시계에서 실제 흐른 시간만큼 이어서 계산
 function audioTime() {
@@ -3325,7 +3325,7 @@ function judgeNote(n, j, lane) {
   G.lastJ = { j, at: performance.now() };
   $('hScore').textContent = Math.round(1e6 * G.sum / G.units).toLocaleString();
 }
-function press(l) {
+function press(l, slide) {
   if (pressed[l]) return;
   pressed[l] = true; flash[l] = 1;
   if (!G || G.paused || G.finished) return;
@@ -3338,10 +3338,25 @@ function press(l) {
     if (d > win[2]) break;
     if (d < -win[2]) continue;
     const ad = Math.abs(d), j = ad <= win[0] ? 0 : ad <= win[1] ? 1 : 2;
-    n.j = j; judgeNote(n, j, l);
+    n.j = j; judgeNote(n, j, l); G.lastHit[l] = now;
     if (n.end) { n.holding = true; G.held[l] = n; }
-    break;
+    return;
   }
+  strayPress(l, now, slide);
+}
+// 헛누름: 노트가 없는 레인을 누르면(여러 키를 마구 두드리기) 콤보가 끊기고 에너지가 줄어든다.
+// 단, 방금 노트를 친 레인을 손이 튀어 한 번 더 누른 것(0.12초 안)과 터치로 레인을 미끄러져 지나간 것은 봐준다.
+function strayPress(l, now, slide) {
+  if (slide || now < 0 || now > G.song.duration) return;
+  if (now - G.lastHit[l] < 0.12) return;
+  const arr = G.lanes[l];
+  for (let i = Math.max(0, G.ptr[l] - 1); i < arr.length; i++) { const n = arr[i]; if (n.t - now > 0.3) break; if (Math.abs(n.t - now) < 0.3) return; }
+  G.stray++;
+  G.combo = 0;
+  G.energy = Math.max(0, G.energy - EN_LOSS[G.diff] * 0.75);
+  G.lastJ = { j: 4, at: performance.now() };
+  flash[l] = 0;
+  if (G.energy <= 0) gameOver();
 }
 function release(l) {
   pressed[l] = false;
@@ -3490,7 +3505,8 @@ function drawField(now, dt, pulse) {
 const keyCache = { cv: null, key: '', y0: 0 };
 function drawKeys() {
   const { judgeY } = geo, y0 = Math.floor(judgeY - 24), h = Math.max(1, Math.ceil(H - y0));
-  const key = pressed.map(p => (p ? 1 : 0)).join('') + '|' + SK.id + '|' + W + 'x' + H + '|' + DPR;
+  let mask = 0; for (let l = 0; l < 7; l++) if (pressed[l]) mask |= 1 << l;
+  const key = keyCache.base === SK.id + W + 'x' + H + DPR ? mask : -1 - mask; // 매 프레임 문자열을 만들지 않음
   if (keyCache.key !== key) {
     if (!keyCache.cv) keyCache.cv = document.createElement('canvas');
     const kc = keyCache.cv;
@@ -3498,7 +3514,7 @@ function drawKeys() {
     const k = kc.getContext('2d'); k.setTransform(1, 0, 0, 1, 0, 0); k.clearRect(0, 0, kc.width, kc.height);
     k.setTransform(DPR, 0, 0, DPR, 0, -y0 * DPR);
     paintKeys(k);
-    keyCache.key = key; keyCache.y0 = y0;
+    keyCache.base = SK.id + W + 'x' + H + DPR; keyCache.key = mask; keyCache.y0 = y0;
   }
   cx.drawImage(keyCache.cv, 0, keyCache.y0, W, keyCache.cv.height / DPR);
 }
@@ -3530,7 +3546,7 @@ function drawFx(now, dt) {
     if (p.k) SkinFX.drawParticle(cx, p);
     else { cx.globalAlpha = p.life; cx.fillStyle = p.c; cx.fillRect(p.x - p.sz / 2, p.y - p.sz / 2, p.sz, p.sz); }
   }
-  particles = particles.filter(p => p.life > 0);
+  { let k = 0; for (const p of particles) if (p.life > 0) particles[k++] = p; particles.length = k; }
   cx.globalAlpha = 1; cx.globalCompositeOperation = 'source-over';
   // 판정·콤보
   if (G) {
@@ -3705,7 +3721,7 @@ function gameOver() {
   const judged = G.counts.reduce((a, b) => a + b, 0) || 1;
   $('rAcc').textContent = `정확도 ${(G.sum / judged * 100).toFixed(1)}%`;
   $('rCombo').textContent = `최대 콤보 ${G.maxCombo}`;
-  ['rP', 'rG', 'rB', 'rM'].forEach((id, i) => $(id).textContent = G.counts[i]);
+  ['rP', 'rG', 'rB', 'rM'].forEach((id, i) => $(id).textContent = G.counts[i]); $('rX').textContent = G.stray;
   $('rNew').hidden = true;
   $('result').hidden = false; $('prog').hidden = true;
   releaseWake();
@@ -3715,7 +3731,7 @@ function finish() {
   G.finished = true;
   const acc = G.sum / G.units * 100, score = Math.round(1e6 * G.sum / G.units), gr = grade(acc);
   const key = G.song.id + ':' + G.diff, prev = records[key];
-  const fc = G.counts[3] === 0;
+  const fc = G.counts[3] === 0 && G.stray === 0;
   const isNew = !prev || score > prev.score;
   if (isNew) { records[key] = { score, acc: Math.round(acc * 10) / 10, grade: gr, combo: G.maxCombo, fc }; save(K_REC, records); }
   $('rState').textContent = fc ? '풀 콤보 완주!' : '완주했어요';
@@ -3725,7 +3741,7 @@ function finish() {
   $('rScore').textContent = score.toLocaleString();
   $('rAcc').textContent = `정확도 ${acc.toFixed(1)}%`;
   $('rCombo').textContent = fc ? `풀 콤보 ${G.maxCombo}` : `최대 콤보 ${G.maxCombo}`;
-  ['rP', 'rG', 'rB', 'rM'].forEach((id, i) => $(id).textContent = G.counts[i]);
+  ['rP', 'rG', 'rB', 'rM'].forEach((id, i) => $(id).textContent = G.counts[i]); $('rX').textContent = G.stray;
   $('rNew').hidden = !isNew;
   $('result').hidden = false; $('prog').hidden = true;
   releaseWake();
@@ -3848,7 +3864,7 @@ cv.addEventListener('pointerdown', e => {
 cv.addEventListener('pointermove', e => {
   if (!ptrLane.has(e.pointerId)) return;
   const l = laneAt(e.clientX), o = ptrLane.get(e.pointerId);
-  if (l !== o) { release(o); ptrLane.set(e.pointerId, l); if (l >= 0) press(l); }
+  if (l !== o) { release(o); ptrLane.set(e.pointerId, l); if (l >= 0) press(l, true); }
 });
 const endPtr = e => { if (!ptrLane.has(e.pointerId)) return; const l = ptrLane.get(e.pointerId); ptrLane.delete(e.pointerId); if (l >= 0 && ![...ptrLane.values()].includes(l)) release(l); };
 cv.addEventListener('pointerup', endPtr); cv.addEventListener('pointercancel', endPtr);
