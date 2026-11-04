@@ -2861,6 +2861,29 @@ function applyScored(L) {
         { t: 'R', lead: 'piri', lvl: 4, label: '모두 함께' }, { s: 'end', m: 'C4/9', lead: 'daegeum', lvl: 5 }] });
   }
 
+
+  // ───────── 할아버지 시계 (사용자 제공 악보: My Grandfather's Clock, G장조 4/4, ♩=200) ─────────
+  {
+    const h8 = 'G4/2 F#4/1 G4/1 A4/2 G4/1 A4/1 B4/2 C5/1 B4/1 E4/2 A4/1 A4/1 G4/2 G4/1 G4/1 F#4/2 E4/1 F#4/1 G4/4';
+    const gV = 'r/3 D4/1 ' + h8 + ' G4/1 r/1 D4/1 D4/1 ' + h8 + ' G4/1 r/1 B4/1 C5/1';
+    const gV2 = h8 + ' G4/1 r/1 D4/1 D4/1 ' + h8 + ' G4/1 r/1 B4/1 C5/1';
+    const gVc = 'G:4 ' + R('G:4 C:4 G:4 C:4 G:4 D7:4 G:4 G:4', 2), gV2c = R('G:4 C:4 G:4 C:4 G:4 D7:4 G:4 G:4', 2);
+    const gB = 'D5/2 B4/1 A4/1 G4/2 F#4/1 G4/1 A4/1 G4/1 F#4/1 E4/1 D4/2 B4/1 C5/1 D5/2 B4/1 A4/1 G4/2 F#4/1 G4/1 A4/4 A4/1 r/1 D4/1 D4/1';
+    const gT = 'G4/1 r/3 A4/1 r/3 B4/.5 B4/.5 B4/1 C5/1 B4/1 E4/2 A4/1 A4/1 G4/4 F#4/4 G4/4 G4/1 r/1 D4/1 D4/1';
+    const gK = 'G4/2 D4/1 D4/1 E4/1 E4/1 D4/2 B3/2 D4/2 B3/2 D4/1 D4/1 G4/2 D4/1 D4/1 E4/1 E4/1 D4/2 B3/2 D4/2 B3/1 r/1 D4/1 D4/1';
+    const gE = 'G4/1 r/3 A4/1 r/3 B4/.5 B4/.5 B4/1 C5/1 B4/1 E4/2 A4/1 A4/1 G4/4 F#4/4 G4/4 G4/1 r/3';
+    const gTc = 'G:4 C:4 G:4 C:4 G:4 D7:4 G:4 G:4';
+    put({ id: 'gclock', src: 'user', draft: false, fit: false, tonic: 67, mode: 'major', bar: 4, bpm: 200, lead: 'bell',
+      desc: '할아버지와 평생을 함께한 큰 괘종시계 노래예요. 뒷부분에서 ‘똑딱똑딱’ 시계추처럼 가락이 오르내려요. 받은 악보의 가락과 화음을 따랐어요.',
+      T: { V: { m: gV, ch: gVc }, V2: { m: gV2, ch: gV2c }, B: { m: gB, ch: 'G:4 Em:4 C:4 D7:4 G:4 Em:4 Am:4 D7:4' },
+        T: { m: gT, ch: gTc }, K: { m: gK, ch: R('G:4', 8) }, E: { m: gE, ch: gTc } },
+      form: [{ s: 'intro', m: 'G4/1 D4/1 G4/1 D4/1 G4/1 D4/1 G4/1 r/1', ch: 'G:4 G:4', lvl: 0, label: '똑딱' },
+        { t: 'V', lead: 'bell', lvl: 1, label: '1절' }, { t: 'B', lead: 'violin', lvl: 2, label: '가운데 가락' },
+        { t: 'T', lead: 'violin', lvl: 2, label: '구십 년' }, { t: 'V2', lead: 'flute', lvl: 2, label: '2절' },
+        { t: 'B', lead: 'violin', lvl: 3, cres: true }, { t: 'T', lead: 'violin', lvl: 4, label: '절정' },
+        { t: 'K', lead: 'bell', lvl: 4, label: '똑딱똑딱' }, { t: 'E', lead: 'violin', lvl: 2, rit: true, label: '멈춘 시계' }] });
+  }
+
   // 곡 길이(1~2분)는 core.js의 fitForm이 모든 곡에 맞춘다
 }
 applyScored(SONG_DEFS);
@@ -3196,7 +3219,8 @@ function updateBack(tsMs, pulse) {
     else bgState.key = '';
     return;
   }
-  if (tsMs - bgState.last < 32 && bgState.key === 'anim' + (G ? 1 : 0)) return;
+  // 기기가 넉넉하면 배경도 매 프레임 함께 움직여야 노트와 어긋나 보이지 않는다. 버거운 기기만 초당 30번으로 줄인다.
+  if (frameMs > 22 && tsMs - bgState.last < 32 && bgState.key === 'anim' + (G ? 1 : 0)) return;
   bgState.last = tsMs; bgState.key = 'anim' + (G ? 1 : 0);
   paintBack(tsMs / 1000, pulse);
 }
@@ -3264,7 +3288,12 @@ function startGame(song) {
   $('hScore').textContent = '0';
   requestWake();
 }
-function latency() { return ctx ? (ctx.outputLatency || ctx.baseLatency || 0) : 0; }
+// 출력 지연값(outputLatency)은 브라우저가 매번 조금씩 다른 값을 돌려준다. 그대로 빼면 노트가 프레임마다 떨려서,
+// 아주 천천히 따라가는 값을 따로 둔다(프레임당 0.2ms 이하로만 바뀜).
+const latS = { v: -1 };
+function rawLatency() { return ctx ? (ctx.outputLatency || ctx.baseLatency || 0) : 0; }
+function latency() { if (latS.v < 0) latS.v = rawLatency(); return latS.v; }
+function latencyTick() { const r = rawLatency(); if (latS.v < 0 || Math.abs(r - latS.v) > 0.2) latS.v = r; else latS.v += Math.max(-0.0002, Math.min(0.0002, (r - latS.v) * 0.01)); }
 // 오디오 시계는 계산 단위(수 ms~수십 ms)로 뚝뚝 끊겨 올라가므로, 화면용으로 매끄럽게 이어 준다.
 // 실제 시간(performance.now)으로 앞으로 예측하고, 오디오 시계와의 차이는 조금씩만 따라잡는다.
 const clk = { a: 0, p: 0, ok: false, off: 0 };
@@ -3280,6 +3309,7 @@ function clockTick(ts) {
   if (!clk.ok || Math.abs(raw - clk.off) > 0.25) { clk.off = raw; clk.ok = true; }
   else clk.off += Math.max(-0.0003, Math.min(0.0003, (raw - clk.off) * 0.02));
   clk.p = pn; clk.a = pn + clk.off;
+  latencyTick();
 }
 // 키 입력 등 프레임 사이 시각: 마지막 프레임 시계에서 실제 흐른 시간만큼 이어서 계산
 function audioTime() {
@@ -3686,8 +3716,10 @@ function drawMenuLanes(dt, tm) {
 }
 function hexA(hex, a) { const n = parseInt(hex.slice(1), 16); return `rgba(${n >> 16},${(n >> 8) & 255},${n & 255},${a})`; }
 let lastF = performance.now();
+let frameMs = 16.7;
 function frame(ts) {
   const dt = Math.min(0.05, (ts - lastF) / 1000); lastF = ts;
+  if (dt > 0) frameMs += (Math.min(50, dt * 1000) - frameMs) * 0.05;
   clockTick(ts);
   update();
   let pulse = 0, now = 0;
